@@ -110,7 +110,7 @@
 <meta property="og:image" content="https://img-blog.csdn.net/20161105231816636">
 <meta property="og:image" content="https://img-blog.csdn.net/20160919205317937">
 <meta property="og:image" content="https://img-blog.csdn.net/20160919205335602">
-<meta property="og:updated_time" content="2019-02-13T18:30:50.990Z">
+<meta property="og:updated_time" content="2019-02-14T17:16:32.102Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="archlinux的装机感想">
 <meta name="twitter:description" content="缘起年前，在某位大佬的推荐下，在VMware（虚拟机)上安装了archlinux，并受其压迫，在年后赶出了一篇archlinux装机感想。  archlinux简介arch之道Keep It Simple, Stupid（保持简单，且一目了然）  Simplicity（简洁） Modernity（现代） Pragmatism（实用） User centrality（以用户为中心） Versatil">
@@ -485,7 +485,7 @@
 <h3 id="Arch-Linux参考网站"><a href="#Arch-Linux参考网站" class="headerlink" title="Arch Linux参考网站"></a>Arch Linux参考网站</h3><ul>
 <li><a href="http://bbs.archlinuxcn.org/" target="_blank" rel="noopener">Arch Linux 中文论坛</a></li>
 <li><a href="https://wiki.archlinux.org/index.php/Arch_Linux" target="_blank" rel="noopener">Arch Linux Wiki</a></li>
-<li><a href="https://wiki.archlinux.org/index.php/Arch_Linux_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87" target="_blank" rel="noopener">Arch Linux Wiki(中文）</a>)</li>
+<li><a href="https://wiki.archlinux.org/index.php/Arch_Linux_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87" target="_blank" rel="noopener">Arch Linux Wiki(中文)</a>)</li>
 </ul>
 <h2 id="安装过程"><a href="#安装过程" class="headerlink" title="安装过程"></a>安装过程</h2><h3 id="准备阶段"><a href="#准备阶段" class="headerlink" title="准备阶段"></a>准备阶段</h3><p>下载VMware（其他虚拟机也可以）和<a href="https://www.archlinux.org/download/" target="_blank" rel="noopener">archlinux的.iso镜像文件</a>，浏览<a href="https://wiki.archlinux.org/index.php/Installation_guide_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87" target="_blank" rel="noopener">官方安装指南</a>)</p>
 <h3 id="设置虚拟机"><a href="#设置虚拟机" class="headerlink" title="设置虚拟机"></a>设置虚拟机</h3><p>我选择了Linux3.x内核，20GB硬盘，1GB的内存，1个双核处理器，网络类型是nat，再加载原先下号的镜像文件，其他就默认吧。(其实看自己的需求啦)</p>
@@ -547,8 +547,7 @@
 <h3 id="配置系统"><a href="#配置系统" class="headerlink" title="配置系统"></a>配置系统</h3><p>用以下命令生成 fstab 文件 <code># genfstab -U /mnt &gt;&gt; /mnt/etc/fstab</code> ，</p>
 <p><strong>强烈建议</strong>在执行完以上命令后，后检查一下生成的 /mnt/etc/fstab 文件是否正确。（就是用这个查看一下<code># nano /mnt/etc/fstab</code>）</p>
 <p><em>有出现分区分配的就是成功了</em></p>
-<h3 id="进入系统"><a href="#进入系统" class="headerlink" title="进入系统"></a>进入系统</h3><p>使用命令<code># arch-chroot /mnt</code>，进入系统。出现以下图片，说明成功进入系统。</p>
-<p><img src="https://img-blog.csdn.net/20161105231816636" alt=""></p>
+<h3 id="进入系统"><a href="#进入系统" class="headerlink" title="进入系统"></a>进入系统</h3><p>使用命令<code># arch-chroot /mnt</code>，进入系统。出现以下图片，说明成功进入系统。<img src="https://img-blog.csdn.net/20161105231816636" alt=""></p>
 <p><em>如果有出现找不到/bin/bash错误信息的话，重装吧 ╥﹏╥ ，首先镜像得是下载官方镜像，其次可能是配置系统的时候出了点问题，按照步骤来，总会成功的</em></p>
 <p><em>进去之后，命令行首就变了，变成了[root@archiso /]#，如果看到这个，恭喜你！基本系统已经安装好了，八年抗战快要结束了</em></p>
 <h3 id="本地化"><a href="#本地化" class="headerlink" title="本地化"></a>本地化</h3><p>本地化的程序与库若要本地化文本，都依赖 Locale，后者明确规定地域、货币、时区日期的格式、字符排列方式和其他本地化标准等等。需要在下面两个文件设置：locale.gen 与 locale.conf。</p>
@@ -581,8 +580,8 @@
 <p>首先安装lxdm桌面管理器，并设置开机启动（pacman命令可以用来安装软件）</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># pacman -S lxdm </span><br><span class="line"># systemctl enable lxdm.service</span><br></pre></td></tr></table></figure>
 <p>然后安装xfce <code># pacman -S xfce4</code>，启动xfce <code># startxfce4</code></p>
-<p><img src="https://img-blog.csdn.net/20160919205317937" alt="登录界面"></p>
-<p><img src="https://img-blog.csdn.net/20160919205335602" alt="桌面"></p>
+<p><img src="https://img-blog.csdn.net/20160919205317937" alt=""></p>
+<p><img src="https://img-blog.csdn.net/20160919205335602" alt=""></p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>终于做完了，我也快枯了，期间错误不断，不停地重装重装……还好，守得云开见月明，现在，基本的环境已经配置的差不多，但是还是后续需要优化，比如中文输入法，浏览器，yaourt安装，qt啥的（提到qt就忍不住吐槽，虚拟机上装qt还是算了吧，我看着它打开都心累）。</p>
 <p>虽然安装archlinux的时候很烦躁（为什么总有不同的error，哦不，是一样的error〒▽〒），且英语水平严重约束我读错误（让你不好好读英语啊喂），但是最后还是收获了一点点东西，至少寒假不仅仅养膘过冬嘛！</p>
 <p>引用松尾芭蕉的一句俳句，大概是成功安装完archlinux和写完这篇博文的心情吧。</p>
