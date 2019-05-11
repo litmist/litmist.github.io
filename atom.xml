@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://litmist.github.io/"/>
-  <updated>2019-03-23T12:53:41.894Z</updated>
+  <updated>2019-04-25T15:30:37.991Z</updated>
   <id>https://litmist.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>I2C的简单学习</title>
+    <link href="https://litmist.github.io/2019/04/25/I2C%E7%9A%84%E7%AE%80%E5%8D%95%E5%AD%A6%E4%B9%A0/"/>
+    <id>https://litmist.github.io/2019/04/25/I2C的简单学习/</id>
+    <published>2019-04-25T14:34:23.000Z</published>
+    <updated>2019-04-25T15:30:37.991Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在看hal库的时候，学习过I2C，但没有实践过，忘记了很多，但最近因为要做ov7725的hal库移植，可能需要I2C协议，就又去看了一遍，做了个笔记。</p><h2 id="I2C协议简介"><a href="#I2C协议简介" class="headerlink" title="I2C协议简介"></a>I2C协议简介</h2><p>I2C 通讯协议(Inter－Integrated Circuit)是由Phiilps 公司开发的，由于它引脚少，硬件实现简单，可扩展性强，不需要USART、CAN 等通讯协议的外部收发设备，现在被广泛地使用在系统内多个集成电路(IC)间的通讯。</p><h2 id="I2C物理层介绍"><a href="#I2C物理层介绍" class="headerlink" title="I2C物理层介绍"></a>I2C物理层介绍</h2><p><img src="/image/I2Cpic1.png" alt=""></p><p><em>MCU中文名称为微控制单元，又称单片微型计算机或者单片机</em></p><p><em>EEPROM，或写作E2PROM，全称电子抹除式可复写只读存储器 ，是一种可以通过电子方式多次复写的半导体存储设备，可以在电脑上或专用设备上擦除已有信息，重新编程。</em></p><p><strong>七个特点</strong></p><ol><li>它是一个支持多设备的总线。“总线”指多个设备共用的信号线。在一个I2C 通讯总线中，可连接多个I2C通讯设备，支持多个通讯主机及多个通讯从机。</li><li>一个I2C总线只使用两条总线线路，<strong>一条双向串行数据(SDA) ，一条串行时钟线(SCL)。数据线即用来表示数据，时钟线用于数据收发同步。</strong></li><li>每个连接到总线的设备都有<strong>一个独立的地址</strong>，主机可以利用这个地址进行不同设备之间的访问。</li><li>总线通过上拉电阻接到电源。<strong>当I2C设备空闲时，会输出高阻态，而当所有设备都空闲，都输出高阻态时，由上拉电阻把总线拉成高电平。</strong></li><li>多个主机同时使用总线时，为了防止数据冲突，会利用<strong>仲裁</strong>方式决定由哪个设备占用总线。</li><li>具有三种传输模式：标准模式传输速率为100kbit/s，快速模式为400kbit/s，高速模式下可达1Mbit/s，但目前大多I2C设备尚不支持高速模式。</li><li>连接到相同总线的IC 数量受到总线的最大电容400pF 限制。</li></ol><h2 id="I2C协议层介绍"><a href="#I2C协议层介绍" class="headerlink" title="I2C协议层介绍"></a>I2C协议层介绍</h2><p>它主要定义了通讯的起始和停止信号、数据有效性、响应、仲裁、时钟同步和地址广播等环节。</p><h3 id="I2C的基本读写过程"><a href="#I2C的基本读写过程" class="headerlink" title="I2C的基本读写过程"></a>I2C的基本读写过程</h3><p><img src="/image/I2Cpic2.png" alt=""></p><ul><li><p>起始信号产生后，所有从机就开始等待主机紧接下来广播的从机地址信号(SLAVE_ADDRESS)。在I2C总线上，每个设备的地址都是唯一的，当主机广播的地址与某个设备地址相同时，这个设备就被选中了。</p></li><li><p>在地址位之后，是传输方向的选择位，该位为0时，表示后面的数据传输方向是由主机传输至从机，即主机向从机写数据。该位为1时，则相反，即主机由从机读数据。从机接收到匹配的地址后，主机或从机会返回一个应答或非应答信号，只有接收到应答信号后，主机才能继续发送或接收数据。</p></li><li><p>若配置的方向传输位为“写数据”方向，即第一幅图的情况，广播完地址，接收到应答信号后，主机开始正式向从机传输数据，数据包的大小为8位，主机每发送完一个字节数据，都要等待从机的应答信号，重复这个过程，可以向从机传输N个数据这个N没有大小限制。当数据传输结束时，主机向从机发送一个停止传输信号，表示不再传输数据。</p></li><li><p>若配置的方向传输位为“读数据”方向，即第二幅图的情况，广播完地址，接收到应答信号后，从机开始向主机返回数据，数据包大小也为8 位，从机每发送完一个数据，都会等待主机的应答信号，重复这个过程，可以返回N个数据，这个N也没有大小限制。当主机希望停止接收数据时，就向从机返回一个非应答信号，则从机自动停止数据传输。</p></li><li><p>除了基本的读写，I2C通讯更常用的是复合格式，即第三幅图的情况，该传输过程有两次起始信号。一般在第一次传输中，主机通过SLAVE_ADDRESS 寻找到从设备后，发送一段“数据”，这段数据通常用于表示从设备内部的寄存器或存储器地址；在第二次的传输中，对该地址的内容进行读或写。也就是说，第一次通讯是告诉从机读写地址，第二次则是读写的实际内容。</p></li></ul><h3 id="通讯的起终信号"><a href="#通讯的起终信号" class="headerlink" title="通讯的起终信号"></a>通讯的起终信号</h3><p>了解了I2C是怎么读写的，还不够，我们得要先和它通讯才行，那怎么通讯的呢？</p><p>当SCL 线是高电平时，SDA 线从高电平向低电平切换，这个情况表示通讯的起始。当SCL 是高电平时SDA 线由低电平向高电平切换，表示通讯的停止。起始和停止信号一般由主机产生。(看图)<br><img src="/image/I2Cpic3.png" alt=""></p><h3 id="数据的有效性"><a href="#数据的有效性" class="headerlink" title="数据的有效性"></a>数据的有效性</h3><p>如果我们成功与主机通讯了，准备互传数据，那数据又是怎么被有效识别到的呢？</p><p>I2C使用SDA信号线来传输数据，使用SCL信号线进行数据同步。SDA数据线在SCL 的每个时钟周期传输一位数据。传输时，SCL 为高电平的时候SDA 表示的数据有效，即此时的SDA为高电平时表示数据“1”，为低电平时表示数据“0”。当SCL为低电平时，SDA的数据无效，一般在这个时候SDA进行电平切换，为下一次表示数据做好准备。<br><img src="/image/I2Cpic4.png" alt=""></p><h3 id="地址及数据方向"><a href="#地址及数据方向" class="headerlink" title="地址及数据方向"></a>地址及数据方向</h3><h3 id="响应"><a href="#响应" class="headerlink" title="响应"></a>响应</h3><p>———-未完待续———–</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;在看hal库的时候，学习过I2C，但没有实践过，忘记了很多，但最近因为要做ov7725的hal库移植，可能需要I2C协议，就又去看了一遍，做
+      
+    
+    </summary>
+    
+      <category term="单片机" scheme="https://litmist.github.io/categories/%E5%8D%95%E7%89%87%E6%9C%BA/"/>
+    
+    
+      <category term="stm32" scheme="https://litmist.github.io/tags/stm32/"/>
+    
+  </entry>
   
   <entry>
     <title>archlinux的装机感想</title>
