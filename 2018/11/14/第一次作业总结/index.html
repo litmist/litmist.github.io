@@ -1,0 +1,1340 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="linux,GitHub," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="一、什么是Linux系统，Linux有哪些部分，Linux都用在了哪些地方1.什么是Linux系统Linux是一套免费使用和自由传播的类Unix操作系统，是一个基于POSIX和UNIX的多用户、多任务、支持多线程和多CPU的操作系统。它能运行主要的UNIX工具软件、应用程序和网络协议。它支持32位和64位硬件。Linux继承了Unix以网络为核心的设计思想，是一个性能稳定的多用户网络操作系统。 2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="小创第一次作业">
+<meta property="og:url" content="https://litmist.github.io/2018/11/14/%E7%AC%AC%E4%B8%80%E6%AC%A1%E4%BD%9C%E4%B8%9A%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="看过的月亮">
+<meta property="og:description" content="一、什么是Linux系统，Linux有哪些部分，Linux都用在了哪些地方1.什么是Linux系统Linux是一套免费使用和自由传播的类Unix操作系统，是一个基于POSIX和UNIX的多用户、多任务、支持多线程和多CPU的操作系统。它能运行主要的UNIX工具软件、应用程序和网络协议。它支持32位和64位硬件。Linux继承了Unix以网络为核心的设计思想，是一个性能稳定的多用户网络操作系统。 2">
+<meta property="og:locale">
+<meta property="article:published_time" content="2018-11-14T14:06:20.000Z">
+<meta property="article:modified_time" content="2019-02-13T12:41:04.204Z">
+<meta property="article:author" content="Chen">
+<meta property="article:tag" content="linux">
+<meta property="article:tag" content="GitHub">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://litmist.github.io/2018/11/14/第一次作业总结/"/>
+
+
+
+
+
+  <title>小创第一次作业 | 看过的月亮</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">看过的月亮</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">至此成了弧</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://litmist.github.io/2018/11/14/%E7%AC%AC%E4%B8%80%E6%AC%A1%E4%BD%9C%E4%B8%9A%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="看过的月亮">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">小创第一次作业</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-14T22:06:20+08:00">
+                2018-11-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index">
+                    <span itemprop="name">读书笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3.2k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  11
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="一、什么是Linux系统，Linux有哪些部分，Linux都用在了哪些地方"><a href="#一、什么是Linux系统，Linux有哪些部分，Linux都用在了哪些地方" class="headerlink" title="一、什么是Linux系统，Linux有哪些部分，Linux都用在了哪些地方"></a>一、什么是Linux系统，Linux有哪些部分，Linux都用在了哪些地方</h2><h3 id="1-什么是Linux系统"><a href="#1-什么是Linux系统" class="headerlink" title="1.什么是Linux系统"></a>1.什么是Linux系统</h3><p>Linux是一套免费使用和自由传播的类Unix操作系统，是一个基于POSIX和UNIX的多用户、多任务、支持多线程和多CPU的操作系统。它能运行主要的UNIX工具软件、应用程序和网络协议。它支持32位和64位硬件。Linux继承了Unix以网络为核心的设计思想，是一个性能稳定的多用户网络操作系统。</p>
+<h3 id="2-Linux有哪些部分"><a href="#2-Linux有哪些部分" class="headerlink" title="2.Linux有哪些部分"></a>2.Linux有哪些部分</h3><p>Linux系统一般有4个主要部分：内核、shell、文件系统和应用程序。</p>
+<p>内核主要由五个子系统组成：进程调度，内存管理，虚拟文件系统，网络接口，进程间通信。</p>
+<h3 id="3-Linux都用在了哪些地方"><a href="#3-Linux都用在了哪些地方" class="headerlink" title="3.Linux都用在了哪些地方"></a>3.Linux都用在了哪些地方</h3><p>Linux操作系统被广泛的应用于企业服务器领域，目前市场上的网络设备都是使用Linux内核操作系统，一些网络服务器也是使用Linux操作系统下面的服务搭建实现的。</p>
+<h2 id="二、Linux和Windows有什么区别，Linux有哪些优势"><a href="#二、Linux和Windows有什么区别，Linux有哪些优势" class="headerlink" title="二、Linux和Windows有什么区别，Linux有哪些优势"></a>二、Linux和Windows有什么区别，Linux有哪些优势</h2><h3 id="1-Linux和Windows有什么区别"><a href="#1-Linux和Windows有什么区别" class="headerlink" title="1.Linux和Windows有什么区别"></a>1.Linux和Windows有什么区别</h3><p>a.开源免费(linux)和闭源收费(windows)</p>
+<p>b.linux的软件大多是开源自由软件，用户可以修改定制发布；Windows大都是收费软件，且由微软官方提供技术支持和服务</p>
+<p>c.Windows操作系统倾向于将更多的功能集成到操作系统内部，并将程序与内核相结合；而Linux不同于Windows，它的内核空间与用户空间有明显的界限</p>
+<p>d.linux稳定性较高，很少有病毒攻击</p>
+<h3 id="2-Linux有哪些优势"><a href="#2-Linux有哪些优势" class="headerlink" title="2.Linux有哪些优势"></a>2.Linux有哪些优势</h3><p>开源，谁都可以查看它的源代码，使它特别安全，而且可以进行更多的操作；内核优化好，运行效率较高，占用资源比较少。</p>
+<h2 id="三、Linux的基本文件（夹）操作命令有哪些"><a href="#三、Linux的基本文件（夹）操作命令有哪些" class="headerlink" title="三、Linux的基本文件（夹）操作命令有哪些"></a>三、Linux的基本文件（夹）操作命令有哪些</h2><h3 id="1-文件操作"><a href="#1-文件操作" class="headerlink" title="1.文件操作"></a>1.文件操作</h3><p><strong>创建文件</strong></p>
+<p>a.使用touch命令。</p>
+<p>在当前目录创建文件</p>
+<p><code>touch aa.txt </code>
+ </p>
+<p>在指定目录创建文件  </p>
+<p><code>touch /home/jerval/Java/bb.txt</code></p>
+<p>b.使用vi命令。</p>
+<p><code>vi aa.txt  </code>
+ </p>
+<p><strong>修改文件名</strong></p>
+<p>a.使用mv命令，如：</p>
+<p><code>mv aa.txt bbb.txt </code></p>
+<p>b.使用rename命令，如：</p>
+<p><code>rename &#39;s/bbb.txt/ccc.txt/&#39; bbb.txt </code></p>
+<p> <br><strong>删除文件</strong></p>
+<p>使用rm命令。</p>
+<p><code>rm ccc.txt </code> </p>
+<h3 id="2-文件夹操作"><a href="#2-文件夹操作" class="headerlink" title="2.文件夹操作"></a>2.文件夹操作</h3><p><strong>创建文件夹</strong></p>
+<p>使用mkdir命令，格式：mkdir [选项] DirName。如：</p>
+<p><code>mkdir /home/jerval/test_dir  </code></p>
+<p><strong>修改文件夹名</strong></p>
+<p>a.使用mv命令，如：</p>
+<p><code>mv /home/jerval/test_dir /home/jerval/test_dir2  </code></p>
+<p>b.使用rename命令，如：</p>
+<p><code>rename &#39;s/jerval/jerval888/&#39; jerval  </code></p>
+<p> <br><em>rename还支持正则表达式。如下：</em></p>
+<p>删除所有的.bak后缀：</p>
+<p><code>rename &#39;s/\.bak$//&#39; *.bak  </code></p>
+<p>  <br>把.jpe文件后缀修改为.jpg： </p>
+<p> <br><code>rename &#39;s/\.jpe$/\.jpg/&#39; *.jpe  </code></p>
+<p>  <br>把文件名改为小写：  </p>
+<p><code>rename &#39;y/A-Z/a-z/&#39; *   </code>
+ </p>
+<p><strong>删除文件夹</strong></p>
+<p>a.使用rm命令。如强制删除文件夹jerval及其下面所有的子文件夹或文件：</p>
+<p><code>rm -rf jerval  </code></p>
+<p>-r 就是向下递归，不管有多少级目录，一并删除</p>
+<p>-f 就是直接强行删除，不作任何提示的意思</p>
+<p>-i 删除前逐一询问确认。</p>
+<p>b.使用rmdir命令，不过一旦目录非空，就很麻烦了，所以推荐使用rm命令。</p>
+<h2 id="四、什么是开源软件，开源社区有哪些，开源软件有什么优势和劣势"><a href="#四、什么是开源软件，开源社区有哪些，开源软件有什么优势和劣势" class="headerlink" title="四、什么是开源软件，开源社区有哪些，开源软件有什么优势和劣势"></a>四、什么是开源软件，开源社区有哪些，开源软件有什么优势和劣势</h2><h3 id="1-什么是开源软件"><a href="#1-什么是开源软件" class="headerlink" title="1.什么是开源软件"></a>1.什么是开源软件</h3><p>全称：开放源代码软件，它被定义为描述其源码可以被公众使用的软件，并且此软件的使用，修改和分发也不受许可证的限制。</p>
+<h3 id="2-开源社区有哪些"><a href="#2-开源社区有哪些" class="headerlink" title="2.开源社区有哪些"></a>2.开源社区有哪些</h3><p>国内：Linux中国，开源中国社区，LUPA，共创软件联盟，ChinaUnix.net，红旗Linux技术社区，PHPChina，JAVA中文站，JAVA世界中文论坛，兰大开源社区等</p>
+<p>国外：kernel，Alpha，PowerPC，PA-RISC，Sourceforge，Opensource，open office等</p>
+<h3 id="3-开源软件有什么优势和劣势"><a href="#3-开源软件有什么优势和劣势" class="headerlink" title="3.开源软件有什么优势和劣势"></a>3.开源软件有什么优势和劣势</h3><p><strong>优势：</strong></p>
+<p>a.免费</p>
+<p>b.开放源代码，给初学者（比如我）一个学习机会</p>
+<p>c.自定义软件，想做什么有能力就可以去做</p>
+<p>d.大家一起贡献代码，相对来说更新和开发速度不慢</p>
+<p>e.自己如果想做项目，开源集思广益，容易得到大家的支持</p>
+<p><strong>劣势：</strong></p>
+<p>a.缺少系统化的支持，如果需要一个问题，可能还找不到解决方法</p>
+<p>b.安装配置，入门比较难</p>
+<p>c.开源者比较难盈利，难以形成较大的规模</p>
+<h2 id="五、为什么要有版本控制，git都有哪些操作，和GitHub有什么关系"><a href="#五、为什么要有版本控制，git都有哪些操作，和GitHub有什么关系" class="headerlink" title="五、为什么要有版本控制，git都有哪些操作，和GitHub有什么关系"></a>五、为什么要有版本控制，git都有哪些操作，和GitHub有什么关系</h2><h3 id="1-为什么要有版本控制"><a href="#1-为什么要有版本控制" class="headerlink" title="1.为什么要有版本控制"></a>1.为什么要有版本控制</h3><p>更好地管理代码，进行权限约束；如果碰到问题，可以通过查询原始文件来修正或者恢复。</p>
+<h3 id="2-git都有哪些操作，和GitHub有什么关系"><a href="#2-git都有哪些操作，和GitHub有什么关系" class="headerlink" title="2.git都有哪些操作，和GitHub有什么关系"></a>2.git都有哪些操作，和GitHub有什么关系</h3><p><code>git init</code></p>
+<p>用 git init 在目录中创建新的 Git 仓库，在目录中执行 git init，就可以创建一个 Git 仓库了。</p>
+<p><code>git clone</code></p>
+<p>使用 git clone 拷贝一个 Git 仓库到本地，让自己能够查看该项目，或者进行修改。</p>
+<p><code>git add</code></p>
+<p>git add 命令可将该文件添加到缓存。</p>
+<p><code>git status</code><br>git status 以查看在你上次提交之后是否有修改。</p>
+<p><code>git diff</code></p>
+<p>执行 git diff 来查看执行 git status 的结果的详细信息。</p>
+<p><code>git commit</code></p>
+<p>使用 git add 命令将想要快照的内容写入缓存区,而执行 git commit 将缓存区内容添加到仓库中。</p>
+<p><code>git reset HEAD</code></p>
+<p>git reset HEAD 命令用于取消已缓存的内容。</p>
+<p><code>git rm</code><br>如果只是简单地从工作目录中手工删除文件，运行 git status 时就会在 Changes not staged for commit 的提示。但要从 Git 中移除某个文件，就必须要从已跟踪文件清单中移除，然后提交。</p>
+<p><code>git mv</code><br>git mv 命令用于移动或重命名一个文件、目录、软连接。</p>
+<p>git是一个版本控制工具github是一个用git做版本控制的项目托管平台.</p>
+<h2 id="六、ARM架构处理器都有哪些，有什么特点，处理器的结构都有哪些，有哪些特点"><a href="#六、ARM架构处理器都有哪些，有什么特点，处理器的结构都有哪些，有哪些特点" class="headerlink" title="六、ARM架构处理器都有哪些，有什么特点，处理器的结构都有哪些，有哪些特点"></a>六、ARM架构处理器都有哪些，有什么特点，处理器的结构都有哪些，有哪些特点</h2><h3 id="1-ARM架构处理器都有哪些，有什么特点"><a href="#1-ARM架构处理器都有哪些，有什么特点" class="headerlink" title="1.ARM架构处理器都有哪些，有什么特点"></a>1.ARM架构处理器都有哪些，有什么特点</h3><p>ARM7系列　ARM9系列　ARM9E系列　ARM10E系列  SecurCore系列　Intel的StrongARM ARM11系列 Intel的Xscale</p>
+<p>其中，ARM7、ARM9、ARM9E和ARM10为4个通用处理器系列，每一个系列提供一套相对独特的性能来满足不同应用领域的需求。</p>
+<p>SecurCore系列专门为安全要求较高的应用而设计。</p>
+<p>Axxia 4500通信处理器基于采用28纳米工艺的ARM 4核Cortex-A15处理器，并搭载ARM全新CoreLink CCN-504高速缓存一致性互连技术，实现安全低功耗和最佳性能。</p>
+<p>ARMCortex-A50处理器系列:<br>提供Cortex-A57与Cortex-A53两款处理器，可选配密码编译加速器，为验证软件提高10倍的运行速度与ARMMali图形处理器系列互用，适用于图形处理器计算应用具有AMBA系统一致性，与CCI-400、CCN-504等ARMCoreLink缓存一致性结构组件达成多核心缓存一致性。</p>
+<p>ARMCortex-A57处理器:<br>最先进、单线程性能最高的ARM应用处理器能提升，以满足供智能手机从内容消费设备转型为内容生产设备的需求，并在相同功耗下实现最高可达现有超级手机三倍的性能计算能力可相当于传统PC，但仅需移动设备的功耗成本即可运行，无论企业用户或普通消费者均可享受低成本与低耗能针对高性能企业应用提高了产品可靠度与可扩展性。</p>
+<p>ARMCortex-A53处理器:<br>史上效率最高的ARM应用处理器，使用体验相当于当前的超级手机，但功耗仅需其四分之一结合可靠性特点，可扩展数据平面（dataplane）应用可将每毫瓦及每平方毫米性能发挥到极致针对个别线程计算应用程序进行了传输处理优化Cortex-A53处理器结合Cortex-A57及ARM的big.LITTLE处理技术，能使平台拥有最大的性能范围，同时大幅减少功耗。</p>
+<h3 id="2-处理器的结构都有哪些，有哪些特点"><a href="#2-处理器的结构都有哪些，有哪些特点" class="headerlink" title="2.处理器的结构都有哪些，有哪些特点"></a>2.处理器的结构都有哪些，有哪些特点</h3><p>ARM:指令集精简，但指令等长，这样提高了处理效率，但遇到复杂指令，就需要更多的简单指令来堆砌复杂任务。</p>
+<p>X86:指令集丰富，指令不等长，善于执行复杂工作，更强调串行性能</p>
+<p>并行处理能力上，ARM凭借高效率和高并发性能取得一定优势；X86善于执行复杂指令，且在纯串行任务上，相较于ARM能取得优势。</p>
+<h2 id="七、为什么在路由器中可以安装Linux，在路由器中使用的Linux和在桌面端使用的有什么区别"><a href="#七、为什么在路由器中可以安装Linux，在路由器中使用的Linux和在桌面端使用的有什么区别" class="headerlink" title="七、为什么在路由器中可以安装Linux，在路由器中使用的Linux和在桌面端使用的有什么区别"></a>七、为什么在路由器中可以安装Linux，在路由器中使用的Linux和在桌面端使用的有什么区别</h2><h3 id="1-为什么在路由器中可以安装Linux"><a href="#1-为什么在路由器中可以安装Linux" class="headerlink" title="1.为什么在路由器中可以安装Linux"></a>1.为什么在路由器中可以安装Linux</h3><p>在 GNU 软件 Zebra 的协助下，可以将 Linux 机器打造成一台功能完备的路由器，能够同时支持 RIPv1、 RIPv2、RIPng、OSPFv2、OSPFv3、BGP - 4 和 BGP - 4+ 等诸多 TCP/IP 协议，路由器则通过这些协议进行传输数据。</p>
+<h3 id="2-在路由器中使用的Linux和在桌面端使用的有什么区别"><a href="#2-在路由器中使用的Linux和在桌面端使用的有什么区别" class="headerlink" title="2.在路由器中使用的Linux和在桌面端使用的有什么区别"></a>2.在路由器中使用的Linux和在桌面端使用的有什么区别</h3><p>使用代码不一样2333具体并不了解</p>
+<h2 id="八、为什么要有操作系统"><a href="#八、为什么要有操作系统" class="headerlink" title="八、为什么要有操作系统"></a>八、为什么要有操作系统</h2><p>操作系统就是为了让人们更加方便的使用硬件资源的一个工具。</p>
+<h2 id="九、自己对计算机分层思想的理解"><a href="#九、自己对计算机分层思想的理解" class="headerlink" title="九、自己对计算机分层思想的理解"></a>九、自己对计算机分层思想的理解</h2><table>
+<thead>
+<tr>
+<th>层数</th>
+<th>名称</th>
+<th>作用</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>第七层</td>
+<td>应用层</td>
+<td>提供用户界面</td>
+<td>文件、打印、消息、数据库和应用程序服务</td>
+</tr>
+<tr>
+<td>第六层</td>
+<td>表示层</td>
+<td>表示数据、进行加密等处理</td>
+<td>数据加密、压缩和转换服务</td>
+</tr>
+<tr>
+<td>第五层</td>
+<td>会话层</td>
+<td>将不同应用程序的数据分离</td>
+<td>对话控制</td>
+</tr>
+<tr>
+<td>第四层</td>
+<td>传输层</td>
+<td>提供可靠或者不可靠的传输，在重传前执行纠错</td>
+<td>端口到端口连接</td>
+</tr>
+<tr>
+<td>第三层</td>
+<td>网络层</td>
+<td>提供逻辑地址，路由器使用它们来选择路径</td>
+<td>路由选择</td>
+</tr>
+<tr>
+<td>第二层</td>
+<td>数据链路层</td>
+<td>将分组拆分为字节，并将字节组合成帧，使用MAC地址提供介质访问，执行错误检测但不纠错</td>
+<td>成帧</td>
+</tr>
+<tr>
+<td>第一层</td>
+<td>物理层</td>
+<td>在设备之间传输比特，指定电平、电缆速度和电缆针脚</td>
+<td>物理拓扑</td>
+</tr>
+</tbody></table>
+<p>分层处理好像任务归类一样，这样处理起来有规律有节奏有逻辑，降低了处理的复杂性，每层独立但是又可以一起合作处理。</p>
+<h2 id="十、UART串口通信的层次结构是怎样的"><a href="#十、UART串口通信的层次结构是怎样的" class="headerlink" title="十、UART串口通信的层次结构是怎样的"></a>十、UART串口通信的层次结构是怎样的</h2><table>
+<thead>
+<tr>
+<th>层</th>
+<th>—</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>终端设备层</td>
+<td>向上提供统一的接口，使用户不必关心具体的终端类型。</td>
+</tr>
+<tr>
+<td>行规程</td>
+<td>指数据交换的“规矩”，比如流量控制，对输入的数据进行变换处理等。</td>
+</tr>
+<tr>
+<td>串口抽象层</td>
+<td>将各个串口的共性概括出来，是低层串口驱动的核心部分，比如设置串口类型，串口波特率等。</td>
+</tr>
+<tr>
+<td>串口芯片层</td>
+<td>向串口抽象层提供串口芯片所用的资源，比如访问地址，串口中断号等。对于标准串口，主要移植内容在芯片层。</td>
+</tr>
+</tbody></table>
+<h2 id="十一、为什么Qt可以跨平台使用而VS不能，C语言的编译步骤是怎样的，常用的编译器有哪些"><a href="#十一、为什么Qt可以跨平台使用而VS不能，C语言的编译步骤是怎样的，常用的编译器有哪些" class="headerlink" title="十一、为什么Qt可以跨平台使用而VS不能，C语言的编译步骤是怎样的，常用的编译器有哪些"></a>十一、为什么Qt可以跨平台使用而VS不能，C语言的编译步骤是怎样的，常用的编译器有哪些</h2><h3 id="1-为什么Qt可以跨平台使用而VS不能"><a href="#1-为什么Qt可以跨平台使用而VS不能" class="headerlink" title="1.为什么Qt可以跨平台使用而VS不能"></a>1.为什么Qt可以跨平台使用而VS不能</h3><p>针对每一种OS平台，QT都有一套对应的底层类库，而接口是完全一致的。因此只要是在QT库上开发的程序，放在任何一种平台下都可以编译运行（前提条件是：程序中没有使用某OS特有的机能）。也就是说在OS和应用层之间，增加了一个平台层来保证可移植性。</p>
+<h3 id="2-C语言的编译步骤是怎样的"><a href="#2-C语言的编译步骤是怎样的" class="headerlink" title="2.C语言的编译步骤是怎样的"></a>2.C语言的编译步骤是怎样的</h3><p>预处理  编译  汇编   链接</p>
+<h3 id="3-常用的编译器有哪些"><a href="#3-常用的编译器有哪些" class="headerlink" title="3.常用的编译器有哪些"></a>3.常用的编译器有哪些</h3><p>VC++、dev-C++、C-Free、win-TC、TC 2.0</p>
+<h2 id="十二、C语言中主函数的返回值可以返回什么东西，主函数的参数又是如何确定的"><a href="#十二、C语言中主函数的返回值可以返回什么东西，主函数的参数又是如何确定的" class="headerlink" title="十二、C语言中主函数的返回值可以返回什么东西，主函数的参数又是如何确定的"></a>十二、C语言中主函数的返回值可以返回什么东西，主函数的参数又是如何确定的</h2><h3 id="1-C语言中主函数的返回值可以返回什么东西"><a href="#1-C语言中主函数的返回值可以返回什么东西" class="headerlink" title="1.C语言中主函数的返回值可以返回什么东西"></a>1.C语言中主函数的返回值可以返回什么东西</h3><p>一般返回0，或者无返回值</p>
+<h3 id="2-主函数的参数又是如何确定的"><a href="#2-主函数的参数又是如何确定的" class="headerlink" title="2.主函数的参数又是如何确定的"></a>2.主函数的参数又是如何确定的</h3><p>这两个参数名字可以自定，但前者必须整形，后者是一个字符型指针数组，这个指针数组每个指针都指向一个字符串，前者就表示字符串的个数。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/linux/" rel="tag"># linux</a>
+          
+            <a href="/tags/GitHub/" rel="tag"># GitHub</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/04/hello-world/" rel="next" title="hello world">
+                <i class="fa fa-chevron-left"></i> hello world
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/22/%E8%93%9D%E7%89%99%E5%B0%8F%E8%BD%A6%E9%81%A5%E6%8E%A7%E9%A1%B9%E7%9B%AE%E6%97%A5%E5%BF%97/" rel="prev" title="蓝牙小车遥控项目日志">
+                蓝牙小车遥控项目日志 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/litmist" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:litmist@126.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=17177333&auto=1&height=66"></iframe>
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AFLinux%E7%B3%BB%E7%BB%9F%EF%BC%8CLinux%E6%9C%89%E5%93%AA%E4%BA%9B%E9%83%A8%E5%88%86%EF%BC%8CLinux%E9%83%BD%E7%94%A8%E5%9C%A8%E4%BA%86%E5%93%AA%E4%BA%9B%E5%9C%B0%E6%96%B9"><span class="nav-number">1.</span> <span class="nav-text">一、什么是Linux系统，Linux有哪些部分，Linux都用在了哪些地方</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E4%BB%80%E4%B9%88%E6%98%AFLinux%E7%B3%BB%E7%BB%9F"><span class="nav-number">1.1.</span> <span class="nav-text">1.什么是Linux系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Linux%E6%9C%89%E5%93%AA%E4%BA%9B%E9%83%A8%E5%88%86"><span class="nav-number">1.2.</span> <span class="nav-text">2.Linux有哪些部分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Linux%E9%83%BD%E7%94%A8%E5%9C%A8%E4%BA%86%E5%93%AA%E4%BA%9B%E5%9C%B0%E6%96%B9"><span class="nav-number">1.3.</span> <span class="nav-text">3.Linux都用在了哪些地方</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81Linux%E5%92%8CWindows%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%8CLinux%E6%9C%89%E5%93%AA%E4%BA%9B%E4%BC%98%E5%8A%BF"><span class="nav-number">2.</span> <span class="nav-text">二、Linux和Windows有什么区别，Linux有哪些优势</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Linux%E5%92%8CWindows%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB"><span class="nav-number">2.1.</span> <span class="nav-text">1.Linux和Windows有什么区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Linux%E6%9C%89%E5%93%AA%E4%BA%9B%E4%BC%98%E5%8A%BF"><span class="nav-number">2.2.</span> <span class="nav-text">2.Linux有哪些优势</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81Linux%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%96%87%E4%BB%B6%EF%BC%88%E5%A4%B9%EF%BC%89%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4%E6%9C%89%E5%93%AA%E4%BA%9B"><span class="nav-number">3.</span> <span class="nav-text">三、Linux的基本文件（夹）操作命令有哪些</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C"><span class="nav-number">3.1.</span> <span class="nav-text">1.文件操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%96%87%E4%BB%B6%E5%A4%B9%E6%93%8D%E4%BD%9C"><span class="nav-number">3.2.</span> <span class="nav-text">2.文件夹操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF%E5%BC%80%E6%BA%90%E8%BD%AF%E4%BB%B6%EF%BC%8C%E5%BC%80%E6%BA%90%E7%A4%BE%E5%8C%BA%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%8C%E5%BC%80%E6%BA%90%E8%BD%AF%E4%BB%B6%E6%9C%89%E4%BB%80%E4%B9%88%E4%BC%98%E5%8A%BF%E5%92%8C%E5%8A%A3%E5%8A%BF"><span class="nav-number">4.</span> <span class="nav-text">四、什么是开源软件，开源社区有哪些，开源软件有什么优势和劣势</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E4%BB%80%E4%B9%88%E6%98%AF%E5%BC%80%E6%BA%90%E8%BD%AF%E4%BB%B6"><span class="nav-number">4.1.</span> <span class="nav-text">1.什么是开源软件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%BC%80%E6%BA%90%E7%A4%BE%E5%8C%BA%E6%9C%89%E5%93%AA%E4%BA%9B"><span class="nav-number">4.2.</span> <span class="nav-text">2.开源社区有哪些</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%BC%80%E6%BA%90%E8%BD%AF%E4%BB%B6%E6%9C%89%E4%BB%80%E4%B9%88%E4%BC%98%E5%8A%BF%E5%92%8C%E5%8A%A3%E5%8A%BF"><span class="nav-number">4.3.</span> <span class="nav-text">3.开源软件有什么优势和劣势</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E6%9C%89%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%EF%BC%8Cgit%E9%83%BD%E6%9C%89%E5%93%AA%E4%BA%9B%E6%93%8D%E4%BD%9C%EF%BC%8C%E5%92%8CGitHub%E6%9C%89%E4%BB%80%E4%B9%88%E5%85%B3%E7%B3%BB"><span class="nav-number">5.</span> <span class="nav-text">五、为什么要有版本控制，git都有哪些操作，和GitHub有什么关系</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E6%9C%89%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6"><span class="nav-number">5.1.</span> <span class="nav-text">1.为什么要有版本控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-git%E9%83%BD%E6%9C%89%E5%93%AA%E4%BA%9B%E6%93%8D%E4%BD%9C%EF%BC%8C%E5%92%8CGitHub%E6%9C%89%E4%BB%80%E4%B9%88%E5%85%B3%E7%B3%BB"><span class="nav-number">5.2.</span> <span class="nav-text">2.git都有哪些操作，和GitHub有什么关系</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AD%E3%80%81ARM%E6%9E%B6%E6%9E%84%E5%A4%84%E7%90%86%E5%99%A8%E9%83%BD%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%8C%E6%9C%89%E4%BB%80%E4%B9%88%E7%89%B9%E7%82%B9%EF%BC%8C%E5%A4%84%E7%90%86%E5%99%A8%E7%9A%84%E7%BB%93%E6%9E%84%E9%83%BD%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%8C%E6%9C%89%E5%93%AA%E4%BA%9B%E7%89%B9%E7%82%B9"><span class="nav-number">6.</span> <span class="nav-text">六、ARM架构处理器都有哪些，有什么特点，处理器的结构都有哪些，有哪些特点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-ARM%E6%9E%B6%E6%9E%84%E5%A4%84%E7%90%86%E5%99%A8%E9%83%BD%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%8C%E6%9C%89%E4%BB%80%E4%B9%88%E7%89%B9%E7%82%B9"><span class="nav-number">6.1.</span> <span class="nav-text">1.ARM架构处理器都有哪些，有什么特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%A4%84%E7%90%86%E5%99%A8%E7%9A%84%E7%BB%93%E6%9E%84%E9%83%BD%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%8C%E6%9C%89%E5%93%AA%E4%BA%9B%E7%89%B9%E7%82%B9"><span class="nav-number">6.2.</span> <span class="nav-text">2.处理器的结构都有哪些，有哪些特点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%83%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88%E5%9C%A8%E8%B7%AF%E7%94%B1%E5%99%A8%E4%B8%AD%E5%8F%AF%E4%BB%A5%E5%AE%89%E8%A3%85Linux%EF%BC%8C%E5%9C%A8%E8%B7%AF%E7%94%B1%E5%99%A8%E4%B8%AD%E4%BD%BF%E7%94%A8%E7%9A%84Linux%E5%92%8C%E5%9C%A8%E6%A1%8C%E9%9D%A2%E7%AB%AF%E4%BD%BF%E7%94%A8%E7%9A%84%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB"><span class="nav-number">7.</span> <span class="nav-text">七、为什么在路由器中可以安装Linux，在路由器中使用的Linux和在桌面端使用的有什么区别</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E4%B8%BA%E4%BB%80%E4%B9%88%E5%9C%A8%E8%B7%AF%E7%94%B1%E5%99%A8%E4%B8%AD%E5%8F%AF%E4%BB%A5%E5%AE%89%E8%A3%85Linux"><span class="nav-number">7.1.</span> <span class="nav-text">1.为什么在路由器中可以安装Linux</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%9C%A8%E8%B7%AF%E7%94%B1%E5%99%A8%E4%B8%AD%E4%BD%BF%E7%94%A8%E7%9A%84Linux%E5%92%8C%E5%9C%A8%E6%A1%8C%E9%9D%A2%E7%AB%AF%E4%BD%BF%E7%94%A8%E7%9A%84%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB"><span class="nav-number">7.2.</span> <span class="nav-text">2.在路由器中使用的Linux和在桌面端使用的有什么区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AB%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E6%9C%89%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F"><span class="nav-number">8.</span> <span class="nav-text">八、为什么要有操作系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B9%9D%E3%80%81%E8%87%AA%E5%B7%B1%E5%AF%B9%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%88%86%E5%B1%82%E6%80%9D%E6%83%B3%E7%9A%84%E7%90%86%E8%A7%A3"><span class="nav-number">9.</span> <span class="nav-text">九、自己对计算机分层思想的理解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%81%E3%80%81UART%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1%E7%9A%84%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84%E6%98%AF%E6%80%8E%E6%A0%B7%E7%9A%84"><span class="nav-number">10.</span> <span class="nav-text">十、UART串口通信的层次结构是怎样的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%81%E4%B8%80%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88Qt%E5%8F%AF%E4%BB%A5%E8%B7%A8%E5%B9%B3%E5%8F%B0%E4%BD%BF%E7%94%A8%E8%80%8CVS%E4%B8%8D%E8%83%BD%EF%BC%8CC%E8%AF%AD%E8%A8%80%E7%9A%84%E7%BC%96%E8%AF%91%E6%AD%A5%E9%AA%A4%E6%98%AF%E6%80%8E%E6%A0%B7%E7%9A%84%EF%BC%8C%E5%B8%B8%E7%94%A8%E7%9A%84%E7%BC%96%E8%AF%91%E5%99%A8%E6%9C%89%E5%93%AA%E4%BA%9B"><span class="nav-number">11.</span> <span class="nav-text">十一、为什么Qt可以跨平台使用而VS不能，C语言的编译步骤是怎样的，常用的编译器有哪些</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E4%B8%BA%E4%BB%80%E4%B9%88Qt%E5%8F%AF%E4%BB%A5%E8%B7%A8%E5%B9%B3%E5%8F%B0%E4%BD%BF%E7%94%A8%E8%80%8CVS%E4%B8%8D%E8%83%BD"><span class="nav-number">11.1.</span> <span class="nav-text">1.为什么Qt可以跨平台使用而VS不能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-C%E8%AF%AD%E8%A8%80%E7%9A%84%E7%BC%96%E8%AF%91%E6%AD%A5%E9%AA%A4%E6%98%AF%E6%80%8E%E6%A0%B7%E7%9A%84"><span class="nav-number">11.2.</span> <span class="nav-text">2.C语言的编译步骤是怎样的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%B8%B8%E7%94%A8%E7%9A%84%E7%BC%96%E8%AF%91%E5%99%A8%E6%9C%89%E5%93%AA%E4%BA%9B"><span class="nav-number">11.3.</span> <span class="nav-text">3.常用的编译器有哪些</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%81%E4%BA%8C%E3%80%81C%E8%AF%AD%E8%A8%80%E4%B8%AD%E4%B8%BB%E5%87%BD%E6%95%B0%E7%9A%84%E8%BF%94%E5%9B%9E%E5%80%BC%E5%8F%AF%E4%BB%A5%E8%BF%94%E5%9B%9E%E4%BB%80%E4%B9%88%E4%B8%9C%E8%A5%BF%EF%BC%8C%E4%B8%BB%E5%87%BD%E6%95%B0%E7%9A%84%E5%8F%82%E6%95%B0%E5%8F%88%E6%98%AF%E5%A6%82%E4%BD%95%E7%A1%AE%E5%AE%9A%E7%9A%84"><span class="nav-number">12.</span> <span class="nav-text">十二、C语言中主函数的返回值可以返回什么东西，主函数的参数又是如何确定的</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-C%E8%AF%AD%E8%A8%80%E4%B8%AD%E4%B8%BB%E5%87%BD%E6%95%B0%E7%9A%84%E8%BF%94%E5%9B%9E%E5%80%BC%E5%8F%AF%E4%BB%A5%E8%BF%94%E5%9B%9E%E4%BB%80%E4%B9%88%E4%B8%9C%E8%A5%BF"><span class="nav-number">12.1.</span> <span class="nav-text">1.C语言中主函数的返回值可以返回什么东西</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E4%B8%BB%E5%87%BD%E6%95%B0%E7%9A%84%E5%8F%82%E6%95%B0%E5%8F%88%E6%98%AF%E5%A6%82%E4%BD%95%E7%A1%AE%E5%AE%9A%E7%9A%84"><span class="nav-number">12.2.</span> <span class="nav-text">2.主函数的参数又是如何确定的</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Chen</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">11.4k</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
