@@ -430,40 +430,37 @@
 <h2 id="三、Linux的基本文件（夹）操作命令有哪些"><a href="#三、Linux的基本文件（夹）操作命令有哪些" class="headerlink" title="三、Linux的基本文件（夹）操作命令有哪些"></a>三、Linux的基本文件（夹）操作命令有哪些</h2><h3 id="1-文件操作"><a href="#1-文件操作" class="headerlink" title="1.文件操作"></a>1.文件操作</h3><p><strong>创建文件</strong></p>
 <p>a.使用touch命令。</p>
 <p>在当前目录创建文件</p>
-<p><code>touch aa.txt </code>
- </p>
-<p>在指定目录创建文件  </p>
-<p><code>touch /home/jerval/Java/bb.txt</code></p>
+<p><code>touch aa.txt</code></p>
+<p>在指定目录创建文件  </p>
+<p><code>touch /home/jerval/Java/bb.txt</code></p>
 <p>b.使用vi命令。</p>
-<p><code>vi aa.txt  </code>
- </p>
+<p><code>vi aa.txt</code></p>
 <p><strong>修改文件名</strong></p>
 <p>a.使用mv命令，如：</p>
-<p><code>mv aa.txt bbb.txt </code></p>
+<p><code>mv aa.txt bbb.txt</code></p>
 <p>b.使用rename命令，如：</p>
-<p><code>rename &#39;s/bbb.txt/ccc.txt/&#39; bbb.txt </code></p>
-<p> <br><strong>删除文件</strong></p>
+<p><code>rename &#39;s/bbb.txt/ccc.txt/&#39; bbb.txt</code></p>
+<p><strong>删除文件</strong></p>
 <p>使用rm命令。</p>
-<p><code>rm ccc.txt </code> </p>
+<p><code>rm ccc.txt</code> </p>
 <h3 id="2-文件夹操作"><a href="#2-文件夹操作" class="headerlink" title="2.文件夹操作"></a>2.文件夹操作</h3><p><strong>创建文件夹</strong></p>
 <p>使用mkdir命令，格式：mkdir [选项] DirName。如：</p>
-<p><code>mkdir /home/jerval/test_dir  </code></p>
+<p><code>mkdir /home/jerval/test_dir</code></p>
 <p><strong>修改文件夹名</strong></p>
 <p>a.使用mv命令，如：</p>
-<p><code>mv /home/jerval/test_dir /home/jerval/test_dir2  </code></p>
+<p><code>mv /home/jerval/test_dir /home/jerval/test_dir2</code></p>
 <p>b.使用rename命令，如：</p>
-<p><code>rename &#39;s/jerval/jerval888/&#39; jerval  </code></p>
-<p> <br><em>rename还支持正则表达式。如下：</em></p>
+<p><code>rename &#39;s/jerval/jerval888/&#39; jerval</code></p>
+<p><em>rename还支持正则表达式。如下：</em></p>
 <p>删除所有的.bak后缀：</p>
-<p><code>rename &#39;s/\.bak$//&#39; *.bak  </code></p>
-<p>  <br>把.jpe文件后缀修改为.jpg： </p>
-<p> <br><code>rename &#39;s/\.jpe$/\.jpg/&#39; *.jpe  </code></p>
-<p>  <br>把文件名改为小写：  </p>
-<p><code>rename &#39;y/A-Z/a-z/&#39; *   </code>
- </p>
+<p><code>rename &#39;s/\.bak$//&#39; *.bak</code></p>
+<p>把.jpe文件后缀修改为.jpg： </p>
+<p><code>rename &#39;s/\.jpe$/\.jpg/&#39; *.jpe</code></p>
+<p>把文件名改为小写：  </p>
+<p><code>rename &#39;y/A-Z/a-z/&#39; *</code></p>
 <p><strong>删除文件夹</strong></p>
 <p>a.使用rm命令。如强制删除文件夹jerval及其下面所有的子文件夹或文件：</p>
-<p><code>rm -rf jerval  </code></p>
+<p><code>rm -rf jerval</code></p>
 <p>-r 就是向下递归，不管有多少级目录，一并删除</p>
 <p>-f 就是直接强行删除，不作任何提示的意思</p>
 <p>-i 删除前逐一询问确认。</p>
@@ -511,7 +508,8 @@
 <h2 id="七、为什么在路由器中可以安装Linux，在路由器中使用的Linux和在桌面端使用的有什么区别"><a href="#七、为什么在路由器中可以安装Linux，在路由器中使用的Linux和在桌面端使用的有什么区别" class="headerlink" title="七、为什么在路由器中可以安装Linux，在路由器中使用的Linux和在桌面端使用的有什么区别"></a>七、为什么在路由器中可以安装Linux，在路由器中使用的Linux和在桌面端使用的有什么区别</h2><h3 id="1-为什么在路由器中可以安装Linux"><a href="#1-为什么在路由器中可以安装Linux" class="headerlink" title="1.为什么在路由器中可以安装Linux"></a>1.为什么在路由器中可以安装Linux</h3><p>在 GNU 软件 Zebra 的协助下，可以将 Linux 机器打造成一台功能完备的路由器，能够同时支持 RIPv1、 RIPv2、RIPng、OSPFv2、OSPFv3、BGP - 4 和 BGP - 4+ 等诸多 TCP/IP 协议，路由器则通过这些协议进行传输数据。</p>
 <h3 id="2-在路由器中使用的Linux和在桌面端使用的有什么区别"><a href="#2-在路由器中使用的Linux和在桌面端使用的有什么区别" class="headerlink" title="2.在路由器中使用的Linux和在桌面端使用的有什么区别"></a>2.在路由器中使用的Linux和在桌面端使用的有什么区别</h3><p>使用代码不一样2333具体并不了解</p>
 <h2 id="八、为什么要有操作系统"><a href="#八、为什么要有操作系统" class="headerlink" title="八、为什么要有操作系统"></a>八、为什么要有操作系统</h2><p>操作系统就是为了让人们更加方便的使用硬件资源的一个工具。</p>
-<h2 id="九、自己对计算机分层思想的理解"><a href="#九、自己对计算机分层思想的理解" class="headerlink" title="九、自己对计算机分层思想的理解"></a>九、自己对计算机分层思想的理解</h2><table>
+<h2 id="九、自己对计算机分层思想的理解"><a href="#九、自己对计算机分层思想的理解" class="headerlink" title="九、自己对计算机分层思想的理解"></a>九、自己对计算机分层思想的理解</h2><div class="table-container">
+<table>
 <thead>
 <tr>
 <th>层数</th>
@@ -520,7 +518,8 @@
 <th>功能</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>第七层</td>
 <td>应用层</td>
 <td>提供用户界面</td>
@@ -562,16 +561,20 @@
 <td>在设备之间传输比特，指定电平、电缆速度和电缆针脚</td>
 <td>物理拓扑</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <p>分层处理好像任务归类一样，这样处理起来有规律有节奏有逻辑，降低了处理的复杂性，每层独立但是又可以一起合作处理。</p>
-<h2 id="十、UART串口通信的层次结构是怎样的"><a href="#十、UART串口通信的层次结构是怎样的" class="headerlink" title="十、UART串口通信的层次结构是怎样的"></a>十、UART串口通信的层次结构是怎样的</h2><table>
+<h2 id="十、UART串口通信的层次结构是怎样的"><a href="#十、UART串口通信的层次结构是怎样的" class="headerlink" title="十、UART串口通信的层次结构是怎样的"></a>十、UART串口通信的层次结构是怎样的</h2><div class="table-container">
+<table>
 <thead>
 <tr>
 <th>层</th>
-<th>—</th>
+<th>—-</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>终端设备层</td>
 <td>向上提供统一的接口，使用户不必关心具体的终端类型。</td>
 </tr>
@@ -587,7 +590,9 @@
 <td>串口芯片层</td>
 <td>向串口抽象层提供串口芯片所用的资源，比如访问地址，串口中断号等。对于标准串口，主要移植内容在芯片层。</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h2 id="十一、为什么Qt可以跨平台使用而VS不能，C语言的编译步骤是怎样的，常用的编译器有哪些"><a href="#十一、为什么Qt可以跨平台使用而VS不能，C语言的编译步骤是怎样的，常用的编译器有哪些" class="headerlink" title="十一、为什么Qt可以跨平台使用而VS不能，C语言的编译步骤是怎样的，常用的编译器有哪些"></a>十一、为什么Qt可以跨平台使用而VS不能，C语言的编译步骤是怎样的，常用的编译器有哪些</h2><h3 id="1-为什么Qt可以跨平台使用而VS不能"><a href="#1-为什么Qt可以跨平台使用而VS不能" class="headerlink" title="1.为什么Qt可以跨平台使用而VS不能"></a>1.为什么Qt可以跨平台使用而VS不能</h3><p>针对每一种OS平台，QT都有一套对应的底层类库，而接口是完全一致的。因此只要是在QT库上开发的程序，放在任何一种平台下都可以编译运行（前提条件是：程序中没有使用某OS特有的机能）。也就是说在OS和应用层之间，增加了一个平台层来保证可移植性。</p>
 <h3 id="2-C语言的编译步骤是怎样的"><a href="#2-C语言的编译步骤是怎样的" class="headerlink" title="2.C语言的编译步骤是怎样的"></a>2.C语言的编译步骤是怎样的</h3><p>预处理  编译  汇编   链接</p>
 <h3 id="3-常用的编译器有哪些"><a href="#3-常用的编译器有哪些" class="headerlink" title="3.常用的编译器有哪些"></a>3.常用的编译器有哪些</h3><p>VC++、dev-C++、C-Free、win-TC、TC 2.0</p>
@@ -1333,6 +1338,8 @@
   
 
   
+  
+
 
   
 

@@ -5,9 +5,9 @@
     <url>/2019/04/25/I2C%E7%9A%84%E7%AE%80%E5%8D%95%E5%AD%A6%E4%B9%A0/</url>
     <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在看hal库的时候，学习过I2C，但没有实践过，忘记了很多，但最近因为要做ov7725的hal库移植，可能需要I2C协议，就又去看了一遍，做了个笔记。使用I2C不困难，理解底层才好做移植。</p>
 <h2 id="I2C协议简介"><a href="#I2C协议简介" class="headerlink" title="I2C协议简介"></a>I2C协议简介</h2><p>I2C 通讯协议(Inter－Integrated Circuit)是由Phiilps 公司开发的，由于它引脚少，硬件实现简单，可扩展性强，不需要USART、CAN 等通讯协议的外部收发设备，现在被广泛地使用在系统内多个集成电路(IC)间的通讯。</p>
-<h2 id="I2C物理层介绍"><a href="#I2C物理层介绍" class="headerlink" title="I2C物理层介绍"></a>I2C物理层介绍</h2><p><img src="/image/I2Cpic1.png"></p>
+<h2 id="I2C物理层介绍"><a href="#I2C物理层介绍" class="headerlink" title="I2C物理层介绍"></a>I2C物理层介绍</h2><p><img src="/image/I2Cpic1.png" alt=""></p>
 <p><em>MCU中文名称为微控制单元，又称单片微型计算机或者单片机</em></p>
-<p><em>EEPROM，或写作E2PROM，全称电子抹除式可复写只读存储器 ，是一种可以通过电子方式多次复写的半导体存储设备，可以在电脑上或专用设备上擦除已有信息，重新编程。</em></p>
+<p><em>EEPROM，或写作E2PROM，全称电子抹除式可复写只读存储器 ，是一种可以通过电子方式多次复写的半导体存储设备，可以在电脑上或专用设备上擦除已有信息，重新编程。</em></p>
 <p><strong>七个特点</strong></p>
 <ol>
 <li>它是一个支持多设备的总线。“总线”指多个设备共用的信号线。在一个I2C 通讯总线中，可连接多个I2C通讯设备，支持多个通讯主机及多个通讯从机。</li>
@@ -19,7 +19,7 @@
 <li>连接到相同总线的IC 数量受到总线的最大电容400pF 限制。</li>
 </ol>
 <h2 id="I2C协议层介绍"><a href="#I2C协议层介绍" class="headerlink" title="I2C协议层介绍"></a>I2C协议层介绍</h2><p>它主要定义了通讯的起始和停止信号、数据有效性、响应、仲裁、时钟同步和地址广播等环节。</p>
-<h3 id="I2C的基本读写过程"><a href="#I2C的基本读写过程" class="headerlink" title="I2C的基本读写过程"></a>I2C的基本读写过程</h3><p><img src="/image/I2Cpic2.png"></p>
+<h3 id="I2C的基本读写过程"><a href="#I2C的基本读写过程" class="headerlink" title="I2C的基本读写过程"></a>I2C的基本读写过程</h3><p><img src="/image/I2Cpic2.png" alt=""></p>
 <ul>
 <li><p>起始信号产生后，所有从机就开始等待主机紧接下来广播的从机地址信号(SLAVE_ADDRESS)。在I2C总线上，每个设备的地址都是唯一的，当主机广播的地址与某个设备地址相同时，这个设备就被选中了。</p>
 </li>
@@ -33,10 +33,10 @@
 </li>
 </ul>
 <h3 id="通讯的起终信号"><a href="#通讯的起终信号" class="headerlink" title="通讯的起终信号"></a>通讯的起终信号</h3><p>了解了I2C是怎么读写的，还不够，我们得要先和它通讯才行，那怎么通讯的呢？</p>
-<p>当SCL 线是高电平时，SDA 线从高电平向低电平切换，这个情况表示通讯的起始。当SCL 是高电平时SDA 线由低电平向高电平切换，表示通讯的停止。起始和停止信号一般由主机产生。(看图)<br><img src="/image/I2Cpic3.png"></p>
+<p>当SCL 线是高电平时，SDA 线从高电平向低电平切换，这个情况表示通讯的起始。当SCL 是高电平时SDA 线由低电平向高电平切换，表示通讯的停止。起始和停止信号一般由主机产生。(看图)<br><img src="/image/I2Cpic3.png" alt=""></p>
 <h3 id="数据的有效性"><a href="#数据的有效性" class="headerlink" title="数据的有效性"></a>数据的有效性</h3><p>如果我们成功与主机通讯了，准备互传数据，那数据又是怎么被有效识别到的呢？</p>
-<p>I2C使用SDA信号线来传输数据，使用SCL信号线进行数据同步。SDA数据线在SCL 的每个时钟周期传输一位数据。传输时，SCL 为高电平的时候SDA 表示的数据有效，即此时的SDA为高电平时表示数据“1”，为低电平时表示数据“0”。当SCL为低电平时，SDA的数据无效，一般在这个时候SDA进行电平切换，为下一次表示数据做好准备。<br><img src="/image/I2Cpic4.png"></p>
-<h3 id="地址及数据方向"><a href="#地址及数据方向" class="headerlink" title="地址及数据方向"></a>地址及数据方向</h3><h3 id="响应"><a href="#响应" class="headerlink" title="响应"></a>响应</h3><p>———-未完待续———–</p>
+<p>I2C使用SDA信号线来传输数据，使用SCL信号线进行数据同步。SDA数据线在SCL 的每个时钟周期传输一位数据。传输时，SCL 为高电平的时候SDA 表示的数据有效，即此时的SDA为高电平时表示数据“1”，为低电平时表示数据“0”。当SCL为低电平时，SDA的数据无效，一般在这个时候SDA进行电平切换，为下一次表示数据做好准备。<br><img src="/image/I2Cpic4.png" alt=""></p>
+<h3 id="地址及数据方向"><a href="#地址及数据方向" class="headerlink" title="地址及数据方向"></a>地址及数据方向</h3><h3 id="响应"><a href="#响应" class="headerlink" title="响应"></a>响应</h3><p>—————未完待续—————-</p>
 ]]></content>
       <categories>
         <category>单片机</category>
@@ -46,276 +46,13 @@
       </tags>
   </entry>
   <entry>
-    <title>archlinux的装机感想</title>
-    <url>/2019/02/05/archlinux%E7%9A%84%E8%A3%85%E6%9C%BA%E6%84%9F%E6%83%B3/</url>
-    <content><![CDATA[<h2 id="缘起"><a href="#缘起" class="headerlink" title="缘起"></a>缘起</h2><p>年前，在<strong>某位大佬</strong>的推荐下，在VMware（虚拟机)上安装了archlinux，并受其<del>压迫</del>，在年后赶出了一篇archlinux装机感想。</p>
-<p><img src="https://linuxundich.de/wp-content/uploads/2013/06/arch-linux.jpg"></p>
-<h2 id="archlinux简介"><a href="#archlinux简介" class="headerlink" title="archlinux简介"></a>archlinux简介</h2><h3 id="arch之道"><a href="#arch之道" class="headerlink" title="arch之道"></a>arch之道</h3><p>Keep It Simple, Stupid（保持简单，且一目了然）</p>
-<ul>
-<li>Simplicity（简洁）</li>
-<li>Modernity（现代）</li>
-<li>Pragmatism（实用）</li>
-<li>User centrality（以用户为中心）</li>
-<li>Versatility（通用）</li>
-</ul>
-<h3 id="Arch-Linux参考网站"><a href="#Arch-Linux参考网站" class="headerlink" title="Arch Linux参考网站"></a>Arch Linux参考网站</h3><ul>
-<li><a href="http://bbs.archlinuxcn.org/">Arch Linux 中文论坛</a></li>
-<li><a href="https://wiki.archlinux.org/index.php/Arch_Linux">Arch Linux Wiki</a></li>
-<li><a href="https://wiki.archlinux.org/index.php/Arch_Linux_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)">Arch Linux Wiki(中文)</a></li>
-</ul>
-<h2 id="安装过程"><a href="#安装过程" class="headerlink" title="安装过程"></a>安装过程</h2><h3 id="准备阶段"><a href="#准备阶段" class="headerlink" title="准备阶段"></a>准备阶段</h3><p>下载VMware（其他虚拟机也可以）和<a href="https://www.archlinux.org/download/">archlinux的.iso镜像文件</a>，浏览<a href="https://wiki.archlinux.org/index.php/Installation_guide_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)">官方安装指南</a></p>
-<h3 id="设置虚拟机"><a href="#设置虚拟机" class="headerlink" title="设置虚拟机"></a>设置虚拟机</h3><p>我选择了Linux3.x内核，20GB硬盘，1GB的内存，1个双核处理器，网络类型是nat，再加载原先下号的镜像文件，其他就默认吧。(其实看自己的需求啦)</p>
-<p><em>如果在新建虚拟机的过程中，有遇到”无法检测此光盘映像中的操作系统”这样的提示语，选择稍后安装操作系统选项，再在自定义硬件的 新CD/DVD（IDE) 使用iso的镜像文件</em></p>
-<p><img src="https://img-blog.csdn.net/20160919204458980"></p>
-<p><em>请尽量下载官方的镜像文件，不然系统可能进不去</em></p>
-<h3 id="选择系统类型"><a href="#选择系统类型" class="headerlink" title="选择系统类型"></a>选择系统类型</h3><p>进去以后会出现Archlinux的live iso的启动菜单。如果要安装64位的arch，就选择第一项x86_64。然后等待片刻，进入arch live iso的终端命令行。默认为root用户，拥有所有权限，可以使用任何命令。</p>
-<p><img src="https://i1.wp.com/itsfoss.com/wp-content/uploads/2017/11/1-2.jpg?zoom=1.25&resize=599,449&ssl=1"></p>
-<h3 id="检查网络环境"><a href="#检查网络环境" class="headerlink" title="检查网络环境"></a>检查网络环境</h3><p>使用 <code># ping -c 3 archlinux.org</code> 命令，检测是否有网</p>
-<p>如果ping的结果是找不到该主机，可能是由于dhcp服务没有开启，使用 <code># systemctl dhcpcd.service</code> 命令，开启该服务</p>
-<h3 id="测试系统时间"><a href="#测试系统时间" class="headerlink" title="测试系统时间"></a>测试系统时间</h3><p> <code># timedatectl status</code> 看一下时间，如果时间不对，用<code># timedatectl set-ntp true</code>开启ntp服务，它会每隔11分钟进行一次网络对时。然后在查看一下系统时间状态</p>
-<h3 id="建立硬盘分区"><a href="#建立硬盘分区" class="headerlink" title="建立硬盘分区"></a>建立硬盘分区</h3><p>使用命令 <code># lsblk</code> 命令查看一下存储设备状态。</p>
-<p>用 <code># fdisk /dev/sda</code> 命令对/dev/sda进行分区，输入 m 可以查看帮助， n 是新建一个分区， d 是删除一个已有分区。（<a href="https://blog.csdn.net/qq_18297675/article/details/52719171">参考</a>）</p>
-<p><strong>以下几种经典的分区方案：</strong></p>
-<blockquote>
-</blockquote>
-<pre><code>1.    /：建议大小在 5GB 以上，
-    swap：即交换分区，建议大小是物理内存的 1~2 倍；
-</code></pre>
-<blockquote>
-</blockquote>
-<pre><code>2.    /boot ：用来存放与 Linux 系统启动有关的程序，比如启动引导装载程序等，建议大小为 100MB ， 
-    / ： Linux 系统的根目录，所有的目录都挂在这个目录下面，建议大小为 5GB 以上，
-    /home ：存放普通用户的数据，是普通用户的宿主目录，建议大小为剩下的空间，
-    /swap ：实现虚拟内存，建议大小是物理内存的 1~2 倍；
-</code></pre>
-<blockquote>
-</blockquote>
-<pre><code>3.    /boot ：用来存放与 Linux 系统启动有关的程序，比如启动引导装载程序等，建议大小为 100MB ， 
-    /usr ：用来存放 Linux 系统中的应用程序，其相关数据较多，建议大于 3GB 以上， 
-    /var ：用来存放 Linux 系统中经常变化的数据以及日志文件，建议大于 1GB 以上， 
-    /home ：存放普通用户的数据，是普通用户的宿主目录，建议大小为剩下的空间， 
-    / ： Linux 系统的根目录，所有的目录都挂在这个目录下面，建议大小为 5GB 以上， 
-    /tmp ：将临时盘在独立的分区，可避免在文件系统被塞满时影响到系统的稳定性。建议大小为 500MB 以上， 
-    swap ：实现虚拟内存，建议大小是物理内存的 1~2 倍。
-</code></pre>
-<p>其实swap分区不一定是物理内存的 1~2 倍，那swap大小配置多少比较合适?(<a href="https://segmentfault.com/a/1190000008125116">参考</a>)</p>
-<blockquote>
-</blockquote>
-<ul>
-<li>当物理内存小于1G且不需要休眠时，设置和内存同样大小的swap空间即可;当需要休眠时，建议配置两倍物理内存的大小，但最大值不要超过两倍内存大小</li>
-<li>当物理内存大于1G且不需要休眠时，建议大小为round(sqrt(RAM))，其中RAM为物理内存大小;当需要休眠时，建议大小是RAM+round(sqrt(RAM))，但最大值不要超过两倍内存大小</li>
-<li>如果两倍物理内存大小的swap空间还不够用，建议增加内存而不是增加swap</li>
-</ul>
-<h3 id="格式化分区"><a href="#格式化分区" class="headerlink" title="格式化分区"></a>格式化分区</h3><p>因为是想熟悉一下Linux的有关命令，所以分区就选择了最简单的第一种方案，分了根分区(/dev/sda1)和交换分区(/dev/sda2)，接下来就是对分区进行格式化。</p>
-<p>格式化根分区 <code># mkfs.ext4 /dev/sda1</code></p>
-<p>对于交换分区，格式化命令如下 <code># mkswap /dev/sda2</code> ，并开启使用交换分区 <code># swapon /dev/sda2</code></p>
-<p><em>其实可以举一反三，知道格式化分区的命令等怎么写了</em></p>
-<h3 id="挂载分区"><a href="#挂载分区" class="headerlink" title="挂载分区"></a>挂载分区</h3><blockquote>
-<p>linux下mnt目录的作用：mount 可直接理解为“挂载”挂接光驱、USB设备的目录，加载后，会在mnt里多出相应设备的目录。</p>
-</blockquote>
-<p>所以，用 <code># mount /dev/sda1 /mnt</code> 命令将根分区挂载到/mnt目录，交换分区是不用挂载。如果使用多个分区，还需要为其他分区创建目录并挂载它们，比如/home家分区，要先在/mnt目录下创建home目录 ，先 <code># mkdir /mnt/home</code>  (其实mkdir就是make directory创建目录的缩写)，再使用命令 <code>mount 家分区 /mnt/home</code> 挂载家目录。</p>
-<h3 id="安装系统"><a href="#安装系统" class="headerlink" title="安装系统"></a>安装系统</h3><p>啊，终于到安装系统了~但是第一件事情是要先修改一下arch的镜像源，使用国内的（或者是地理位置最近的），下载速度会更快。文件 /etc/pacman.d/mirrorlist 定义了软件包会从哪个镜像源下载。可以使用nano查看一下该文件，<code># nano /etc/pacman.d/mirrorlist</code> ，如果你不嫌麻烦，可以自己找到镜像源，并将他们提到最前面，但这里，采用的是正则表达式工具grep工具来将中国的源取出来。</p>
-<p>首先，先切换到软件源所在目录。 <code># cd /etc/pacman.d</code></p>
-<p>然后用grep取出中国的源。用-A参数的话会用–分隔符分隔每一条匹配，因此再次使用grep工具去掉前一次结果产生的分隔符。 <code># grep -A 1 &#39;##.*China&#39; mirrorlist|grep -v &#39;\-\-&#39;&gt; mirrorlist2</code></p>
-<p>最后将中国的源放到镜像源列表的最前面。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># cat mirrorlist&gt;&gt;mirrorlist2</span><br><span class="line"># mv mirrorlist2 mirrorlist</span><br></pre></td></tr></table></figure>
-
-<p><em>我当时还特地重新进去看看了，国内的源还挺多的，对了，输入过的命令可以按上下键重新显示再执行</em></p>
-<p>修改完了，还得要刷新一下pacman的缓存 <code># pacman -Syy</code> </p>
-<p>终于可以开始安装系统了，可以使用 <code># pacstrap -i /mnt base base-devel</code> 命令安装，一路回车默认就可以了（-i参数是在安装前进行确认）</p>
-<p><em>这里可能会有很多错误，比如下载到一半error，可能是网络问题</em></p>
-<h3 id="配置系统"><a href="#配置系统" class="headerlink" title="配置系统"></a>配置系统</h3><p>用以下命令生成 fstab 文件 <code># genfstab -U /mnt &gt;&gt; /mnt/etc/fstab</code> ，</p>
-<p><strong>强烈建议</strong>在执行完以上命令后，后检查一下生成的 /mnt/etc/fstab 文件是否正确。（就是用这个查看一下<code># nano /mnt/etc/fstab</code>）</p>
-<p><em>有出现分区分配的就是成功了</em></p>
-<h3 id="进入系统"><a href="#进入系统" class="headerlink" title="进入系统"></a>进入系统</h3><p>使用命令<code># arch-chroot /mnt</code>，进入系统。出现以下图片，说明成功进入系统。<img src="https://img-blog.csdn.net/20161105231816636"></p>
-<p><em>如果有出现找不到/bin/bash错误信息的话，重装吧 ╥﹏╥ ，首先镜像得是下载官方镜像，其次可能是配置系统的时候出了点问题，按照步骤来，总会成功的</em></p>
-<p><em>进去之后，命令行首就变了，变成了[root@archiso /]#，如果看到这个，恭喜你！基本系统已经安装好了，八年抗战快要结束了</em></p>
-<h3 id="本地化"><a href="#本地化" class="headerlink" title="本地化"></a>本地化</h3><p>本地化的程序与库若要本地化文本，都依赖 Locale，后者明确规定地域、货币、时区日期的格式、字符排列方式和其他本地化标准等等。需要在下面两个文件设置：locale.gen 与 locale.conf。</p>
-<p>所以，先查看 <code># nano /etc/locale.gen</code>，然后将en_US.UTF-8 UTF-8、zh_CN.UTF-8 UTF-8、zh_TW.UTF-8 UTF-8着三行的注释（也就是前面的#）删掉。</p>
-<p>然后运行locale-gen命令生成locale信息，<code># locale-gen</code>。</p>
-<p>再生成一个locale.conf文件，<code># echo LANG=en_US.UTF-8 &gt; /etc/locale.conf</code></p>
-<blockquote>
-<p>警告: 不推荐在此设置任何中文 locale，会导致 TTY 乱码。</p>
-</blockquote>
-<p><em>可以尝试一下中文，兴许变成了□□：□□□□□□□</em></p>
-<h3 id="设置root密码"><a href="#设置root密码" class="headerlink" title="设置root密码"></a>设置root密码</h3><p><code># passwd</code> </p>
-<p>然后输入密码，但是这里是不会显示的，你凭感觉输入（别以为是什么系统出错了不能读取键盘(;´༎ຶД༎ຶ`)），successfully</p>
-<h3 id="设置主机名"><a href="#设置主机名" class="headerlink" title="设置主机名"></a>设置主机名</h3><p><code># echo 主机名 &gt; /etc/hostname</code></p>
-<p>添加对应的信息到/etc/hosts文件中。<em>应该知道这么打开文件了吧，nano</em></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#&lt;ip-address&gt;   &lt;hostname.domain.org&gt;   &lt;hostname&gt;</span><br><span class="line">127.0.0.1   localhost.localdomain   localhost   主机名</span><br><span class="line">::1     localhost.localdomain   localhost   主机名</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>如果系统有一个永久的 IP 地址，请使用这个永久的 IP 地址而不是 127.0.1.1</p>
-</blockquote>
-<h3 id="时间设置"><a href="#时间设置" class="headerlink" title="时间设置"></a>时间设置</h3><p>如果时间对的，就不需要设置了</p>
-<p>设置时区 <code># ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</code></p>
-<p>将时间标准设置为UTC，如果虚拟机有这项设置则不用设置（例如VirtualBox就有设置硬件事件为UTC的选项）。<code># hwclock --systohc --utc</code></p>
-<h3 id="安装启动加载器"><a href="#安装启动加载器" class="headerlink" title="安装启动加载器"></a>安装启动加载器</h3><p>安装grub，然后自动生成默认配置文件</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># pacman -S grub</span><br><span class="line"># grub-install --recheck /dev/sda</span><br><span class="line"># grub-mkconfig -o /boot/grub/grub.cfg</span><br></pre></td></tr></table></figure>
-
-<h3 id="退出重启"><a href="#退出重启" class="headerlink" title="退出重启"></a>退出重启</h3><p>输入 <code># exit</code> 或按 <code>Ctrl+D</code> 退出 chroot 环境。</p>
-<p>可选用 <code># umount -R /mnt</code> 手动卸载被挂载的分区。</p>
-<p>最后，通过执行 <code># reboot</code> 重启系统，systemd 将自动卸载仍然挂载的任何分区。不要忘记移除安装介质，然后使用 root 帐户登录到新系统。</p>
-<h3 id="图形界面安装"><a href="#图形界面安装" class="headerlink" title="图形界面安装"></a>图形界面安装</h3><p>我们现在都是命令行界面，可能用惯了图形界面的大家不习惯，所以，接下来安装图形界面Xorg  <code># pacman -S xorg-server xorg-xinit</code></p>
-<p>显卡驱动<code># pacman -S xf86-video-vesa</code> </p>
-<p><em>这是虚拟机的显卡驱动</em></p>
-<p><strong>archlinux提供了多种桌面</strong>（<a href="https://wiki.archlinux.org/index.php/Desktop_environment_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)">参考</a>）</p>
-<p><em>我选择了xfce桌面和lxdm桌面管理器（因为虚拟机分配的内存较小，我就选择了轻量级的桌面，等有了电脑真正安装系统的时候，可能要换(<em>^▽^</em>)）</em></p>
-<p>首先安装lxdm桌面管理器，并设置开机启动（pacman命令可以用来安装软件）</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># pacman -S lxdm </span><br><span class="line"># systemctl enable lxdm.service</span><br></pre></td></tr></table></figure>
-
-<p>然后安装xfce <code># pacman -S xfce4</code>，启动xfce <code># startxfce4</code></p>
-<p><img src="https://img-blog.csdn.net/20160919205317937"></p>
-<p><img src="https://img-blog.csdn.net/20160919205335602"></p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>终于做完了，我也快枯了，期间错误不断，不停地重装重装……还好，守得云开见月明，现在，基本的环境已经配置的差不多，但是还是后续需要优化，比如中文输入法，浏览器，yaourt安装，qt啥的（提到qt就忍不住吐槽，虚拟机上装qt还是算了吧，我看着它打开都心累）。</p>
-<p>虽然安装archlinux的时候很烦躁（为什么总有不同的error，哦不，是一样的error〒▽〒），且英语水平严重约束我读错误（让你不好好读英语啊喂），但是最后还是收获了一点点东西，至少寒假不仅仅养膘过冬嘛！</p>
-<p>引用松尾芭蕉的一句俳句，大概是成功安装完archlinux和写完这篇博文的心情吧。</p>
-<blockquote>
-<p>山路费寻攀，居然眼见紫罗兰。</p>
-</blockquote>
-<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><em>部分与文内链接重复</em></p>
-<ul>
-<li><a href="http://bbs.archlinuxcn.org/">Arch Linux 中文论坛</a></li>
-<li><a href="https://wiki.archlinux.org/index.php/Arch_Linux_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)">Arch Linux Wiki(中文)</a></li>
-<li><a href="https://wiki.archlinux.org/index.php/Installation_guide_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)">官方安装指南</a></li>
-<li><a href="https://blog.csdn.net/qq_18297675/article/details/52719171">linux如何用fdisk命令分区</a></li>
-<li><a href="https://blog.csdn.net/kingolie/article/details/53048625">虚拟机安装Archlinux</a></li>
-<li><a href="https://segmentfault.com/a/1190000008125116">Linux交换空间（swap space）</a></li>
-<li><a href="https://blog.csdn.net/uniqsa/article/details/71421462">分区方案参考</a></li>
-<li><a href="https://wiki.archlinux.org/index.php/Desktop_environment_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)">archlinux支持的桌面列表</a></li>
-<li><a href="http://linux.vbird.org/linux_basic/#">鸟哥的Linux 私房菜</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>读书笔记</category>
-      </categories>
-      <tags>
-        <tag>linux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>hello world</title>
-    <url>/2018/11/04/hello-world/</url>
-    <content><![CDATA[<h1 id="欢迎来到我的博客！"><a href="#欢迎来到我的博客！" class="headerlink" title="欢迎来到我的博客！"></a>欢迎来到我的博客！</h1><ul>
-<li><p>建这个博客的目的是记录一下平时的学习情况和对未来的规划，分享一些杂七杂八的想法</p>
-</li>
-<li><p><del>可能会有一些奇怪的东西随机出没</del></p>
-</li>
-<li><p>本人有些愚笨，做的东西比较低级，做的过程比较繁琐，希望大佬前来指点！</p>
-</li>
-</ul>
-<ul>
-<li>邮箱：<a href="mailto:&#108;&#105;&#116;&#x6d;&#x73;&#105;&#116;&#x40;&#49;&#50;&#54;&#46;&#x63;&#111;&#x6d;">&#108;&#105;&#116;&#x6d;&#x73;&#105;&#116;&#x40;&#49;&#50;&#54;&#46;&#x63;&#111;&#x6d;</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>hello</category>
-      </categories>
-      <tags>
-        <tag>hello</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>《深度学习》学习笔记(0)</title>
-    <url>/2021/07/16/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(0)/</url>
-    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>​    快两年没有更新博客了，原因是生活的重心逐渐向学习转移，笔记也以纸张为主。今年暑假呆在学校里，一边准备考研，一边学习新东西，需要笔记来记录一下学习情况。</p>
-<p>​    而且前几日，老师推荐了几本书，正好我之前就有这本《深度学习》，以前只阅读片段，现在打算从头学起，本系列博客便是这本书的学习笔记记录。</p>
-<h3 id="备注"><a href="#备注" class="headerlink" title="备注"></a>备注</h3><ol>
-<li>本书由Ian Goodfellow ， Yoshua Bengio ，Aaron Courville三位大牛合著。</li>
-<li>本书的英文版可以在网站（<a href="http://www.deeplearningbook.org/%EF%BC%89%E4%B8%8A%E5%85%8D%E8%B4%B9%E9%98%85%E8%AF%BB%EF%BC%9B%E4%B8%AD%E6%96%87%E7%89%88%E4%B9%9F%E6%98%AF%E5%BC%80%E6%BA%90%E7%9A%84%EF%BC%8C%E7%BD%91%E7%AB%99%E4%B8%BA%EF%BC%88https://github.com/exacity/deeplearningbook-chinese%EF%BC%89%E3%80%82">http://www.deeplearningbook.org/）上免费阅读；中文版也是开源的，网站为（https://github.com/exacity/deeplearningbook-chinese）。</a></li>
-</ol>
-]]></content>
-      <categories>
-        <category>读书笔记</category>
-      </categories>
-      <tags>
-        <tag>DL</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>《深度学习》学习笔记(1)</title>
-    <url>/2021/07/18/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(1)/</url>
-    <content><![CDATA[<h2 id="第1部分-应用数学与机器学习基础"><a href="#第1部分-应用数学与机器学习基础" class="headerlink" title="第1部分 应用数学与机器学习基础"></a>第1部分 应用数学与机器学习基础</h2><h3 id="第2章-线性代数"><a href="#第2章-线性代数" class="headerlink" title="第2章 线性代数"></a>第2章 线性代数</h3><p><em>一些概念工科线性代数教材中有提及，不作详细解释</em></p>
-<h4 id="个别概念"><a href="#个别概念" class="headerlink" title="个别概念"></a><strong>个别概念</strong></h4><ul>
-<li><p>标量、向量、矩阵，单位矩阵、逆矩阵</p>
-</li>
-<li><p>张量(tensor)：一个数组中的元素分布在若干维坐标的规则网格中。记作**$A$**                    <em>（多维数组？高纬度矩阵？)</em></p>
-</li>
-<li><p>广播(broadcasting)：不同维度张量相加     <em>(python的广播机制)</em>                                           </p>
-</li>
-<li><p>线性组合、线性相关、奇异矩阵</p>
-</li>
-<li><p>范数：衡量向量大小。<br>$$<br>||x||_p=(\sum_i|\mbox x_i|^p)^\frac1p<br>$$</p>
-<ul>
-<li>$L_1$范数：0/非0差异，经常作为表示非零元素数目的替代函数；</li>
-<li>最大范数：向量中具有最大幅值的元素的绝对值；</li>
-<li>Frobenius范数：衡量矩阵大小；                                                      </li>
-<li>点积可以用范数表示 $$x^Ty=||x||_2||y||_2cos\theta$$</li>
-</ul>
-</li>
-<li><p>对角矩阵、对称矩阵</p>
-</li>
-<li><p>单位向量是具有单位范数的向量，即$ ||x||_2=1 $</p>
-</li>
-<li><p>正交：如果$x^Ty=0$，那么向量x和y互相正交</p>
-<ul>
-<li>标准正交：向量不但互相正交，并且范数都为1</li>
-<li>正交矩阵：行向量和列向量分别是标准正交的方阵，则$A^{-1}=A^T$</li>
-</ul>
-</li>
-<li><p>特征分解：<br>$$<br>A=Q\Lambda Q^T<br>$$<br>其中$Q$是$A$的特征向量组成的正交矩阵，$\Lambda$ 是对角矩阵。</p>
-<ul>
-<li>实对称矩阵的特征分解可以用于优化二次方程$f(x)=x^TAx$,其中限制$ ||x||_2=1 $，当$x$等于$A$的某个特征向量时，f将返回对应的特征值，在限制条件下，函数$f(x)$的最大值是最大特征值，最小值是最小特征值。（在后面实例中会用到）</li>
-</ul>
-</li>
-<li><p>奇异值分解（SVD)：<br>$$<br>A=UDV^T<br>$$<br>其中A为m ∗ n的矩阵(未必为方阵)，U为m ∗ m的正交矩阵，D为m ∗ n的矩阵，V是一个n ∗ n的正交矩阵。</p>
-<ul>
-<li>每个实数矩阵都有一个奇异值分解，但不一定都有特征分解。</li>
-</ul>
-</li>
-<li><p>SVD最有用的一个性质是拓展矩阵求逆到非方矩阵上。</p>
-</li>
-<li><p>迹运算：返回矩阵对角元素的和，即$Tr(A)=\sum_iA_{i,i}$。</p>
-<ul>
-<li>描述Frobenius范数：$||A||_F=\sqrt{Tr(AA^T)}$</li>
-<li>性质：<ul>
-<li>$Tr(A)=Tr(A^T)$</li>
-<li>$Tr(ABC)=Tr(CAB)=Tr(BCA)$</li>
-<li>$a=Tr(a)$</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>行列式</p>
-</li>
-</ul>
-<h4 id="实例：主成分分析"><a href="#实例：主成分分析" class="headerlink" title="实例：主成分分析"></a><strong>实例：主成分分析</strong></h4><p>主成分分析（PCA）是一种统计过程，它使用正交变换将一组可能相关变量(实体，每个实体具有不同的数值)的观察值转换为一组称为主成分的线性不相关变量的值。</p>
-<p><em>理解：主要基于多变量内部具有一定的相关性，我们想要减少运算量，于是用较少的变量代替原来的变量，并尽可能地保留信息</em></p>
-<p>实际上主成分分析有好几种推导，下面介绍一下本书采用的方法（最小平方误差）。</p>
-<p>假设在$R^n$空间里有m个点，对其进行编码。则每一个$x^{(i)}\in R^n$,会有对应的$c^{(i)}\in R^l$,如果l比n小，那就减少了运算量。<em>从n个特征降维到l个特征。</em>找到编码函数$f(x)=c$和解码函数$x\approx g(f(X))$。</p>
-<p>设$g(c)=Dc$，其中$D\in R^{n<em>l}$是定义编码的矩阵。为了让D有唯一解，<strong>限制D中的所有列向量都有单位范数</strong>。为了让新的特征不具有相关性，<strong>限制D的列向量互相正交</strong>。</em>正交向量线性无关。*</p>
-<p>为了得到最优编码$c^*$，<strong>最小化原始输入向量$x$和重构向量$g(c)$之间的距离</strong>，用$L_2$范数(的平方)衡量他们之间的距离。即：<br>$$<br>c*=argmin_c||x-g(c)||_2^2<br>\=argmin_c(x-g(c))^T(x-g(c))<br>\=argmin_c(x^Tx-2x^Tg(c)+g(c)^Tg(c))<br>\∵x^Tx与c无关，再代入g(c)=Dc<br>\∴c*=argmin_c -2x^TDc+c^TD^TDc        ~~~~~~~~~(D^TD=I_l)<br>\=argmin_c -2x^TDc+c^Tc<br>$$<br>进行向量微积分计算<br>$$<br>\nabla_c(-2x^TDc+c^Tc)=0</p>
-<p>\c=D^Tx<br>$$<br>所以得到<br>$$<br>r(x)=g(f(x))=g(c)=DD^Tx<br>$$<br>我们的优化目标则成为找到D，因此让误差矩阵最小，即Frobenius范数最小,在前提$D^TD=I_l$(正交性质)<br>$$<br>D^*=argmin_D\sqrt{\sum_{i,j}(x_j^{(i)}-r(x^{(i)})_j)^2}<br>$$</p>
-<p>$$<br>d^*=argmin_d \sum_i||X-Xdd^T||_F^2    ~~~~~~~~~~~~~~~~~~s.d.d^Td=1<br>\=argmin_d ~Tr((X-Xdd^T)^T(X-Xdd^T))<br>\进行化简后<br>\=argmin_d ~-2Tr(X^TXdd^T)+Tr(X^TXdd^Tdd^T)<br>\=argmin_d ~-Tr(X^TXdd^T)<br>\=argmax_d ~Tr(X^TXdd^T)<br>\进行特征分解求解，则<br>\最优的d为X^TX的最大特征值对应的特征向量<br>$$</p>
-<p>结论：矩阵D由前l个最大的特征值对应的特征向量组成。</p>
-<p>注：PCA推导有更详细的博客<a href="https://www.cnblogs.com/pinard/p/6239403.html">在此</a>，还有基于最大方差的推导，等学完概率论后再来看看。</p>
-<hr>
-<h3 id="第3章-概率与信息论"><a href="#第3章-概率与信息论" class="headerlink" title="第3章 概率与信息论"></a>第3章 概率与信息论</h3><p><em>复习完概率论后再来看</em></p>
-]]></content>
-      <categories>
-        <category>读书笔记</category>
-      </categories>
-      <tags>
-        <tag>DL</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>stm32蓝牙小车</title>
     <url>/2019/01/05/stm32%E8%93%9D%E7%89%99%E5%B0%8F%E8%BD%A6/</url>
     <content><![CDATA[<h2 id="项目目标：蓝牙遥控小车"><a href="#项目目标：蓝牙遥控小车" class="headerlink" title="项目目标：蓝牙遥控小车"></a><strong>项目目标：蓝牙遥控小车</strong></h2><h2 id="项目过程："><a href="#项目过程：" class="headerlink" title="项目过程："></a>项目过程：</h2><h3 id="1-12月22日："><a href="#1-12月22日：" class="headerlink" title="1.12月22日："></a>1.12月22日：</h3><ul>
 <li>第一次考核结束，学长建议我们将单片机改用成stm32，并设置几个创新性的模块；</li>
 <li>对小车无法直线前进的问题进行了探讨：将两轮左右对换后，发现小车直行时往另一相反方向偏转，初步判断是左右两轮规格不一致导致；考核时学长提到会不会是万向轮的问题，我们又将小车前端的万向轮固定，发现小车前行仍偏转，可以判断该问题应与万向轮无关；通过仔细观察小车前进时两轮的转动情况，我们发现，当小车悬空时，两轮转速几乎相同，但置于地面时，小车直行3-5秒后开始发生偏转，且有一轮不动。调换左右轮，情况相同。<h3 id="2-12月24日："><a href="#2-12月24日：" class="headerlink" title="2.12月24日："></a>2.12月24日：</h3></li>
-<li> 探讨了换用stm32的基本想法，以及对小车的再升级计划。</li>
-<li> 确定在小车上增加一个红外避障的模块以及OLED显示屏：当小车向前/后/左/右行驶时，OLED显示屏第二行上出现go/back/left/right字样，停止时，出现stop字样；用红外避障检测小车前方左右两侧的障碍物，当左/右前方有障碍物的时候，第三行左/右侧go字样变为aa。<h3 id="3-12月25日："><a href="#3-12月25日：" class="headerlink" title="3.12月25日："></a>3.12月25日：</h3></li>
+<li>探讨了换用stm32的基本想法，以及对小车的再升级计划。</li>
+<li>确定在小车上增加一个红外避障的模块以及OLED显示屏：当小车向前/后/左/右行驶时，OLED显示屏第二行上出现go/back/left/right字样，停止时，出现stop字样；用红外避障检测小车前方左右两侧的障碍物，当左/右前方有障碍物的时候，第三行左/右侧go字样变为aa。<h3 id="3-12月25日："><a href="#3-12月25日：" class="headerlink" title="3.12月25日："></a>3.12月25日：</h3></li>
 <li>研究stm32单片机代码，开始编写项目主程序。<h3 id="4-1月1日："><a href="#4-1月1日：" class="headerlink" title="4.1月1日："></a>4.1月1日：</h3></li>
 <li>开始编写pwm调速程序和红外避障检测以及OLED显示屏模块的程序。在四轮配件买来之前，用第一次的三轮配件进行了初步调试（二轮改四轮的时候，因为接口的问题用到了映射，映射是个好东西，可以少用一个定时器，直接四路输出）。<h3 id="5-1月5日："><a href="#5-1月5日：" class="headerlink" title="5.1月5日："></a>5.1月5日：</h3></li>
 <li>所有材料均购入，对小车的主体部分进行了组装。</li>
@@ -337,21 +74,469 @@
       </tags>
   </entry>
   <entry>
-    <title>电赛感想</title>
-    <url>/2019/08/16/%E7%94%B5%E8%B5%9B%E6%84%9F%E6%83%B3/</url>
-    <content><![CDATA[<h2 id="为何参赛"><a href="#为何参赛" class="headerlink" title="为何参赛"></a>为何参赛</h2><p>本来，我是没有考虑过这个比赛的，一是预备知识量大，二是准备时间长，三是队友难寻（作为大一萌新的我毫无战斗力）。实数侥幸，承蒙学长看得起我，说带一个小萌新参加19年的电赛，我就很开心地答应了，后参加了学校的一选二选成功出道。尽管中间经历了很多事情，但是最终也在十一号早上将自己队伍的作品送到了北邮，进行评测。</p>
-<h2 id="参赛准备历程"><a href="#参赛准备历程" class="headerlink" title="参赛准备历程"></a>参赛准备历程</h2><h3 id="比赛前的准备"><a href="#比赛前的准备" class="headerlink" title="比赛前的准备"></a>比赛前的准备</h3><p>说到参赛准备，真的是一场跨时间很长的战斗。我是在大一上学期，入门了单片机（32的标准库和51），但是这样完全不够格去电赛，在下学期，为了整个队伍的电控方面的一致性，我改去学了32的hal库，大概学完I2C后，队伍出了点问题，就解散了，多亏指导老师的调整，我加入了一个双人队伍，成为里面的电控主力，同时又从hal库转到了标准库，在原有的基础上，学了屏幕、adc、pid方面的知识。另外有关摄像头这方面，我们队伍采用了openmv的方案，先用python写openmv的程序，在将它与stm32通讯，这样就完成了大部分摄像头的功能。</p>
-<h3 id="比赛前夕的预备"><a href="#比赛前夕的预备" class="headerlink" title="比赛前夕的预备"></a>比赛前夕的预备</h3><p>比赛前几天，我们队伍就搭好了电控的框架，一是按键控制，二是屏幕显示，三是单片机和openmv的通讯。还有一些预备的模块，例如ADC，mpu6050，定时器的中断和pwm的输出。</p>
-<h2 id="比赛中"><a href="#比赛中" class="headerlink" title="比赛中"></a>比赛中</h2><h3 id="“犹豫就会败北”"><a href="#“犹豫就会败北”" class="headerlink" title="“犹豫就会败北”"></a>“犹豫就会败北”</h3><p>当时七点半多赛题就出来了，我一看题目，嗯~，B题题目“巡线机器人”像是控制类题目，点进去一看，什么！“设计一基于四旋翼飞行器的巡线机器人……”，(O_o)??飞控题再见。那再去H题“模拟电磁曲射炮”看看，“自行设计并制作一模拟电磁曲射炮”，震惊，电赛组委会竟然出了这么一道题，1.8J警告好吗。自个做电磁炮，有点告辞了哈，然后我们就开始看看其他题目，A题“本题所有控制器必须使用 TI 公司处理器”，告辞；CDEFG题没训练过，告辞；IJK题高职高专，告辞。能做的题目，也只能是1.8J警告的电磁炮，所以，大概在九点的时候，我们确定了题目，并开始了讨论。<br>既然选择了这道题，电磁炮是关键吧，那先去万能的某宝看看，连万能的某宝的某店家都告诉我，电磁炮全网没货！！！<em>（聊天记录见下图）</em><br> <img src="/image/taobaodiancipao.jpg" width = "108" height = "490" alt="聊天记录" align=center /><br>没办法，那就自己上手做了。事实上，我们做电磁炮就做了大概两天半的时间，直到第三天的晚上，我才真正地开始调试程序。</p>
-<h3 id="功亏一篑"><a href="#功亏一篑" class="headerlink" title="功亏一篑"></a>功亏一篑</h3><p>在最后提交的时候，发现我们都是usb调试，根本没考虑作为独立作品的时候的供电，结果到现场的时候，半个小时都在接电源，openmv的芯片还发烫，还好有备用的。</p>
-<h2 id="比赛后"><a href="#比赛后" class="headerlink" title="比赛后"></a>比赛后</h2><p>追悔莫及，没有把握好调试的半个小时。</p>
-<p>如果我大三还有时间的话，可能会冲一把，给我的本科竞赛生涯画上句号。</p>
+    <title>hello world</title>
+    <url>/2018/11/04/hello-world/</url>
+    <content><![CDATA[<h1 id="欢迎来到我的博客！"><a href="#欢迎来到我的博客！" class="headerlink" title="欢迎来到我的博客！"></a>欢迎来到我的博客！</h1><ul>
+<li><p>建这个博客的目的是记录一下平时的学习情况和对未来的规划，分享一些杂七杂八的想法</p>
+</li>
+<li><p><del>可能会有一些奇怪的东西随机出没</del></p>
+</li>
+<li><p>本人有些愚笨，做的东西比较低级，做的过程比较繁琐，希望大佬前来指点！</p>
+</li>
+</ul>
+<ul>
+<li>邮箱：litmsit@126.com</li>
+</ul>
 ]]></content>
       <categories>
-        <category>随笔</category>
+        <category>hello</category>
       </categories>
       <tags>
-        <tag>来路</tag>
+        <tag>hello</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>archlinux的装机感想</title>
+    <url>/2019/02/05/archlinux%E7%9A%84%E8%A3%85%E6%9C%BA%E6%84%9F%E6%83%B3/</url>
+    <content><![CDATA[<h2 id="缘起"><a href="#缘起" class="headerlink" title="缘起"></a>缘起</h2><p>年前，在<strong>某位大佬</strong>的推荐下，在VMware（虚拟机)上安装了archlinux，并受其<del>压迫</del>，在年后赶出了一篇archlinux装机感想。</p>
+<p><img src="https://linuxundich.de/wp-content/uploads/2013/06/arch-linux.jpg" alt=""></p>
+<h2 id="archlinux简介"><a href="#archlinux简介" class="headerlink" title="archlinux简介"></a>archlinux简介</h2><h3 id="arch之道"><a href="#arch之道" class="headerlink" title="arch之道"></a>arch之道</h3><p>Keep It Simple, Stupid（保持简单，且一目了然）</p>
+<ul>
+<li>Simplicity（简洁）</li>
+<li>Modernity（现代）</li>
+<li>Pragmatism（实用）</li>
+<li>User centrality（以用户为中心）</li>
+<li>Versatility（通用）</li>
+</ul>
+<h3 id="Arch-Linux参考网站"><a href="#Arch-Linux参考网站" class="headerlink" title="Arch Linux参考网站"></a>Arch Linux参考网站</h3><ul>
+<li><a href="http://bbs.archlinuxcn.org/">Arch Linux 中文论坛</a></li>
+<li><a href="https://wiki.archlinux.org/index.php/Arch_Linux">Arch Linux Wiki</a></li>
+<li><a href="https://wiki.archlinux.org/index.php/Arch_Linux_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87">Arch Linux Wiki(中文)</a>)</li>
+</ul>
+<h2 id="安装过程"><a href="#安装过程" class="headerlink" title="安装过程"></a>安装过程</h2><h3 id="准备阶段"><a href="#准备阶段" class="headerlink" title="准备阶段"></a>准备阶段</h3><p>下载VMware（其他虚拟机也可以）和<a href="https://www.archlinux.org/download/">archlinux的.iso镜像文件</a>，浏览<a href="https://wiki.archlinux.org/index.php/Installation_guide_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87">官方安装指南</a>)</p>
+<h3 id="设置虚拟机"><a href="#设置虚拟机" class="headerlink" title="设置虚拟机"></a>设置虚拟机</h3><p>我选择了Linux3.x内核，20GB硬盘，1GB的内存，1个双核处理器，网络类型是nat，再加载原先下号的镜像文件，其他就默认吧。(其实看自己的需求啦)</p>
+<p><em>如果在新建虚拟机的过程中，有遇到”无法检测此光盘映像中的操作系统”这样的提示语，选择稍后安装操作系统选项，再在自定义硬件的 新CD/DVD（IDE) 使用iso的镜像文件</em></p>
+<p><img src="https://img-blog.csdn.net/20160919204458980" alt=""></p>
+<p><em>请尽量下载官方的镜像文件，不然系统可能进不去</em></p>
+<h3 id="选择系统类型"><a href="#选择系统类型" class="headerlink" title="选择系统类型"></a>选择系统类型</h3><p>进去以后会出现Archlinux的live iso的启动菜单。如果要安装64位的arch，就选择第一项x86_64。然后等待片刻，进入arch live iso的终端命令行。默认为root用户，拥有所有权限，可以使用任何命令。</p>
+<p><img src="https://i1.wp.com/itsfoss.com/wp-content/uploads/2017/11/1-2.jpg?zoom=1.25&amp;resize=599%2C449&amp;ssl=1" alt=""></p>
+<h3 id="检查网络环境"><a href="#检查网络环境" class="headerlink" title="检查网络环境"></a>检查网络环境</h3><p>使用 <code># ping -c 3 archlinux.org</code> 命令，检测是否有网</p>
+<p>如果ping的结果是找不到该主机，可能是由于dhcp服务没有开启，使用 <code># systemctl dhcpcd.service</code> 命令，开启该服务</p>
+<h3 id="测试系统时间"><a href="#测试系统时间" class="headerlink" title="测试系统时间"></a>测试系统时间</h3><p> <code># timedatectl status</code> 看一下时间，如果时间不对，用<code># timedatectl set-ntp true</code>开启ntp服务，它会每隔11分钟进行一次网络对时。然后在查看一下系统时间状态</p>
+<h3 id="建立硬盘分区"><a href="#建立硬盘分区" class="headerlink" title="建立硬盘分区"></a>建立硬盘分区</h3><p>使用命令 <code># lsblk</code> 命令查看一下存储设备状态。</p>
+<p>用 <code># fdisk /dev/sda</code> 命令对/dev/sda进行分区，输入 m 可以查看帮助， n 是新建一个分区， d 是删除一个已有分区。（<a href="https://blog.csdn.net/qq_18297675/article/details/52719171">参考</a>）</p>
+<p><strong>以下几种经典的分区方案：</strong><br>&gt;</p>
+<pre><code>1.    /：建议大小在 5GB 以上，
+    swap：即交换分区，建议大小是物理内存的 1~2 倍；
+</code></pre><p>&gt;</p>
+<pre><code>2.    /boot ：用来存放与 Linux 系统启动有关的程序，比如启动引导装载程序等，建议大小为 100MB ， 
+    / ： Linux 系统的根目录，所有的目录都挂在这个目录下面，建议大小为 5GB 以上，
+    /home ：存放普通用户的数据，是普通用户的宿主目录，建议大小为剩下的空间，
+    /swap ：实现虚拟内存，建议大小是物理内存的 1~2 倍；
+</code></pre><p>&gt;</p>
+<pre><code>3.    /boot ：用来存放与 Linux 系统启动有关的程序，比如启动引导装载程序等，建议大小为 100MB ， 
+    /usr ：用来存放 Linux 系统中的应用程序，其相关数据较多，建议大于 3GB 以上， 
+    /var ：用来存放 Linux 系统中经常变化的数据以及日志文件，建议大于 1GB 以上， 
+    /home ：存放普通用户的数据，是普通用户的宿主目录，建议大小为剩下的空间， 
+    / ： Linux 系统的根目录，所有的目录都挂在这个目录下面，建议大小为 5GB 以上， 
+    /tmp ：将临时盘在独立的分区，可避免在文件系统被塞满时影响到系统的稳定性。建议大小为 500MB 以上， 
+    swap ：实现虚拟内存，建议大小是物理内存的 1~2 倍。
+</code></pre><p>其实swap分区不一定是物理内存的 1~2 倍，那swap大小配置多少比较合适?(<a href="https://segmentfault.com/a/1190000008125116">参考</a>)<br>&gt;</p>
+<ul>
+<li>当物理内存小于1G且不需要休眠时，设置和内存同样大小的swap空间即可;当需要休眠时，建议配置两倍物理内存的大小，但最大值不要超过两倍内存大小</li>
+<li>当物理内存大于1G且不需要休眠时，建议大小为round(sqrt(RAM))，其中RAM为物理内存大小;当需要休眠时，建议大小是RAM+round(sqrt(RAM))，但最大值不要超过两倍内存大小</li>
+<li>如果两倍物理内存大小的swap空间还不够用，建议增加内存而不是增加swap</li>
+</ul>
+<h3 id="格式化分区"><a href="#格式化分区" class="headerlink" title="格式化分区"></a>格式化分区</h3><p>因为是想熟悉一下Linux的有关命令，所以分区就选择了最简单的第一种方案，分了根分区(/dev/sda1)和交换分区(/dev/sda2)，接下来就是对分区进行格式化。</p>
+<p>格式化根分区 <code># mkfs.ext4 /dev/sda1</code></p>
+<p>对于交换分区，格式化命令如下 <code># mkswap /dev/sda2</code> ，并开启使用交换分区 <code># swapon /dev/sda2</code></p>
+<p><em>其实可以举一反三，知道格式化分区的命令等怎么写了</em></p>
+<h3 id="挂载分区"><a href="#挂载分区" class="headerlink" title="挂载分区"></a>挂载分区</h3><blockquote>
+<p>linux下mnt目录的作用：mount 可直接理解为“挂载”挂接光驱、USB设备的目录，加载后，会在mnt里多出相应设备的目录。</p>
+</blockquote>
+<p>所以，用 <code># mount /dev/sda1 /mnt</code> 命令将根分区挂载到/mnt目录，交换分区是不用挂载。如果使用多个分区，还需要为其他分区创建目录并挂载它们，比如/home家分区，要先在/mnt目录下创建home目录 ，先 <code># mkdir /mnt/home</code>  (其实mkdir就是make directory创建目录的缩写)，再使用命令 <code>mount 家分区 /mnt/home</code> 挂载家目录。</p>
+<h3 id="安装系统"><a href="#安装系统" class="headerlink" title="安装系统"></a>安装系统</h3><p>啊，终于到安装系统了~但是第一件事情是要先修改一下arch的镜像源，使用国内的（或者是地理位置最近的），下载速度会更快。文件 /etc/pacman.d/mirrorlist 定义了软件包会从哪个镜像源下载。可以使用nano查看一下该文件，<code># nano /etc/pacman.d/mirrorlist</code> ，如果你不嫌麻烦，可以自己找到镜像源，并将他们提到最前面，但这里，采用的是正则表达式工具grep工具来将中国的源取出来。</p>
+<p>首先，先切换到软件源所在目录。 <code># cd /etc/pacman.d</code></p>
+<p>然后用grep取出中国的源。用-A参数的话会用–分隔符分隔每一条匹配，因此再次使用grep工具去掉前一次结果产生的分隔符。 <code># grep -A 1 &#39;##.*China&#39; mirrorlist|grep -v &#39;\-\-&#39;&gt; mirrorlist2</code></p>
+<p>最后将中国的源放到镜像源列表的最前面。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># cat mirrorlist&gt;&gt;mirrorlist2</span><br><span class="line"># mv mirrorlist2 mirrorlist</span><br></pre></td></tr></table></figure>
+<p><em>我当时还特地重新进去看看了，国内的源还挺多的，对了，输入过的命令可以按上下键重新显示再执行</em></p>
+<p>修改完了，还得要刷新一下pacman的缓存 <code># pacman -Syy</code> </p>
+<p>终于可以开始安装系统了，可以使用 <code># pacstrap -i /mnt base base-devel</code> 命令安装，一路回车默认就可以了（-i参数是在安装前进行确认）</p>
+<p><em>这里可能会有很多错误，比如下载到一半error，可能是网络问题</em></p>
+<h3 id="配置系统"><a href="#配置系统" class="headerlink" title="配置系统"></a>配置系统</h3><p>用以下命令生成 fstab 文件 <code># genfstab -U /mnt &gt;&gt; /mnt/etc/fstab</code> ，</p>
+<p><strong>强烈建议</strong>在执行完以上命令后，后检查一下生成的 /mnt/etc/fstab 文件是否正确。（就是用这个查看一下<code># nano /mnt/etc/fstab</code>）</p>
+<p><em>有出现分区分配的就是成功了</em></p>
+<h3 id="进入系统"><a href="#进入系统" class="headerlink" title="进入系统"></a>进入系统</h3><p>使用命令<code># arch-chroot /mnt</code>，进入系统。出现以下图片，说明成功进入系统。<img src="https://img-blog.csdn.net/20161105231816636" alt=""></p>
+<p><em>如果有出现找不到/bin/bash错误信息的话，重装吧 ╥﹏╥ ，首先镜像得是下载官方镜像，其次可能是配置系统的时候出了点问题，按照步骤来，总会成功的</em></p>
+<p><em>进去之后，命令行首就变了，变成了[root@archiso /]#，如果看到这个，恭喜你！基本系统已经安装好了，八年抗战快要结束了</em></p>
+<h3 id="本地化"><a href="#本地化" class="headerlink" title="本地化"></a>本地化</h3><p>本地化的程序与库若要本地化文本，都依赖 Locale，后者明确规定地域、货币、时区日期的格式、字符排列方式和其他本地化标准等等。需要在下面两个文件设置：locale.gen 与 locale.conf。</p>
+<p>所以，先查看 <code># nano /etc/locale.gen</code>，然后将en_US.UTF-8 UTF-8、zh_CN.UTF-8 UTF-8、zh_TW.UTF-8 UTF-8着三行的注释（也就是前面的#）删掉。</p>
+<p>然后运行locale-gen命令生成locale信息，<code># locale-gen</code>。</p>
+<p>再生成一个locale.conf文件，<code># echo LANG=en_US.UTF-8 &gt; /etc/locale.conf</code></p>
+<blockquote>
+<p>警告: 不推荐在此设置任何中文 locale，会导致 TTY 乱码。</p>
+</blockquote>
+<p><em>可以尝试一下中文，兴许变成了□□：□□□□□□□</em></p>
+<h3 id="设置root密码"><a href="#设置root密码" class="headerlink" title="设置root密码"></a>设置root密码</h3><p><code># passwd</code> </p>
+<p>然后输入密码，但是这里是不会显示的，你凭感觉输入（别以为是什么系统出错了不能读取键盘(;´༎ຶД༎ຶ`)），successfully</p>
+<h3 id="设置主机名"><a href="#设置主机名" class="headerlink" title="设置主机名"></a>设置主机名</h3><p><code># echo 主机名 &gt; /etc/hostname</code></p>
+<p>添加对应的信息到/etc/hosts文件中。<em>应该知道这么打开文件了吧，nano</em><br><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#&lt;ip-address&gt;   &lt;hostname.domain.org&gt;   &lt;hostname&gt;</span><br><span class="line">127.0.0.1   localhost.localdomain   localhost   主机名</span><br><span class="line">::1     localhost.localdomain   localhost   主机名</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>如果系统有一个永久的 IP 地址，请使用这个永久的 IP 地址而不是 127.0.1.1</p>
+</blockquote>
+<h3 id="时间设置"><a href="#时间设置" class="headerlink" title="时间设置"></a>时间设置</h3><p>如果时间对的，就不需要设置了</p>
+<p>设置时区 <code># ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</code></p>
+<p>将时间标准设置为UTC，如果虚拟机有这项设置则不用设置（例如VirtualBox就有设置硬件事件为UTC的选项）。<code># hwclock --systohc --utc</code></p>
+<h3 id="安装启动加载器"><a href="#安装启动加载器" class="headerlink" title="安装启动加载器"></a>安装启动加载器</h3><p>安装grub，然后自动生成默认配置文件<br><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># pacman -S grub</span><br><span class="line"># grub-install --recheck /dev/sda</span><br><span class="line"># grub-mkconfig -o /boot/grub/grub.cfg</span><br></pre></td></tr></table></figure></p>
+<h3 id="退出重启"><a href="#退出重启" class="headerlink" title="退出重启"></a>退出重启</h3><p>输入 <code># exit</code> 或按 <code>Ctrl+D</code> 退出 chroot 环境。</p>
+<p>可选用 <code># umount -R /mnt</code> 手动卸载被挂载的分区。</p>
+<p>最后，通过执行 <code># reboot</code> 重启系统，systemd 将自动卸载仍然挂载的任何分区。不要忘记移除安装介质，然后使用 root 帐户登录到新系统。</p>
+<h3 id="图形界面安装"><a href="#图形界面安装" class="headerlink" title="图形界面安装"></a>图形界面安装</h3><p>我们现在都是命令行界面，可能用惯了图形界面的大家不习惯，所以，接下来安装图形界面Xorg  <code># pacman -S xorg-server xorg-xinit</code></p>
+<p>显卡驱动<code># pacman -S xf86-video-vesa</code> </p>
+<p><em>这是虚拟机的显卡驱动</em></p>
+<p><strong>archlinux提供了多种桌面</strong>（<a href="https://wiki.archlinux.org/index.php/Desktop_environment_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87">参考</a>)）</p>
+<p><em>我选择了xfce桌面和lxdm桌面管理器（因为虚拟机分配的内存较小，我就选择了轻量级的桌面，等有了电脑真正安装系统的时候，可能要换(</em>^▽^<em>)）</em></p>
+<p>首先安装lxdm桌面管理器，并设置开机启动（pacman命令可以用来安装软件）</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># pacman -S lxdm </span><br><span class="line"># systemctl enable lxdm.service</span><br></pre></td></tr></table></figure>
+<p>然后安装xfce <code># pacman -S xfce4</code>，启动xfce <code># startxfce4</code></p>
+<p><img src="https://img-blog.csdn.net/20160919205317937" alt=""></p>
+<p><img src="https://img-blog.csdn.net/20160919205335602" alt=""></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>终于做完了，我也快枯了，期间错误不断，不停地重装重装……还好，守得云开见月明，现在，基本的环境已经配置的差不多，但是还是后续需要优化，比如中文输入法，浏览器，yaourt安装，qt啥的（提到qt就忍不住吐槽，虚拟机上装qt还是算了吧，我看着它打开都心累）。</p>
+<p>虽然安装archlinux的时候很烦躁（为什么总有不同的error，哦不，是一样的error〒▽〒），且英语水平严重约束我读错误（让你不好好读英语啊喂），但是最后还是收获了一点点东西，至少寒假不仅仅养膘过冬嘛！</p>
+<p>引用松尾芭蕉的一句俳句，大概是成功安装完archlinux和写完这篇博文的心情吧。</p>
+<blockquote>
+<p>山路费寻攀，居然眼见紫罗兰。</p>
+</blockquote>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><em>部分与文内链接重复</em></p>
+<ul>
+<li><a href="http://bbs.archlinuxcn.org/">Arch Linux 中文论坛</a></li>
+<li><a href="https://wiki.archlinux.org/index.php/Arch_Linux_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87">Arch Linux Wiki(中文)</a>)</li>
+<li><a href="https://wiki.archlinux.org/index.php/Installation_guide_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87">官方安装指南</a>)</li>
+<li><a href="https://blog.csdn.net/qq_18297675/article/details/52719171">linux如何用fdisk命令分区</a></li>
+<li><a href="https://blog.csdn.net/kingolie/article/details/53048625">虚拟机安装Archlinux</a></li>
+<li><a href="https://segmentfault.com/a/1190000008125116">Linux交换空间（swap space）</a></li>
+<li><a href="https://blog.csdn.net/uniqsa/article/details/71421462">分区方案参考</a></li>
+<li><a href="https://wiki.archlinux.org/index.php/Desktop_environment_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87">archlinux支持的桌面列表</a>)</li>
+<li><a href="http://linux.vbird.org/linux_basic/#">鸟哥的Linux 私房菜</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>读书笔记</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>《深度学习》学习笔记(0)</title>
+    <url>/2021/07/16/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(0)/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>​    快两年没有更新博客了，原因是生活的重心逐渐向学习转移，笔记也以纸张为主。今年暑假呆在学校里，一边准备考研，一边学习新东西，需要笔记来记录一下学习情况。</p>
+<p>​    而且前几日，老师推荐了几本书，正好我之前就有这本《深度学习》，以前只阅读片段，现在打算从头学起，本系列博客便是这本书的学习笔记记录。</p>
+<h3 id="备注"><a href="#备注" class="headerlink" title="备注"></a>备注</h3><ol>
+<li>本书由Ian Goodfellow ， Yoshua Bengio ，Aaron Courville三位大牛合著。</li>
+<li>本书的英文版可以在网站（<a href="http://www.deeplearningbook.org/）上免费阅读；中文版也是开源的，网站为（https://github.com/exacity/deeplearningbook-chinese）。">http://www.deeplearningbook.org/）上免费阅读；中文版也是开源的，网站为（https://github.com/exacity/deeplearningbook-chinese）。</a></li>
+</ol>
+]]></content>
+      <categories>
+        <category>读书笔记</category>
+      </categories>
+      <tags>
+        <tag>DL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>《深度学习》学习笔记(1)</title>
+    <url>/2021/07/18/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(1)/</url>
+    <content><![CDATA[<h2 id="第1部分-应用数学与机器学习基础"><a href="#第1部分-应用数学与机器学习基础" class="headerlink" title="第1部分 应用数学与机器学习基础"></a>第1部分 应用数学与机器学习基础</h2><h3 id="第2章-线性代数"><a href="#第2章-线性代数" class="headerlink" title="第2章 线性代数"></a>第2章 线性代数</h3><p><em>一些概念工科线性代数教材中有提及，不作详细解释</em></p>
+<h4 id="个别概念"><a href="#个别概念" class="headerlink" title="个别概念"></a><strong>个别概念</strong></h4><ul>
+<li><p>标量、向量、矩阵，单位矩阵、逆矩阵</p>
+</li>
+<li><p>张量(tensor)：一个数组中的元素分布在若干维坐标的规则网格中。记作<strong>$A$</strong>                    <em>（多维数组？高纬度矩阵？)</em></p>
+</li>
+<li><p>广播(broadcasting)：不同维度张量相加     <em>(python的广播机制)</em>                                           </p>
+</li>
+<li><p>线性组合、线性相关、奇异矩阵</p>
+</li>
+<li><p>范数：衡量向量大小。</p>
+<script type="math/tex; mode=display">
+||x||_p=(\sum_i|\mbox x_i|^p)^\frac1p</script><ul>
+<li>$L_1$范数：0/非0差异，经常作为表示非零元素数目的替代函数；</li>
+<li>最大范数：向量中具有最大幅值的元素的绝对值；</li>
+<li>Frobenius范数：衡量矩阵大小；                                                      </li>
+<li>点积可以用范数表示 <script type="math/tex">x^Ty=||x||_2||y||_2cos\theta</script></li>
+</ul>
+</li>
+<li><p>对角矩阵、对称矩阵</p>
+</li>
+<li><p>单位向量是具有单位范数的向量，即$ ||x||_2=1 $</p>
+</li>
+<li><p>正交：如果$x^Ty=0$，那么向量x和y互相正交</p>
+<ul>
+<li>标准正交：向量不但互相正交，并且范数都为1</li>
+<li>正交矩阵：行向量和列向量分别是标准正交的方阵，则$A^{-1}=A^T$</li>
+</ul>
+</li>
+<li><p>特征分解：</p>
+<script type="math/tex; mode=display">
+A=Q\Lambda Q^T</script><p>其中$Q$是$A$的特征向量组成的正交矩阵，$\Lambda$ 是对角矩阵。</p>
+<ul>
+<li>实对称矩阵的特征分解可以用于优化二次方程$f(x)=x^TAx$,其中限制$ ||x||_2=1 $，当$x$等于$A$的某个特征向量时，f将返回对应的特征值，在限制条件下，函数$f(x)$的最大值是最大特征值，最小值是最小特征值。（在后面实例中会用到）</li>
+</ul>
+</li>
+<li><p>奇异值分解（SVD)：</p>
+<script type="math/tex; mode=display">
+A=UDV^T</script><p>其中A为m ∗ n的矩阵(未必为方阵)，U为m ∗ m的正交矩阵，D为m ∗ n的矩阵，V是一个n ∗ n的正交矩阵。</p>
+<ul>
+<li>每个实数矩阵都有一个奇异值分解，但不一定都有特征分解。</li>
+</ul>
+</li>
+<li><p>SVD最有用的一个性质是拓展矩阵求逆到非方矩阵上。</p>
+</li>
+<li><p>迹运算：返回矩阵对角元素的和，即$Tr(A)=\sum<em>iA</em>{i,i}$。</p>
+<ul>
+<li>描述Frobenius范数：$||A||_F=\sqrt{Tr(AA^T)}$</li>
+<li>性质：<ul>
+<li>$Tr(A)=Tr(A^T)$</li>
+<li>$Tr(ABC)=Tr(CAB)=Tr(BCA)$</li>
+<li>$a=Tr(a)$</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>行列式</p>
+</li>
+</ul>
+<h4 id="实例：主成分分析"><a href="#实例：主成分分析" class="headerlink" title="实例：主成分分析"></a><strong>实例：主成分分析</strong></h4><p>主成分分析（PCA）是一种统计过程，它使用正交变换将一组可能相关变量(实体，每个实体具有不同的数值)的观察值转换为一组称为主成分的线性不相关变量的值。</p>
+<p><em>理解：主要基于多变量内部具有一定的相关性，我们想要减少运算量，于是用较少的变量代替原来的变量，并尽可能地保留信息</em></p>
+<p>实际上主成分分析有好几种推导，下面介绍一下本书采用的方法（最小平方误差）。</p>
+<p>假设在$R^n$空间里有m个点，对其进行编码。则每一个$x^{(i)}\in R^n$,会有对应的$c^{(i)}\in R^l$,如果l比n小，那就减少了运算量。<em>从n个特征降维到l个特征。</em>找到编码函数$f(x)=c$和解码函数$x\approx g(f(X))$。</p>
+<p>设$g(c)=Dc$，其中$D\in R^{n<em>l}$是定义编码的矩阵。为了让D有唯一解，<strong>限制D中的所有列向量都有单位范数</strong>。为了让新的特征不具有相关性，<strong>限制D的列向量互相正交</strong>。</em>正交向量线性无关。*</p>
+<p>为了得到最优编码$c^<em>$，<em>*最小化原始输入向量$x$和重构向量$g(c)$之间的距离</em></em>，用$L_2$范数(的平方)衡量他们之间的距离。即：</p>
+<script type="math/tex; mode=display">
+c*=argmin_c||x-g(c)||_2^2
+\\=argmin_c(x-g(c))^T(x-g(c))
+\\=argmin_c(x^Tx-2x^Tg(c)+g(c)^Tg(c))
+\\∵x^Tx与c无关，再代入g(c)=Dc
+\\∴c*=argmin_c -2x^TDc+c^TD^TDc        ~~~~~~~~~(D^TD=I_l)
+\\=argmin_c -2x^TDc+c^Tc</script><p>进行向量微积分计算</p>
+<script type="math/tex; mode=display">
+\nabla_c(-2x^TDc+c^Tc)=0
+
+\\c=D^Tx</script><p>所以得到</p>
+<script type="math/tex; mode=display">
+r(x)=g(f(x))=g(c)=DD^Tx</script><p>我们的优化目标则成为找到D，因此让误差矩阵最小，即Frobenius范数最小,在前提$D^TD=I_l$(正交性质)</p>
+<script type="math/tex; mode=display">
+D^*=argmin_D\sqrt{\sum_{i,j}(x_j^{(i)}-r(x^{(i)})_j)^2}</script><script type="math/tex; mode=display">
+d^*=argmin_d \sum_i||X-Xdd^T||_F^2    ~~~~~~~~~~~~~~~~~~s.d.d^Td=1
+\\=argmin_d ~Tr((X-Xdd^T)^T(X-Xdd^T))
+\\进行化简后
+\\=argmin_d ~-2Tr(X^TXdd^T)+Tr(X^TXdd^Tdd^T)
+\\=argmin_d ~-Tr(X^TXdd^T)
+\\=argmax_d ~Tr(X^TXdd^T)
+\\进行特征分解求解，则
+\\最优的d为X^TX的最大特征值对应的特征向量</script><p>结论：矩阵D由前l个最大的特征值对应的特征向量组成。</p>
+<p>注：PCA推导有更详细的博客<a href="https://www.cnblogs.com/pinard/p/6239403.html">在此</a>，还有基于最大方差的推导，等学完概率论后再来看看。</p>
+<hr>
+<h3 id="第3章-概率与信息论"><a href="#第3章-概率与信息论" class="headerlink" title="第3章 概率与信息论"></a>第3章 概率与信息论</h3><p><em>复习完概率论后再来看</em></p>
+]]></content>
+      <categories>
+        <category>读书笔记</category>
+      </categories>
+      <tags>
+        <tag>DL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>小创第一次作业</title>
+    <url>/2018/11/14/%E7%AC%AC%E4%B8%80%E6%AC%A1%E4%BD%9C%E4%B8%9A%E6%80%BB%E7%BB%93/</url>
+    <content><![CDATA[<h2 id="一、什么是Linux系统，Linux有哪些部分，Linux都用在了哪些地方"><a href="#一、什么是Linux系统，Linux有哪些部分，Linux都用在了哪些地方" class="headerlink" title="一、什么是Linux系统，Linux有哪些部分，Linux都用在了哪些地方"></a>一、什么是Linux系统，Linux有哪些部分，Linux都用在了哪些地方</h2><h3 id="1-什么是Linux系统"><a href="#1-什么是Linux系统" class="headerlink" title="1.什么是Linux系统"></a>1.什么是Linux系统</h3><p>Linux是一套免费使用和自由传播的类Unix操作系统，是一个基于POSIX和UNIX的多用户、多任务、支持多线程和多CPU的操作系统。它能运行主要的UNIX工具软件、应用程序和网络协议。它支持32位和64位硬件。Linux继承了Unix以网络为核心的设计思想，是一个性能稳定的多用户网络操作系统。</p>
+<h3 id="2-Linux有哪些部分"><a href="#2-Linux有哪些部分" class="headerlink" title="2.Linux有哪些部分"></a>2.Linux有哪些部分</h3><p>Linux系统一般有4个主要部分：内核、shell、文件系统和应用程序。</p>
+<p>内核主要由五个子系统组成：进程调度，内存管理，虚拟文件系统，网络接口，进程间通信。</p>
+<h3 id="3-Linux都用在了哪些地方"><a href="#3-Linux都用在了哪些地方" class="headerlink" title="3.Linux都用在了哪些地方"></a>3.Linux都用在了哪些地方</h3><p>Linux操作系统被广泛的应用于企业服务器领域，目前市场上的网络设备都是使用Linux内核操作系统，一些网络服务器也是使用Linux操作系统下面的服务搭建实现的。</p>
+<h2 id="二、Linux和Windows有什么区别，Linux有哪些优势"><a href="#二、Linux和Windows有什么区别，Linux有哪些优势" class="headerlink" title="二、Linux和Windows有什么区别，Linux有哪些优势"></a>二、Linux和Windows有什么区别，Linux有哪些优势</h2><h3 id="1-Linux和Windows有什么区别"><a href="#1-Linux和Windows有什么区别" class="headerlink" title="1.Linux和Windows有什么区别"></a>1.Linux和Windows有什么区别</h3><p>a.开源免费(linux)和闭源收费(windows)</p>
+<p>b.linux的软件大多是开源自由软件，用户可以修改定制发布；Windows大都是收费软件，且由微软官方提供技术支持和服务</p>
+<p>c.Windows操作系统倾向于将更多的功能集成到操作系统内部，并将程序与内核相结合；而Linux不同于Windows，它的内核空间与用户空间有明显的界限</p>
+<p>d.linux稳定性较高，很少有病毒攻击</p>
+<h3 id="2-Linux有哪些优势"><a href="#2-Linux有哪些优势" class="headerlink" title="2.Linux有哪些优势"></a>2.Linux有哪些优势</h3><p>开源，谁都可以查看它的源代码，使它特别安全，而且可以进行更多的操作；内核优化好，运行效率较高，占用资源比较少。</p>
+<h2 id="三、Linux的基本文件（夹）操作命令有哪些"><a href="#三、Linux的基本文件（夹）操作命令有哪些" class="headerlink" title="三、Linux的基本文件（夹）操作命令有哪些"></a>三、Linux的基本文件（夹）操作命令有哪些</h2><h3 id="1-文件操作"><a href="#1-文件操作" class="headerlink" title="1.文件操作"></a>1.文件操作</h3><p><strong>创建文件</strong></p>
+<p>a.使用touch命令。</p>
+<p>在当前目录创建文件</p>
+<p><code>touch aa.txt</code></p>
+<p>在指定目录创建文件  </p>
+<p><code>touch /home/jerval/Java/bb.txt</code></p>
+<p>b.使用vi命令。</p>
+<p><code>vi aa.txt</code></p>
+<p><strong>修改文件名</strong></p>
+<p>a.使用mv命令，如：</p>
+<p><code>mv aa.txt bbb.txt</code></p>
+<p>b.使用rename命令，如：</p>
+<p><code>rename &#39;s/bbb.txt/ccc.txt/&#39; bbb.txt</code></p>
+<p><strong>删除文件</strong></p>
+<p>使用rm命令。</p>
+<p><code>rm ccc.txt</code> </p>
+<h3 id="2-文件夹操作"><a href="#2-文件夹操作" class="headerlink" title="2.文件夹操作"></a>2.文件夹操作</h3><p><strong>创建文件夹</strong></p>
+<p>使用mkdir命令，格式：mkdir [选项] DirName。如：</p>
+<p><code>mkdir /home/jerval/test_dir</code></p>
+<p><strong>修改文件夹名</strong></p>
+<p>a.使用mv命令，如：</p>
+<p><code>mv /home/jerval/test_dir /home/jerval/test_dir2</code></p>
+<p>b.使用rename命令，如：</p>
+<p><code>rename &#39;s/jerval/jerval888/&#39; jerval</code></p>
+<p><em>rename还支持正则表达式。如下：</em></p>
+<p>删除所有的.bak后缀：</p>
+<p><code>rename &#39;s/\.bak$//&#39; *.bak</code></p>
+<p>把.jpe文件后缀修改为.jpg： </p>
+<p><code>rename &#39;s/\.jpe$/\.jpg/&#39; *.jpe</code></p>
+<p>把文件名改为小写：  </p>
+<p><code>rename &#39;y/A-Z/a-z/&#39; *</code></p>
+<p><strong>删除文件夹</strong></p>
+<p>a.使用rm命令。如强制删除文件夹jerval及其下面所有的子文件夹或文件：</p>
+<p><code>rm -rf jerval</code></p>
+<p>-r 就是向下递归，不管有多少级目录，一并删除</p>
+<p>-f 就是直接强行删除，不作任何提示的意思</p>
+<p>-i 删除前逐一询问确认。</p>
+<p>b.使用rmdir命令，不过一旦目录非空，就很麻烦了，所以推荐使用rm命令。</p>
+<h2 id="四、什么是开源软件，开源社区有哪些，开源软件有什么优势和劣势"><a href="#四、什么是开源软件，开源社区有哪些，开源软件有什么优势和劣势" class="headerlink" title="四、什么是开源软件，开源社区有哪些，开源软件有什么优势和劣势"></a>四、什么是开源软件，开源社区有哪些，开源软件有什么优势和劣势</h2><h3 id="1-什么是开源软件"><a href="#1-什么是开源软件" class="headerlink" title="1.什么是开源软件"></a>1.什么是开源软件</h3><p>全称：开放源代码软件，它被定义为描述其源码可以被公众使用的软件，并且此软件的使用，修改和分发也不受许可证的限制。</p>
+<h3 id="2-开源社区有哪些"><a href="#2-开源社区有哪些" class="headerlink" title="2.开源社区有哪些"></a>2.开源社区有哪些</h3><p>国内：Linux中国，开源中国社区，LUPA，共创软件联盟，ChinaUnix.net，红旗Linux技术社区，PHPChina，JAVA中文站，JAVA世界中文论坛，兰大开源社区等</p>
+<p>国外：kernel，Alpha，PowerPC，PA-RISC，Sourceforge，Opensource，open office等</p>
+<h3 id="3-开源软件有什么优势和劣势"><a href="#3-开源软件有什么优势和劣势" class="headerlink" title="3.开源软件有什么优势和劣势"></a>3.开源软件有什么优势和劣势</h3><p><strong>优势：</strong></p>
+<p>a.免费</p>
+<p>b.开放源代码，给初学者（比如我）一个学习机会</p>
+<p>c.自定义软件，想做什么有能力就可以去做</p>
+<p>d.大家一起贡献代码，相对来说更新和开发速度不慢</p>
+<p>e.自己如果想做项目，开源集思广益，容易得到大家的支持</p>
+<p><strong>劣势：</strong></p>
+<p>a.缺少系统化的支持，如果需要一个问题，可能还找不到解决方法</p>
+<p>b.安装配置，入门比较难</p>
+<p>c.开源者比较难盈利，难以形成较大的规模</p>
+<h2 id="五、为什么要有版本控制，git都有哪些操作，和GitHub有什么关系"><a href="#五、为什么要有版本控制，git都有哪些操作，和GitHub有什么关系" class="headerlink" title="五、为什么要有版本控制，git都有哪些操作，和GitHub有什么关系"></a>五、为什么要有版本控制，git都有哪些操作，和GitHub有什么关系</h2><h3 id="1-为什么要有版本控制"><a href="#1-为什么要有版本控制" class="headerlink" title="1.为什么要有版本控制"></a>1.为什么要有版本控制</h3><p>更好地管理代码，进行权限约束；如果碰到问题，可以通过查询原始文件来修正或者恢复。</p>
+<h3 id="2-git都有哪些操作，和GitHub有什么关系"><a href="#2-git都有哪些操作，和GitHub有什么关系" class="headerlink" title="2.git都有哪些操作，和GitHub有什么关系"></a>2.git都有哪些操作，和GitHub有什么关系</h3><p><code>git init</code></p>
+<p>用 git init 在目录中创建新的 Git 仓库，在目录中执行 git init，就可以创建一个 Git 仓库了。</p>
+<p><code>git clone</code></p>
+<p>使用 git clone 拷贝一个 Git 仓库到本地，让自己能够查看该项目，或者进行修改。</p>
+<p><code>git add</code></p>
+<p>git add 命令可将该文件添加到缓存。</p>
+<p><code>git status</code><br>git status 以查看在你上次提交之后是否有修改。</p>
+<p><code>git diff</code></p>
+<p>执行 git diff 来查看执行 git status 的结果的详细信息。</p>
+<p><code>git commit</code></p>
+<p>使用 git add 命令将想要快照的内容写入缓存区,而执行 git commit 将缓存区内容添加到仓库中。</p>
+<p><code>git reset HEAD</code></p>
+<p>git reset HEAD 命令用于取消已缓存的内容。</p>
+<p><code>git rm</code><br>如果只是简单地从工作目录中手工删除文件，运行 git status 时就会在 Changes not staged for commit 的提示。但要从 Git 中移除某个文件，就必须要从已跟踪文件清单中移除，然后提交。</p>
+<p><code>git mv</code><br>git mv 命令用于移动或重命名一个文件、目录、软连接。</p>
+<p>git是一个版本控制工具github是一个用git做版本控制的项目托管平台.</p>
+<h2 id="六、ARM架构处理器都有哪些，有什么特点，处理器的结构都有哪些，有哪些特点"><a href="#六、ARM架构处理器都有哪些，有什么特点，处理器的结构都有哪些，有哪些特点" class="headerlink" title="六、ARM架构处理器都有哪些，有什么特点，处理器的结构都有哪些，有哪些特点"></a>六、ARM架构处理器都有哪些，有什么特点，处理器的结构都有哪些，有哪些特点</h2><h3 id="1-ARM架构处理器都有哪些，有什么特点"><a href="#1-ARM架构处理器都有哪些，有什么特点" class="headerlink" title="1.ARM架构处理器都有哪些，有什么特点"></a>1.ARM架构处理器都有哪些，有什么特点</h3><p>ARM7系列　ARM9系列　ARM9E系列　ARM10E系列  SecurCore系列　Intel的StrongARM ARM11系列 Intel的Xscale</p>
+<p>其中，ARM7、ARM9、ARM9E和ARM10为4个通用处理器系列，每一个系列提供一套相对独特的性能来满足不同应用领域的需求。</p>
+<p>SecurCore系列专门为安全要求较高的应用而设计。</p>
+<p>Axxia 4500通信处理器基于采用28纳米工艺的ARM 4核Cortex-A15处理器，并搭载ARM全新CoreLink CCN-504高速缓存一致性互连技术，实现安全低功耗和最佳性能。</p>
+<p>ARMCortex-A50处理器系列:<br>提供Cortex-A57与Cortex-A53两款处理器，可选配密码编译加速器，为验证软件提高10倍的运行速度与ARMMali图形处理器系列互用，适用于图形处理器计算应用具有AMBA系统一致性，与CCI-400、CCN-504等ARMCoreLink缓存一致性结构组件达成多核心缓存一致性。</p>
+<p>ARMCortex-A57处理器:<br>最先进、单线程性能最高的ARM应用处理器能提升，以满足供智能手机从内容消费设备转型为内容生产设备的需求，并在相同功耗下实现最高可达现有超级手机三倍的性能计算能力可相当于传统PC，但仅需移动设备的功耗成本即可运行，无论企业用户或普通消费者均可享受低成本与低耗能针对高性能企业应用提高了产品可靠度与可扩展性。</p>
+<p>ARMCortex-A53处理器:<br>史上效率最高的ARM应用处理器，使用体验相当于当前的超级手机，但功耗仅需其四分之一结合可靠性特点，可扩展数据平面（dataplane）应用可将每毫瓦及每平方毫米性能发挥到极致针对个别线程计算应用程序进行了传输处理优化Cortex-A53处理器结合Cortex-A57及ARM的big.LITTLE处理技术，能使平台拥有最大的性能范围，同时大幅减少功耗。</p>
+<h3 id="2-处理器的结构都有哪些，有哪些特点"><a href="#2-处理器的结构都有哪些，有哪些特点" class="headerlink" title="2.处理器的结构都有哪些，有哪些特点"></a>2.处理器的结构都有哪些，有哪些特点</h3><p>ARM:指令集精简，但指令等长，这样提高了处理效率，但遇到复杂指令，就需要更多的简单指令来堆砌复杂任务。</p>
+<p>X86:指令集丰富，指令不等长，善于执行复杂工作，更强调串行性能</p>
+<p>并行处理能力上，ARM凭借高效率和高并发性能取得一定优势；X86善于执行复杂指令，且在纯串行任务上，相较于ARM能取得优势。</p>
+<h2 id="七、为什么在路由器中可以安装Linux，在路由器中使用的Linux和在桌面端使用的有什么区别"><a href="#七、为什么在路由器中可以安装Linux，在路由器中使用的Linux和在桌面端使用的有什么区别" class="headerlink" title="七、为什么在路由器中可以安装Linux，在路由器中使用的Linux和在桌面端使用的有什么区别"></a>七、为什么在路由器中可以安装Linux，在路由器中使用的Linux和在桌面端使用的有什么区别</h2><h3 id="1-为什么在路由器中可以安装Linux"><a href="#1-为什么在路由器中可以安装Linux" class="headerlink" title="1.为什么在路由器中可以安装Linux"></a>1.为什么在路由器中可以安装Linux</h3><p>在 GNU 软件 Zebra 的协助下，可以将 Linux 机器打造成一台功能完备的路由器，能够同时支持 RIPv1、 RIPv2、RIPng、OSPFv2、OSPFv3、BGP - 4 和 BGP - 4+ 等诸多 TCP/IP 协议，路由器则通过这些协议进行传输数据。</p>
+<h3 id="2-在路由器中使用的Linux和在桌面端使用的有什么区别"><a href="#2-在路由器中使用的Linux和在桌面端使用的有什么区别" class="headerlink" title="2.在路由器中使用的Linux和在桌面端使用的有什么区别"></a>2.在路由器中使用的Linux和在桌面端使用的有什么区别</h3><p>使用代码不一样2333具体并不了解</p>
+<h2 id="八、为什么要有操作系统"><a href="#八、为什么要有操作系统" class="headerlink" title="八、为什么要有操作系统"></a>八、为什么要有操作系统</h2><p>操作系统就是为了让人们更加方便的使用硬件资源的一个工具。</p>
+<h2 id="九、自己对计算机分层思想的理解"><a href="#九、自己对计算机分层思想的理解" class="headerlink" title="九、自己对计算机分层思想的理解"></a>九、自己对计算机分层思想的理解</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>层数</th>
+<th>名称</th>
+<th>作用</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>第七层</td>
+<td>应用层</td>
+<td>提供用户界面</td>
+<td>文件、打印、消息、数据库和应用程序服务</td>
+</tr>
+<tr>
+<td>第六层</td>
+<td>表示层</td>
+<td>表示数据、进行加密等处理</td>
+<td>数据加密、压缩和转换服务</td>
+</tr>
+<tr>
+<td>第五层</td>
+<td>会话层</td>
+<td>将不同应用程序的数据分离</td>
+<td>对话控制</td>
+</tr>
+<tr>
+<td>第四层</td>
+<td>传输层</td>
+<td>提供可靠或者不可靠的传输，在重传前执行纠错</td>
+<td>端口到端口连接</td>
+</tr>
+<tr>
+<td>第三层</td>
+<td>网络层</td>
+<td>提供逻辑地址，路由器使用它们来选择路径</td>
+<td>路由选择</td>
+</tr>
+<tr>
+<td>第二层</td>
+<td>数据链路层</td>
+<td>将分组拆分为字节，并将字节组合成帧，使用MAC地址提供介质访问，执行错误检测但不纠错</td>
+<td>成帧</td>
+</tr>
+<tr>
+<td>第一层</td>
+<td>物理层</td>
+<td>在设备之间传输比特，指定电平、电缆速度和电缆针脚</td>
+<td>物理拓扑</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>分层处理好像任务归类一样，这样处理起来有规律有节奏有逻辑，降低了处理的复杂性，每层独立但是又可以一起合作处理。</p>
+<h2 id="十、UART串口通信的层次结构是怎样的"><a href="#十、UART串口通信的层次结构是怎样的" class="headerlink" title="十、UART串口通信的层次结构是怎样的"></a>十、UART串口通信的层次结构是怎样的</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>层</th>
+<th>—-</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>终端设备层</td>
+<td>向上提供统一的接口，使用户不必关心具体的终端类型。</td>
+</tr>
+<tr>
+<td>行规程</td>
+<td>指数据交换的“规矩”，比如流量控制，对输入的数据进行变换处理等。</td>
+</tr>
+<tr>
+<td>串口抽象层</td>
+<td>将各个串口的共性概括出来，是低层串口驱动的核心部分，比如设置串口类型，串口波特率等。</td>
+</tr>
+<tr>
+<td>串口芯片层</td>
+<td>向串口抽象层提供串口芯片所用的资源，比如访问地址，串口中断号等。对于标准串口，主要移植内容在芯片层。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="十一、为什么Qt可以跨平台使用而VS不能，C语言的编译步骤是怎样的，常用的编译器有哪些"><a href="#十一、为什么Qt可以跨平台使用而VS不能，C语言的编译步骤是怎样的，常用的编译器有哪些" class="headerlink" title="十一、为什么Qt可以跨平台使用而VS不能，C语言的编译步骤是怎样的，常用的编译器有哪些"></a>十一、为什么Qt可以跨平台使用而VS不能，C语言的编译步骤是怎样的，常用的编译器有哪些</h2><h3 id="1-为什么Qt可以跨平台使用而VS不能"><a href="#1-为什么Qt可以跨平台使用而VS不能" class="headerlink" title="1.为什么Qt可以跨平台使用而VS不能"></a>1.为什么Qt可以跨平台使用而VS不能</h3><p>针对每一种OS平台，QT都有一套对应的底层类库，而接口是完全一致的。因此只要是在QT库上开发的程序，放在任何一种平台下都可以编译运行（前提条件是：程序中没有使用某OS特有的机能）。也就是说在OS和应用层之间，增加了一个平台层来保证可移植性。</p>
+<h3 id="2-C语言的编译步骤是怎样的"><a href="#2-C语言的编译步骤是怎样的" class="headerlink" title="2.C语言的编译步骤是怎样的"></a>2.C语言的编译步骤是怎样的</h3><p>预处理  编译  汇编   链接</p>
+<h3 id="3-常用的编译器有哪些"><a href="#3-常用的编译器有哪些" class="headerlink" title="3.常用的编译器有哪些"></a>3.常用的编译器有哪些</h3><p>VC++、dev-C++、C-Free、win-TC、TC 2.0</p>
+<h2 id="十二、C语言中主函数的返回值可以返回什么东西，主函数的参数又是如何确定的"><a href="#十二、C语言中主函数的返回值可以返回什么东西，主函数的参数又是如何确定的" class="headerlink" title="十二、C语言中主函数的返回值可以返回什么东西，主函数的参数又是如何确定的"></a>十二、C语言中主函数的返回值可以返回什么东西，主函数的参数又是如何确定的</h2><h3 id="1-C语言中主函数的返回值可以返回什么东西"><a href="#1-C语言中主函数的返回值可以返回什么东西" class="headerlink" title="1.C语言中主函数的返回值可以返回什么东西"></a>1.C语言中主函数的返回值可以返回什么东西</h3><p>一般返回0，或者无返回值</p>
+<h3 id="2-主函数的参数又是如何确定的"><a href="#2-主函数的参数又是如何确定的" class="headerlink" title="2.主函数的参数又是如何确定的"></a>2.主函数的参数又是如何确定的</h3><p>这两个参数名字可以自定，但前者必须整形，后者是一个字符型指针数组，这个指针数组每个指针都指向一个字符串，前者就表示字符串的个数。</p>
+]]></content>
+      <categories>
+        <category>读书笔记</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+        <tag>GitHub</tag>
       </tags>
   </entry>
   <entry>
@@ -422,190 +607,21 @@
       </tags>
   </entry>
   <entry>
-    <title>小创第一次作业</title>
-    <url>/2018/11/14/%E7%AC%AC%E4%B8%80%E6%AC%A1%E4%BD%9C%E4%B8%9A%E6%80%BB%E7%BB%93/</url>
-    <content><![CDATA[<h2 id="一、什么是Linux系统，Linux有哪些部分，Linux都用在了哪些地方"><a href="#一、什么是Linux系统，Linux有哪些部分，Linux都用在了哪些地方" class="headerlink" title="一、什么是Linux系统，Linux有哪些部分，Linux都用在了哪些地方"></a>一、什么是Linux系统，Linux有哪些部分，Linux都用在了哪些地方</h2><h3 id="1-什么是Linux系统"><a href="#1-什么是Linux系统" class="headerlink" title="1.什么是Linux系统"></a>1.什么是Linux系统</h3><p>Linux是一套免费使用和自由传播的类Unix操作系统，是一个基于POSIX和UNIX的多用户、多任务、支持多线程和多CPU的操作系统。它能运行主要的UNIX工具软件、应用程序和网络协议。它支持32位和64位硬件。Linux继承了Unix以网络为核心的设计思想，是一个性能稳定的多用户网络操作系统。</p>
-<h3 id="2-Linux有哪些部分"><a href="#2-Linux有哪些部分" class="headerlink" title="2.Linux有哪些部分"></a>2.Linux有哪些部分</h3><p>Linux系统一般有4个主要部分：内核、shell、文件系统和应用程序。</p>
-<p>内核主要由五个子系统组成：进程调度，内存管理，虚拟文件系统，网络接口，进程间通信。</p>
-<h3 id="3-Linux都用在了哪些地方"><a href="#3-Linux都用在了哪些地方" class="headerlink" title="3.Linux都用在了哪些地方"></a>3.Linux都用在了哪些地方</h3><p>Linux操作系统被广泛的应用于企业服务器领域，目前市场上的网络设备都是使用Linux内核操作系统，一些网络服务器也是使用Linux操作系统下面的服务搭建实现的。</p>
-<h2 id="二、Linux和Windows有什么区别，Linux有哪些优势"><a href="#二、Linux和Windows有什么区别，Linux有哪些优势" class="headerlink" title="二、Linux和Windows有什么区别，Linux有哪些优势"></a>二、Linux和Windows有什么区别，Linux有哪些优势</h2><h3 id="1-Linux和Windows有什么区别"><a href="#1-Linux和Windows有什么区别" class="headerlink" title="1.Linux和Windows有什么区别"></a>1.Linux和Windows有什么区别</h3><p>a.开源免费(linux)和闭源收费(windows)</p>
-<p>b.linux的软件大多是开源自由软件，用户可以修改定制发布；Windows大都是收费软件，且由微软官方提供技术支持和服务</p>
-<p>c.Windows操作系统倾向于将更多的功能集成到操作系统内部，并将程序与内核相结合；而Linux不同于Windows，它的内核空间与用户空间有明显的界限</p>
-<p>d.linux稳定性较高，很少有病毒攻击</p>
-<h3 id="2-Linux有哪些优势"><a href="#2-Linux有哪些优势" class="headerlink" title="2.Linux有哪些优势"></a>2.Linux有哪些优势</h3><p>开源，谁都可以查看它的源代码，使它特别安全，而且可以进行更多的操作；内核优化好，运行效率较高，占用资源比较少。</p>
-<h2 id="三、Linux的基本文件（夹）操作命令有哪些"><a href="#三、Linux的基本文件（夹）操作命令有哪些" class="headerlink" title="三、Linux的基本文件（夹）操作命令有哪些"></a>三、Linux的基本文件（夹）操作命令有哪些</h2><h3 id="1-文件操作"><a href="#1-文件操作" class="headerlink" title="1.文件操作"></a>1.文件操作</h3><p><strong>创建文件</strong></p>
-<p>a.使用touch命令。</p>
-<p>在当前目录创建文件</p>
-<p><code>touch aa.txt </code>
- </p>
-<p>在指定目录创建文件  </p>
-<p><code>touch /home/jerval/Java/bb.txt</code></p>
-<p>b.使用vi命令。</p>
-<p><code>vi aa.txt  </code>
- </p>
-<p><strong>修改文件名</strong></p>
-<p>a.使用mv命令，如：</p>
-<p><code>mv aa.txt bbb.txt </code></p>
-<p>b.使用rename命令，如：</p>
-<p><code>rename &#39;s/bbb.txt/ccc.txt/&#39; bbb.txt </code></p>
-<p> <br><strong>删除文件</strong></p>
-<p>使用rm命令。</p>
-<p><code>rm ccc.txt </code> </p>
-<h3 id="2-文件夹操作"><a href="#2-文件夹操作" class="headerlink" title="2.文件夹操作"></a>2.文件夹操作</h3><p><strong>创建文件夹</strong></p>
-<p>使用mkdir命令，格式：mkdir [选项] DirName。如：</p>
-<p><code>mkdir /home/jerval/test_dir  </code></p>
-<p><strong>修改文件夹名</strong></p>
-<p>a.使用mv命令，如：</p>
-<p><code>mv /home/jerval/test_dir /home/jerval/test_dir2  </code></p>
-<p>b.使用rename命令，如：</p>
-<p><code>rename &#39;s/jerval/jerval888/&#39; jerval  </code></p>
-<p> <br><em>rename还支持正则表达式。如下：</em></p>
-<p>删除所有的.bak后缀：</p>
-<p><code>rename &#39;s/\.bak$//&#39; *.bak  </code></p>
-<p>  <br>把.jpe文件后缀修改为.jpg： </p>
-<p> <br><code>rename &#39;s/\.jpe$/\.jpg/&#39; *.jpe  </code></p>
-<p>  <br>把文件名改为小写：  </p>
-<p><code>rename &#39;y/A-Z/a-z/&#39; *   </code>
- </p>
-<p><strong>删除文件夹</strong></p>
-<p>a.使用rm命令。如强制删除文件夹jerval及其下面所有的子文件夹或文件：</p>
-<p><code>rm -rf jerval  </code></p>
-<p>-r 就是向下递归，不管有多少级目录，一并删除</p>
-<p>-f 就是直接强行删除，不作任何提示的意思</p>
-<p>-i 删除前逐一询问确认。</p>
-<p>b.使用rmdir命令，不过一旦目录非空，就很麻烦了，所以推荐使用rm命令。</p>
-<h2 id="四、什么是开源软件，开源社区有哪些，开源软件有什么优势和劣势"><a href="#四、什么是开源软件，开源社区有哪些，开源软件有什么优势和劣势" class="headerlink" title="四、什么是开源软件，开源社区有哪些，开源软件有什么优势和劣势"></a>四、什么是开源软件，开源社区有哪些，开源软件有什么优势和劣势</h2><h3 id="1-什么是开源软件"><a href="#1-什么是开源软件" class="headerlink" title="1.什么是开源软件"></a>1.什么是开源软件</h3><p>全称：开放源代码软件，它被定义为描述其源码可以被公众使用的软件，并且此软件的使用，修改和分发也不受许可证的限制。</p>
-<h3 id="2-开源社区有哪些"><a href="#2-开源社区有哪些" class="headerlink" title="2.开源社区有哪些"></a>2.开源社区有哪些</h3><p>国内：Linux中国，开源中国社区，LUPA，共创软件联盟，ChinaUnix.net，红旗Linux技术社区，PHPChina，JAVA中文站，JAVA世界中文论坛，兰大开源社区等</p>
-<p>国外：kernel，Alpha，PowerPC，PA-RISC，Sourceforge，Opensource，open office等</p>
-<h3 id="3-开源软件有什么优势和劣势"><a href="#3-开源软件有什么优势和劣势" class="headerlink" title="3.开源软件有什么优势和劣势"></a>3.开源软件有什么优势和劣势</h3><p><strong>优势：</strong></p>
-<p>a.免费</p>
-<p>b.开放源代码，给初学者（比如我）一个学习机会</p>
-<p>c.自定义软件，想做什么有能力就可以去做</p>
-<p>d.大家一起贡献代码，相对来说更新和开发速度不慢</p>
-<p>e.自己如果想做项目，开源集思广益，容易得到大家的支持</p>
-<p><strong>劣势：</strong></p>
-<p>a.缺少系统化的支持，如果需要一个问题，可能还找不到解决方法</p>
-<p>b.安装配置，入门比较难</p>
-<p>c.开源者比较难盈利，难以形成较大的规模</p>
-<h2 id="五、为什么要有版本控制，git都有哪些操作，和GitHub有什么关系"><a href="#五、为什么要有版本控制，git都有哪些操作，和GitHub有什么关系" class="headerlink" title="五、为什么要有版本控制，git都有哪些操作，和GitHub有什么关系"></a>五、为什么要有版本控制，git都有哪些操作，和GitHub有什么关系</h2><h3 id="1-为什么要有版本控制"><a href="#1-为什么要有版本控制" class="headerlink" title="1.为什么要有版本控制"></a>1.为什么要有版本控制</h3><p>更好地管理代码，进行权限约束；如果碰到问题，可以通过查询原始文件来修正或者恢复。</p>
-<h3 id="2-git都有哪些操作，和GitHub有什么关系"><a href="#2-git都有哪些操作，和GitHub有什么关系" class="headerlink" title="2.git都有哪些操作，和GitHub有什么关系"></a>2.git都有哪些操作，和GitHub有什么关系</h3><p><code>git init</code></p>
-<p>用 git init 在目录中创建新的 Git 仓库，在目录中执行 git init，就可以创建一个 Git 仓库了。</p>
-<p><code>git clone</code></p>
-<p>使用 git clone 拷贝一个 Git 仓库到本地，让自己能够查看该项目，或者进行修改。</p>
-<p><code>git add</code></p>
-<p>git add 命令可将该文件添加到缓存。</p>
-<p><code>git status</code><br>git status 以查看在你上次提交之后是否有修改。</p>
-<p><code>git diff</code></p>
-<p>执行 git diff 来查看执行 git status 的结果的详细信息。</p>
-<p><code>git commit</code></p>
-<p>使用 git add 命令将想要快照的内容写入缓存区,而执行 git commit 将缓存区内容添加到仓库中。</p>
-<p><code>git reset HEAD</code></p>
-<p>git reset HEAD 命令用于取消已缓存的内容。</p>
-<p><code>git rm</code><br>如果只是简单地从工作目录中手工删除文件，运行 git status 时就会在 Changes not staged for commit 的提示。但要从 Git 中移除某个文件，就必须要从已跟踪文件清单中移除，然后提交。</p>
-<p><code>git mv</code><br>git mv 命令用于移动或重命名一个文件、目录、软连接。</p>
-<p>git是一个版本控制工具github是一个用git做版本控制的项目托管平台.</p>
-<h2 id="六、ARM架构处理器都有哪些，有什么特点，处理器的结构都有哪些，有哪些特点"><a href="#六、ARM架构处理器都有哪些，有什么特点，处理器的结构都有哪些，有哪些特点" class="headerlink" title="六、ARM架构处理器都有哪些，有什么特点，处理器的结构都有哪些，有哪些特点"></a>六、ARM架构处理器都有哪些，有什么特点，处理器的结构都有哪些，有哪些特点</h2><h3 id="1-ARM架构处理器都有哪些，有什么特点"><a href="#1-ARM架构处理器都有哪些，有什么特点" class="headerlink" title="1.ARM架构处理器都有哪些，有什么特点"></a>1.ARM架构处理器都有哪些，有什么特点</h3><p>ARM7系列　ARM9系列　ARM9E系列　ARM10E系列  SecurCore系列　Intel的StrongARM ARM11系列 Intel的Xscale</p>
-<p>其中，ARM7、ARM9、ARM9E和ARM10为4个通用处理器系列，每一个系列提供一套相对独特的性能来满足不同应用领域的需求。</p>
-<p>SecurCore系列专门为安全要求较高的应用而设计。</p>
-<p>Axxia 4500通信处理器基于采用28纳米工艺的ARM 4核Cortex-A15处理器，并搭载ARM全新CoreLink CCN-504高速缓存一致性互连技术，实现安全低功耗和最佳性能。</p>
-<p>ARMCortex-A50处理器系列:<br>提供Cortex-A57与Cortex-A53两款处理器，可选配密码编译加速器，为验证软件提高10倍的运行速度与ARMMali图形处理器系列互用，适用于图形处理器计算应用具有AMBA系统一致性，与CCI-400、CCN-504等ARMCoreLink缓存一致性结构组件达成多核心缓存一致性。</p>
-<p>ARMCortex-A57处理器:<br>最先进、单线程性能最高的ARM应用处理器能提升，以满足供智能手机从内容消费设备转型为内容生产设备的需求，并在相同功耗下实现最高可达现有超级手机三倍的性能计算能力可相当于传统PC，但仅需移动设备的功耗成本即可运行，无论企业用户或普通消费者均可享受低成本与低耗能针对高性能企业应用提高了产品可靠度与可扩展性。</p>
-<p>ARMCortex-A53处理器:<br>史上效率最高的ARM应用处理器，使用体验相当于当前的超级手机，但功耗仅需其四分之一结合可靠性特点，可扩展数据平面（dataplane）应用可将每毫瓦及每平方毫米性能发挥到极致针对个别线程计算应用程序进行了传输处理优化Cortex-A53处理器结合Cortex-A57及ARM的big.LITTLE处理技术，能使平台拥有最大的性能范围，同时大幅减少功耗。</p>
-<h3 id="2-处理器的结构都有哪些，有哪些特点"><a href="#2-处理器的结构都有哪些，有哪些特点" class="headerlink" title="2.处理器的结构都有哪些，有哪些特点"></a>2.处理器的结构都有哪些，有哪些特点</h3><p>ARM:指令集精简，但指令等长，这样提高了处理效率，但遇到复杂指令，就需要更多的简单指令来堆砌复杂任务。</p>
-<p>X86:指令集丰富，指令不等长，善于执行复杂工作，更强调串行性能</p>
-<p>并行处理能力上，ARM凭借高效率和高并发性能取得一定优势；X86善于执行复杂指令，且在纯串行任务上，相较于ARM能取得优势。</p>
-<h2 id="七、为什么在路由器中可以安装Linux，在路由器中使用的Linux和在桌面端使用的有什么区别"><a href="#七、为什么在路由器中可以安装Linux，在路由器中使用的Linux和在桌面端使用的有什么区别" class="headerlink" title="七、为什么在路由器中可以安装Linux，在路由器中使用的Linux和在桌面端使用的有什么区别"></a>七、为什么在路由器中可以安装Linux，在路由器中使用的Linux和在桌面端使用的有什么区别</h2><h3 id="1-为什么在路由器中可以安装Linux"><a href="#1-为什么在路由器中可以安装Linux" class="headerlink" title="1.为什么在路由器中可以安装Linux"></a>1.为什么在路由器中可以安装Linux</h3><p>在 GNU 软件 Zebra 的协助下，可以将 Linux 机器打造成一台功能完备的路由器，能够同时支持 RIPv1、 RIPv2、RIPng、OSPFv2、OSPFv3、BGP - 4 和 BGP - 4+ 等诸多 TCP/IP 协议，路由器则通过这些协议进行传输数据。</p>
-<h3 id="2-在路由器中使用的Linux和在桌面端使用的有什么区别"><a href="#2-在路由器中使用的Linux和在桌面端使用的有什么区别" class="headerlink" title="2.在路由器中使用的Linux和在桌面端使用的有什么区别"></a>2.在路由器中使用的Linux和在桌面端使用的有什么区别</h3><p>使用代码不一样2333具体并不了解</p>
-<h2 id="八、为什么要有操作系统"><a href="#八、为什么要有操作系统" class="headerlink" title="八、为什么要有操作系统"></a>八、为什么要有操作系统</h2><p>操作系统就是为了让人们更加方便的使用硬件资源的一个工具。</p>
-<h2 id="九、自己对计算机分层思想的理解"><a href="#九、自己对计算机分层思想的理解" class="headerlink" title="九、自己对计算机分层思想的理解"></a>九、自己对计算机分层思想的理解</h2><table>
-<thead>
-<tr>
-<th>层数</th>
-<th>名称</th>
-<th>作用</th>
-<th>功能</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>第七层</td>
-<td>应用层</td>
-<td>提供用户界面</td>
-<td>文件、打印、消息、数据库和应用程序服务</td>
-</tr>
-<tr>
-<td>第六层</td>
-<td>表示层</td>
-<td>表示数据、进行加密等处理</td>
-<td>数据加密、压缩和转换服务</td>
-</tr>
-<tr>
-<td>第五层</td>
-<td>会话层</td>
-<td>将不同应用程序的数据分离</td>
-<td>对话控制</td>
-</tr>
-<tr>
-<td>第四层</td>
-<td>传输层</td>
-<td>提供可靠或者不可靠的传输，在重传前执行纠错</td>
-<td>端口到端口连接</td>
-</tr>
-<tr>
-<td>第三层</td>
-<td>网络层</td>
-<td>提供逻辑地址，路由器使用它们来选择路径</td>
-<td>路由选择</td>
-</tr>
-<tr>
-<td>第二层</td>
-<td>数据链路层</td>
-<td>将分组拆分为字节，并将字节组合成帧，使用MAC地址提供介质访问，执行错误检测但不纠错</td>
-<td>成帧</td>
-</tr>
-<tr>
-<td>第一层</td>
-<td>物理层</td>
-<td>在设备之间传输比特，指定电平、电缆速度和电缆针脚</td>
-<td>物理拓扑</td>
-</tr>
-</tbody></table>
-<p>分层处理好像任务归类一样，这样处理起来有规律有节奏有逻辑，降低了处理的复杂性，每层独立但是又可以一起合作处理。</p>
-<h2 id="十、UART串口通信的层次结构是怎样的"><a href="#十、UART串口通信的层次结构是怎样的" class="headerlink" title="十、UART串口通信的层次结构是怎样的"></a>十、UART串口通信的层次结构是怎样的</h2><table>
-<thead>
-<tr>
-<th>层</th>
-<th>—</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>终端设备层</td>
-<td>向上提供统一的接口，使用户不必关心具体的终端类型。</td>
-</tr>
-<tr>
-<td>行规程</td>
-<td>指数据交换的“规矩”，比如流量控制，对输入的数据进行变换处理等。</td>
-</tr>
-<tr>
-<td>串口抽象层</td>
-<td>将各个串口的共性概括出来，是低层串口驱动的核心部分，比如设置串口类型，串口波特率等。</td>
-</tr>
-<tr>
-<td>串口芯片层</td>
-<td>向串口抽象层提供串口芯片所用的资源，比如访问地址，串口中断号等。对于标准串口，主要移植内容在芯片层。</td>
-</tr>
-</tbody></table>
-<h2 id="十一、为什么Qt可以跨平台使用而VS不能，C语言的编译步骤是怎样的，常用的编译器有哪些"><a href="#十一、为什么Qt可以跨平台使用而VS不能，C语言的编译步骤是怎样的，常用的编译器有哪些" class="headerlink" title="十一、为什么Qt可以跨平台使用而VS不能，C语言的编译步骤是怎样的，常用的编译器有哪些"></a>十一、为什么Qt可以跨平台使用而VS不能，C语言的编译步骤是怎样的，常用的编译器有哪些</h2><h3 id="1-为什么Qt可以跨平台使用而VS不能"><a href="#1-为什么Qt可以跨平台使用而VS不能" class="headerlink" title="1.为什么Qt可以跨平台使用而VS不能"></a>1.为什么Qt可以跨平台使用而VS不能</h3><p>针对每一种OS平台，QT都有一套对应的底层类库，而接口是完全一致的。因此只要是在QT库上开发的程序，放在任何一种平台下都可以编译运行（前提条件是：程序中没有使用某OS特有的机能）。也就是说在OS和应用层之间，增加了一个平台层来保证可移植性。</p>
-<h3 id="2-C语言的编译步骤是怎样的"><a href="#2-C语言的编译步骤是怎样的" class="headerlink" title="2.C语言的编译步骤是怎样的"></a>2.C语言的编译步骤是怎样的</h3><p>预处理  编译  汇编   链接</p>
-<h3 id="3-常用的编译器有哪些"><a href="#3-常用的编译器有哪些" class="headerlink" title="3.常用的编译器有哪些"></a>3.常用的编译器有哪些</h3><p>VC++、dev-C++、C-Free、win-TC、TC 2.0</p>
-<h2 id="十二、C语言中主函数的返回值可以返回什么东西，主函数的参数又是如何确定的"><a href="#十二、C语言中主函数的返回值可以返回什么东西，主函数的参数又是如何确定的" class="headerlink" title="十二、C语言中主函数的返回值可以返回什么东西，主函数的参数又是如何确定的"></a>十二、C语言中主函数的返回值可以返回什么东西，主函数的参数又是如何确定的</h2><h3 id="1-C语言中主函数的返回值可以返回什么东西"><a href="#1-C语言中主函数的返回值可以返回什么东西" class="headerlink" title="1.C语言中主函数的返回值可以返回什么东西"></a>1.C语言中主函数的返回值可以返回什么东西</h3><p>一般返回0，或者无返回值</p>
-<h3 id="2-主函数的参数又是如何确定的"><a href="#2-主函数的参数又是如何确定的" class="headerlink" title="2.主函数的参数又是如何确定的"></a>2.主函数的参数又是如何确定的</h3><p>这两个参数名字可以自定，但前者必须整形，后者是一个字符型指针数组，这个指针数组每个指针都指向一个字符串，前者就表示字符串的个数。</p>
+    <title>电赛感想</title>
+    <url>/2019/08/16/%E7%94%B5%E8%B5%9B%E6%84%9F%E6%83%B3/</url>
+    <content><![CDATA[<h2 id="为何参赛"><a href="#为何参赛" class="headerlink" title="为何参赛"></a>为何参赛</h2><p>本来，我是没有考虑过这个比赛的，一是预备知识量大，二是准备时间长，三是队友难寻（作为大一萌新的我毫无战斗力）。实数侥幸，承蒙学长看得起我，说带一个小萌新参加19年的电赛，我就很开心地答应了，后参加了学校的一选二选成功出道。尽管中间经历了很多事情，但是最终也在十一号早上将自己队伍的作品送到了北邮，进行评测。</p>
+<h2 id="参赛准备历程"><a href="#参赛准备历程" class="headerlink" title="参赛准备历程"></a>参赛准备历程</h2><h3 id="比赛前的准备"><a href="#比赛前的准备" class="headerlink" title="比赛前的准备"></a>比赛前的准备</h3><p>说到参赛准备，真的是一场跨时间很长的战斗。我是在大一上学期，入门了单片机（32的标准库和51），但是这样完全不够格去电赛，在下学期，为了整个队伍的电控方面的一致性，我改去学了32的hal库，大概学完I2C后，队伍出了点问题，就解散了，多亏指导老师的调整，我加入了一个双人队伍，成为里面的电控主力，同时又从hal库转到了标准库，在原有的基础上，学了屏幕、adc、pid方面的知识。另外有关摄像头这方面，我们队伍采用了openmv的方案，先用python写openmv的程序，在将它与stm32通讯，这样就完成了大部分摄像头的功能。</p>
+<h3 id="比赛前夕的预备"><a href="#比赛前夕的预备" class="headerlink" title="比赛前夕的预备"></a>比赛前夕的预备</h3><p>比赛前几天，我们队伍就搭好了电控的框架，一是按键控制，二是屏幕显示，三是单片机和openmv的通讯。还有一些预备的模块，例如ADC，mpu6050，定时器的中断和pwm的输出。</p>
+<h2 id="比赛中"><a href="#比赛中" class="headerlink" title="比赛中"></a>比赛中</h2><h3 id="“犹豫就会败北”"><a href="#“犹豫就会败北”" class="headerlink" title="“犹豫就会败北”"></a>“犹豫就会败北”</h3><p>当时七点半多赛题就出来了，我一看题目，嗯~，B题题目“巡线机器人”像是控制类题目，点进去一看，什么！“设计一基于四旋翼飞行器的巡线机器人……”，(O_o)??飞控题再见。那再去H题“模拟电磁曲射炮”看看，“自行设计并制作一模拟电磁曲射炮”，震惊，电赛组委会竟然出了这么一道题，1.8J警告好吗。自个做电磁炮，有点告辞了哈，然后我们就开始看看其他题目，A题“本题所有控制器必须使用 TI 公司处理器”，告辞；CDEFG题没训练过，告辞；IJK题高职高专，告辞。能做的题目，也只能是1.8J警告的电磁炮，所以，大概在九点的时候，我们确定了题目，并开始了讨论。<br>既然选择了这道题，电磁炮是关键吧，那先去万能的某宝看看，连万能的某宝的某店家都告诉我，电磁炮全网没货！！！<em>（聊天记录见下图）</em><br> <img src="/image/taobaodiancipao.jpg" width = "108" height = "490" alt="聊天记录" align=center /><br>没办法，那就自己上手做了。事实上，我们做电磁炮就做了大概两天半的时间，直到第三天的晚上，我才真正地开始调试程序。</p>
+<h3 id="功亏一篑"><a href="#功亏一篑" class="headerlink" title="功亏一篑"></a>功亏一篑</h3><p>在最后提交的时候，发现我们都是usb调试，根本没考虑作为独立作品的时候的供电，结果到现场的时候，半个小时都在接电源，openmv的芯片还发烫，还好有备用的。</p>
+<h2 id="比赛后"><a href="#比赛后" class="headerlink" title="比赛后"></a>比赛后</h2><p>追悔莫及，没有把握好调试的半个小时。</p>
+<p>如果我大三还有时间的话，可能会冲一把，给我的本科竞赛生涯画上句号。</p>
 ]]></content>
       <categories>
-        <category>读书笔记</category>
+        <category>随笔</category>
       </categories>
       <tags>
-        <tag>linux</tag>
-        <tag>GitHub</tag>
+        <tag>来路</tag>
       </tags>
   </entry>
 </search>
