@@ -46,56 +46,6 @@
       </tags>
   </entry>
   <entry>
-    <title>stm32蓝牙小车</title>
-    <url>/2019/01/05/stm32%E8%93%9D%E7%89%99%E5%B0%8F%E8%BD%A6/</url>
-    <content><![CDATA[<h2 id="项目目标：蓝牙遥控小车"><a href="#项目目标：蓝牙遥控小车" class="headerlink" title="项目目标：蓝牙遥控小车"></a><strong>项目目标：蓝牙遥控小车</strong></h2><h2 id="项目过程："><a href="#项目过程：" class="headerlink" title="项目过程："></a>项目过程：</h2><h3 id="1-12月22日："><a href="#1-12月22日：" class="headerlink" title="1.12月22日："></a>1.12月22日：</h3><ul>
-<li>第一次考核结束，学长建议我们将单片机改用成stm32，并设置几个创新性的模块；</li>
-<li>对小车无法直线前进的问题进行了探讨：将两轮左右对换后，发现小车直行时往另一相反方向偏转，初步判断是左右两轮规格不一致导致；考核时学长提到会不会是万向轮的问题，我们又将小车前端的万向轮固定，发现小车前行仍偏转，可以判断该问题应与万向轮无关；通过仔细观察小车前进时两轮的转动情况，我们发现，当小车悬空时，两轮转速几乎相同，但置于地面时，小车直行3-5秒后开始发生偏转，且有一轮不动。调换左右轮，情况相同。<h3 id="2-12月24日："><a href="#2-12月24日：" class="headerlink" title="2.12月24日："></a>2.12月24日：</h3></li>
-<li> 探讨了换用stm32的基本想法，以及对小车的再升级计划。</li>
-<li> 确定在小车上增加一个红外避障的模块以及OLED显示屏：当小车向前/后/左/右行驶时，OLED显示屏第二行上出现go/back/left/right字样，停止时，出现stop字样；用红外避障检测小车前方左右两侧的障碍物，当左/右前方有障碍物的时候，第三行左/右侧go字样变为aa。<h3 id="3-12月25日："><a href="#3-12月25日：" class="headerlink" title="3.12月25日："></a>3.12月25日：</h3></li>
-<li>研究stm32单片机代码，开始编写项目主程序。<h3 id="4-1月1日："><a href="#4-1月1日：" class="headerlink" title="4.1月1日："></a>4.1月1日：</h3></li>
-<li>开始编写pwm调速程序和红外避障检测以及OLED显示屏模块的程序。在四轮配件买来之前，用第一次的三轮配件进行了初步调试（二轮改四轮的时候，因为接口的问题用到了映射，映射是个好东西，可以少用一个定时器，直接四路输出）。<h3 id="5-1月5日："><a href="#5-1月5日：" class="headerlink" title="5.1月5日："></a>5.1月5日：</h3></li>
-<li>所有材料均购入，对小车的主体部分进行了组装。</li>
-<li>对小车进行各部分的调试，基本实现项目初期设定的目标。<h2 id="实现结果："><a href="#实现结果：" class="headerlink" title="实现结果："></a>实现结果：</h2></li>
-<li>通过手机蓝牙SPP对stm32小车发出前进，后退，暂停，左转，右转，加速，减速等指令，并实现了其相应的功能。<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2></li>
-<li>通过这次项目，我们更深入了解了有关串口通信、电机驱动和定时器设置的一些内容，对stm32单片机有了更加深入的了解。（其实并没有，我不生产代码，我只是代码的搬运工）</li>
-<li>在项目进行的过程中，我们遇到了许多问题，比如OLED屏乱码，单片机vcc接口太少。</li>
-<li>本次项目基本实现了初期的目标，成功换用了单片机，并增加了两个新的模块：红外避障和oled屏。</li>
-<li>还有一个小注意点，以后外设多的时候，先看看哪个接口不怎么用，把这个当io口，其实最好是能规划好接口干什么，不然改代码改接口很烦。</li>
-<li>32和51真的好不一样，51是32寄存器的简化简化再简化，所以我选择库函数。        他们给我的感觉是：32是一块一块地组合起来，51是一坨东西放那里（虽然这一坨东西里面也有一块一块，虽然32也可以是一坨的）。</li>
-<li>小车可能算告一段落了，如果再想做小车，可能想做平衡车（好像和风力摆差不多）了。</li>
-</ul>
-]]></content>
-      <categories>
-        <category>单片机</category>
-      </categories>
-      <tags>
-        <tag>stm32</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>hello world</title>
-    <url>/2018/11/04/hello-world/</url>
-    <content><![CDATA[<h1 id="欢迎来到我的博客！"><a href="#欢迎来到我的博客！" class="headerlink" title="欢迎来到我的博客！"></a>欢迎来到我的博客！</h1><ul>
-<li><p>建这个博客的目的是记录一下平时的学习情况和对未来的规划，分享一些杂七杂八的想法</p>
-</li>
-<li><p><del>可能会有一些奇怪的东西随机出没</del></p>
-</li>
-<li><p>本人有些愚笨，做的东西比较低级，做的过程比较繁琐，希望大佬前来指点！</p>
-</li>
-</ul>
-<ul>
-<li>邮箱：<a href="mailto:&#108;&#x69;&#116;&#109;&#115;&#x69;&#x74;&#x40;&#49;&#50;&#x36;&#46;&#x63;&#x6f;&#x6d;">&#108;&#x69;&#116;&#109;&#115;&#x69;&#x74;&#x40;&#49;&#50;&#x36;&#46;&#x63;&#x6f;&#x6d;</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>hello</category>
-      </categories>
-      <tags>
-        <tag>hello</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>archlinux的装机感想</title>
     <url>/2019/02/05/archlinux%E7%9A%84%E8%A3%85%E6%9C%BA%E6%84%9F%E6%83%B3/</url>
     <content><![CDATA[<h2 id="缘起"><a href="#缘起" class="headerlink" title="缘起"></a>缘起</h2><p>年前，在<strong>某位大佬</strong>的推荐下，在VMware（虚拟机)上安装了archlinux，并受其<del>压迫</del>，在年后赶出了一篇archlinux装机感想。</p>
@@ -243,6 +193,28 @@
       </tags>
   </entry>
   <entry>
+    <title>hello world</title>
+    <url>/2018/11/04/hello-world/</url>
+    <content><![CDATA[<h1 id="欢迎来到我的博客！"><a href="#欢迎来到我的博客！" class="headerlink" title="欢迎来到我的博客！"></a>欢迎来到我的博客！</h1><ul>
+<li><p>建这个博客的目的是记录一下平时的学习情况和对未来的规划，分享一些杂七杂八的想法</p>
+</li>
+<li><p><del>可能会有一些奇怪的东西随机出没</del></p>
+</li>
+<li><p>本人有些愚笨，做的东西比较低级，做的过程比较繁琐，希望大佬前来指点！</p>
+</li>
+</ul>
+<ul>
+<li>邮箱：<a href="mailto:&#108;&#105;&#116;&#x6d;&#x73;&#105;&#116;&#x40;&#49;&#50;&#54;&#46;&#x63;&#111;&#x6d;">&#108;&#105;&#116;&#x6d;&#x73;&#105;&#116;&#x40;&#49;&#50;&#54;&#46;&#x63;&#111;&#x6d;</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>hello</category>
+      </categories>
+      <tags>
+        <tag>hello</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>《深度学习》学习笔记(0)</title>
     <url>/2021/07/16/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(0)/</url>
     <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>​    快两年没有更新博客了，原因是生活的重心逐渐向学习转移，笔记也以纸张为主。今年暑假呆在学校里，一边准备考研，一边学习新东西，需要笔记来记录一下学习情况。</p>
@@ -257,6 +229,196 @@
       </categories>
       <tags>
         <tag>DL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>《深度学习》学习笔记(1)</title>
+    <url>/2021/07/18/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(1)/</url>
+    <content><![CDATA[<h2 id="第1部分-应用数学与机器学习基础"><a href="#第1部分-应用数学与机器学习基础" class="headerlink" title="第1部分 应用数学与机器学习基础"></a>第1部分 应用数学与机器学习基础</h2><h3 id="第2章-线性代数"><a href="#第2章-线性代数" class="headerlink" title="第2章 线性代数"></a>第2章 线性代数</h3><p><em>一些概念工科线性代数教材中有提及，不作详细解释</em></p>
+<h4 id="个别概念"><a href="#个别概念" class="headerlink" title="个别概念"></a><strong>个别概念</strong></h4><ul>
+<li><p>标量、向量、矩阵，单位矩阵、逆矩阵</p>
+</li>
+<li><p>张量(tensor)：一个数组中的元素分布在若干维坐标的规则网格中。记作**$A$**                    <em>（多维数组？高纬度矩阵？)</em></p>
+</li>
+<li><p>广播(broadcasting)：不同维度张量相加     <em>(python的广播机制)</em>                                           </p>
+</li>
+<li><p>线性组合、线性相关、奇异矩阵</p>
+</li>
+<li><p>范数：衡量向量大小。<br>$$<br>||x||_p=(\sum_i|\mbox x_i|^p)^\frac1p<br>$$</p>
+<ul>
+<li>$L_1$范数：0/非0差异，经常作为表示非零元素数目的替代函数；</li>
+<li>最大范数：向量中具有最大幅值的元素的绝对值；</li>
+<li>Frobenius范数：衡量矩阵大小；                                                      </li>
+<li>点积可以用范数表示 $$x^Ty=||x||_2||y||_2cos\theta$$</li>
+</ul>
+</li>
+<li><p>对角矩阵、对称矩阵</p>
+</li>
+<li><p>单位向量是具有单位范数的向量，即$ ||x||_2=1 $</p>
+</li>
+<li><p>正交：如果$x^Ty=0$，那么向量x和y互相正交</p>
+<ul>
+<li>标准正交：向量不但互相正交，并且范数都为1</li>
+<li>正交矩阵：行向量和列向量分别是标准正交的方阵，则$A^{-1}=A^T$</li>
+</ul>
+</li>
+<li><p>特征分解：<br>$$<br>A=Q\Lambda Q^T<br>$$<br>其中$Q$是$A$的特征向量组成的正交矩阵，$\Lambda$ 是对角矩阵。</p>
+<ul>
+<li>实对称矩阵的特征分解可以用于优化二次方程$f(x)=x^TAx$,其中限制$ ||x||_2=1 $，当$x$等于$A$的某个特征向量时，f将返回对应的特征值，在限制条件下，函数$f(x)$的最大值是最大特征值，最小值是最小特征值。（在后面实例中会用到）</li>
+</ul>
+</li>
+<li><p>奇异值分解（SVD)：<br>$$<br>A=UDV^T<br>$$<br>其中A为m ∗ n的矩阵(未必为方阵)，U为m ∗ m的正交矩阵，D为m ∗ n的矩阵，V是一个n ∗ n的正交矩阵。</p>
+<ul>
+<li>每个实数矩阵都有一个奇异值分解，但不一定都有特征分解。</li>
+</ul>
+</li>
+<li><p>SVD最有用的一个性质是拓展矩阵求逆到非方矩阵上。</p>
+</li>
+<li><p>迹运算：返回矩阵对角元素的和，即$Tr(A)=\sum_iA_{i,i}$。</p>
+<ul>
+<li>描述Frobenius范数：$||A||_F=\sqrt{Tr(AA^T)}$</li>
+<li>性质：<ul>
+<li>$Tr(A)=Tr(A^T)$</li>
+<li>$Tr(ABC)=Tr(CAB)=Tr(BCA)$</li>
+<li>$a=Tr(a)$</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>行列式</p>
+</li>
+</ul>
+<h4 id="实例：主成分分析"><a href="#实例：主成分分析" class="headerlink" title="实例：主成分分析"></a><strong>实例：主成分分析</strong></h4><p>主成分分析（PCA）是一种统计过程，它使用正交变换将一组可能相关变量(实体，每个实体具有不同的数值)的观察值转换为一组称为主成分的线性不相关变量的值。</p>
+<p><em>理解：主要基于多变量内部具有一定的相关性，我们想要减少运算量，于是用较少的变量代替原来的变量，并尽可能地保留信息</em></p>
+<p>实际上主成分分析有好几种推导，下面介绍一下本书采用的方法（最小平方误差）。</p>
+<p>假设在$R^n$空间里有m个点，对其进行编码。则每一个$x^{(i)}\in R^n$,会有对应的$c^{(i)}\in R^l$,如果l比n小，那就减少了运算量。<em>从n个特征降维到l个特征。</em>找到编码函数$f(x)=c$和解码函数$x\approx g(f(X))$。</p>
+<p>设$g(c)=Dc$，其中$D\in R^{n<em>l}$是定义编码的矩阵。为了让D有唯一解，<strong>限制D中的所有列向量都有单位范数</strong>。为了让新的特征不具有相关性，<strong>限制D的列向量互相正交</strong>。</em>正交向量线性无关。*</p>
+<p>为了得到最优编码$c^*$，<strong>最小化原始输入向量$x$和重构向量$g(c)$之间的距离</strong>，用$L_2$范数(的平方)衡量他们之间的距离。即：<br>$$<br>c*=argmin_c||x-g(c)||_2^2<br>\=argmin_c(x-g(c))^T(x-g(c))<br>\=argmin_c(x^Tx-2x^Tg(c)+g(c)^Tg(c))<br>\∵x^Tx与c无关，再代入g(c)=Dc<br>\∴c*=argmin_c -2x^TDc+c^TD^TDc        ~~~~~~~~~(D^TD=I_l)<br>\=argmin_c -2x^TDc+c^Tc<br>$$<br>进行向量微积分计算<br>$$<br>\nabla_c(-2x^TDc+c^Tc)=0</p>
+<p>\c=D^Tx<br>$$<br>所以得到<br>$$<br>r(x)=g(f(x))=g(c)=DD^Tx<br>$$<br>我们的优化目标则成为找到D，因此让误差矩阵最小，即Frobenius范数最小,在前提$D^TD=I_l$(正交性质)<br>$$<br>D^*=argmin_D\sqrt{\sum_{i,j}(x_j^{(i)}-r(x^{(i)})_j)^2}<br>$$</p>
+<p>$$<br>d^*=argmin_d \sum_i||X-Xdd^T||_F^2    ~~~~~~~~~~~~~~~~~~s.d.d^Td=1<br>\=argmin_d ~Tr((X-Xdd^T)^T(X-Xdd^T))<br>\进行化简后<br>\=argmin_d ~-2Tr(X^TXdd^T)+Tr(X^TXdd^Tdd^T)<br>\=argmin_d ~-Tr(X^TXdd^T)<br>\=argmax_d ~Tr(X^TXdd^T)<br>\进行特征分解求解，则<br>\最优的d为X^TX的最大特征值对应的特征向量<br>$$</p>
+<p>结论：矩阵D由前l个最大的特征值对应的特征向量组成。</p>
+<p>注：PCA推导有更详细的博客<a href="https://www.cnblogs.com/pinard/p/6239403.html">在此</a>，还有基于最大方差的推导，等学完概率论后再来看看。</p>
+<hr>
+<h3 id="第3章-概率与信息论"><a href="#第3章-概率与信息论" class="headerlink" title="第3章 概率与信息论"></a>第3章 概率与信息论</h3><p><em>复习完概率论后再来看</em></p>
+]]></content>
+      <categories>
+        <category>读书笔记</category>
+      </categories>
+      <tags>
+        <tag>DL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>stm32蓝牙小车</title>
+    <url>/2019/01/05/stm32%E8%93%9D%E7%89%99%E5%B0%8F%E8%BD%A6/</url>
+    <content><![CDATA[<h2 id="项目目标：蓝牙遥控小车"><a href="#项目目标：蓝牙遥控小车" class="headerlink" title="项目目标：蓝牙遥控小车"></a><strong>项目目标：蓝牙遥控小车</strong></h2><h2 id="项目过程："><a href="#项目过程：" class="headerlink" title="项目过程："></a>项目过程：</h2><h3 id="1-12月22日："><a href="#1-12月22日：" class="headerlink" title="1.12月22日："></a>1.12月22日：</h3><ul>
+<li>第一次考核结束，学长建议我们将单片机改用成stm32，并设置几个创新性的模块；</li>
+<li>对小车无法直线前进的问题进行了探讨：将两轮左右对换后，发现小车直行时往另一相反方向偏转，初步判断是左右两轮规格不一致导致；考核时学长提到会不会是万向轮的问题，我们又将小车前端的万向轮固定，发现小车前行仍偏转，可以判断该问题应与万向轮无关；通过仔细观察小车前进时两轮的转动情况，我们发现，当小车悬空时，两轮转速几乎相同，但置于地面时，小车直行3-5秒后开始发生偏转，且有一轮不动。调换左右轮，情况相同。<h3 id="2-12月24日："><a href="#2-12月24日：" class="headerlink" title="2.12月24日："></a>2.12月24日：</h3></li>
+<li> 探讨了换用stm32的基本想法，以及对小车的再升级计划。</li>
+<li> 确定在小车上增加一个红外避障的模块以及OLED显示屏：当小车向前/后/左/右行驶时，OLED显示屏第二行上出现go/back/left/right字样，停止时，出现stop字样；用红外避障检测小车前方左右两侧的障碍物，当左/右前方有障碍物的时候，第三行左/右侧go字样变为aa。<h3 id="3-12月25日："><a href="#3-12月25日：" class="headerlink" title="3.12月25日："></a>3.12月25日：</h3></li>
+<li>研究stm32单片机代码，开始编写项目主程序。<h3 id="4-1月1日："><a href="#4-1月1日：" class="headerlink" title="4.1月1日："></a>4.1月1日：</h3></li>
+<li>开始编写pwm调速程序和红外避障检测以及OLED显示屏模块的程序。在四轮配件买来之前，用第一次的三轮配件进行了初步调试（二轮改四轮的时候，因为接口的问题用到了映射，映射是个好东西，可以少用一个定时器，直接四路输出）。<h3 id="5-1月5日："><a href="#5-1月5日：" class="headerlink" title="5.1月5日："></a>5.1月5日：</h3></li>
+<li>所有材料均购入，对小车的主体部分进行了组装。</li>
+<li>对小车进行各部分的调试，基本实现项目初期设定的目标。<h2 id="实现结果："><a href="#实现结果：" class="headerlink" title="实现结果："></a>实现结果：</h2></li>
+<li>通过手机蓝牙SPP对stm32小车发出前进，后退，暂停，左转，右转，加速，减速等指令，并实现了其相应的功能。<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2></li>
+<li>通过这次项目，我们更深入了解了有关串口通信、电机驱动和定时器设置的一些内容，对stm32单片机有了更加深入的了解。（其实并没有，我不生产代码，我只是代码的搬运工）</li>
+<li>在项目进行的过程中，我们遇到了许多问题，比如OLED屏乱码，单片机vcc接口太少。</li>
+<li>本次项目基本实现了初期的目标，成功换用了单片机，并增加了两个新的模块：红外避障和oled屏。</li>
+<li>还有一个小注意点，以后外设多的时候，先看看哪个接口不怎么用，把这个当io口，其实最好是能规划好接口干什么，不然改代码改接口很烦。</li>
+<li>32和51真的好不一样，51是32寄存器的简化简化再简化，所以我选择库函数。        他们给我的感觉是：32是一块一块地组合起来，51是一坨东西放那里（虽然这一坨东西里面也有一块一块，虽然32也可以是一坨的）。</li>
+<li>小车可能算告一段落了，如果再想做小车，可能想做平衡车（好像和风力摆差不多）了。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>单片机</category>
+      </categories>
+      <tags>
+        <tag>stm32</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>电赛感想</title>
+    <url>/2019/08/16/%E7%94%B5%E8%B5%9B%E6%84%9F%E6%83%B3/</url>
+    <content><![CDATA[<h2 id="为何参赛"><a href="#为何参赛" class="headerlink" title="为何参赛"></a>为何参赛</h2><p>本来，我是没有考虑过这个比赛的，一是预备知识量大，二是准备时间长，三是队友难寻（作为大一萌新的我毫无战斗力）。实数侥幸，承蒙学长看得起我，说带一个小萌新参加19年的电赛，我就很开心地答应了，后参加了学校的一选二选成功出道。尽管中间经历了很多事情，但是最终也在十一号早上将自己队伍的作品送到了北邮，进行评测。</p>
+<h2 id="参赛准备历程"><a href="#参赛准备历程" class="headerlink" title="参赛准备历程"></a>参赛准备历程</h2><h3 id="比赛前的准备"><a href="#比赛前的准备" class="headerlink" title="比赛前的准备"></a>比赛前的准备</h3><p>说到参赛准备，真的是一场跨时间很长的战斗。我是在大一上学期，入门了单片机（32的标准库和51），但是这样完全不够格去电赛，在下学期，为了整个队伍的电控方面的一致性，我改去学了32的hal库，大概学完I2C后，队伍出了点问题，就解散了，多亏指导老师的调整，我加入了一个双人队伍，成为里面的电控主力，同时又从hal库转到了标准库，在原有的基础上，学了屏幕、adc、pid方面的知识。另外有关摄像头这方面，我们队伍采用了openmv的方案，先用python写openmv的程序，在将它与stm32通讯，这样就完成了大部分摄像头的功能。</p>
+<h3 id="比赛前夕的预备"><a href="#比赛前夕的预备" class="headerlink" title="比赛前夕的预备"></a>比赛前夕的预备</h3><p>比赛前几天，我们队伍就搭好了电控的框架，一是按键控制，二是屏幕显示，三是单片机和openmv的通讯。还有一些预备的模块，例如ADC，mpu6050，定时器的中断和pwm的输出。</p>
+<h2 id="比赛中"><a href="#比赛中" class="headerlink" title="比赛中"></a>比赛中</h2><h3 id="“犹豫就会败北”"><a href="#“犹豫就会败北”" class="headerlink" title="“犹豫就会败北”"></a>“犹豫就会败北”</h3><p>当时七点半多赛题就出来了，我一看题目，嗯~，B题题目“巡线机器人”像是控制类题目，点进去一看，什么！“设计一基于四旋翼飞行器的巡线机器人……”，(O_o)??飞控题再见。那再去H题“模拟电磁曲射炮”看看，“自行设计并制作一模拟电磁曲射炮”，震惊，电赛组委会竟然出了这么一道题，1.8J警告好吗。自个做电磁炮，有点告辞了哈，然后我们就开始看看其他题目，A题“本题所有控制器必须使用 TI 公司处理器”，告辞；CDEFG题没训练过，告辞；IJK题高职高专，告辞。能做的题目，也只能是1.8J警告的电磁炮，所以，大概在九点的时候，我们确定了题目，并开始了讨论。<br>既然选择了这道题，电磁炮是关键吧，那先去万能的某宝看看，连万能的某宝的某店家都告诉我，电磁炮全网没货！！！<em>（聊天记录见下图）</em><br> <img src="/image/taobaodiancipao.jpg" width = "108" height = "490" alt="聊天记录" align=center /><br>没办法，那就自己上手做了。事实上，我们做电磁炮就做了大概两天半的时间，直到第三天的晚上，我才真正地开始调试程序。</p>
+<h3 id="功亏一篑"><a href="#功亏一篑" class="headerlink" title="功亏一篑"></a>功亏一篑</h3><p>在最后提交的时候，发现我们都是usb调试，根本没考虑作为独立作品的时候的供电，结果到现场的时候，半个小时都在接电源，openmv的芯片还发烫，还好有备用的。</p>
+<h2 id="比赛后"><a href="#比赛后" class="headerlink" title="比赛后"></a>比赛后</h2><p>追悔莫及，没有把握好调试的半个小时。</p>
+<p>如果我大三还有时间的话，可能会冲一把，给我的本科竞赛生涯画上句号。</p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>来路</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>蓝牙小车遥控项目日志</title>
+    <url>/2018/12/22/%E8%93%9D%E7%89%99%E5%B0%8F%E8%BD%A6%E9%81%A5%E6%8E%A7%E9%A1%B9%E7%9B%AE%E6%97%A5%E5%BF%97/</url>
+    <content><![CDATA[<h2 id="项目目标：蓝牙遥控小车"><a href="#项目目标：蓝牙遥控小车" class="headerlink" title="项目目标：蓝牙遥控小车"></a><strong>项目目标：蓝牙遥控小车</strong></h2><h2 id="项目过程："><a href="#项目过程：" class="headerlink" title="项目过程："></a>项目过程：</h2><h3 id="11月5日："><a href="#11月5日：" class="headerlink" title="11月5日："></a>11月5日：</h3><ul>
+<li>讨论了蓝牙和红外遥控小车，考虑到蓝牙遥控可直接用手机app进行操作，确定项目目标为通过蓝牙对小车进行遥控操作</li>
+</ul>
+<h3 id="11月7日："><a href="#11月7日：" class="headerlink" title="11月7日："></a>11月7日：</h3><ul>
+<li>探讨了小车的主要组成部分：单片机，电机驱动板模块，电机，蓝牙模块</li>
+<li>对各部分之间的联系以及小车的运作原理进行了学习和讨论：<ul>
+<li>通过手机蓝牙SPP对蓝牙模块发出信号指令</li>
+<li>蓝牙模块接收到指令后从通信口传递给单片机进行信息判断</li>
+<li>单片机通过控制电机驱动板输出端的电压的高低来实现对电机的控制，从而使小车实现相应的操作指令</li>
+</ul>
+</li>
+</ul>
+<h3 id="11月27日："><a href="#11月27日：" class="headerlink" title="11月27日："></a>11月27日：</h3><ul>
+<li>对项目所需要的材料进行了更为细致的商榷，一些细节的补充也使项目更加的成熟<ul>
+<li>是否使用麦克纳姆轮</li>
+<li>电机的选择：直流电机还是步进电机</li>
+<li>小车底盘板是否由我们自己绘图切割</li>
+<li>单片机的选择：stm 32或51单片机或arduino</li>
+<li>驱动模块的确定</li>
+<li>蓝牙模块的确定</li>
+</ul>
+</li>
+<li>对该部分最后的讨论结果为：<ul>
+<li>采用普通的两轮+万向轮的形式</li>
+<li>选用了tt直流减速电机</li>
+<li>小车底盘板网购</li>
+<li>从难度的角度出发，确定选择采用51单片机（芯片stc89c52)</li>
+<li>选择了l298n红版驱动</li>
+<li>选用了hc-05蓝牙模块</li>
+</ul>
+</li>
+</ul>
+<h3 id="12月1日："><a href="#12月1日：" class="headerlink" title="12月1日："></a>12月1日：</h3><ul>
+<li>所有材料均购入，对小车的主体部分进行了组装</li>
+<li>研究单片机代码，开始编写项目程序</li>
+</ul>
+<h3 id="12月15日："><a href="#12月15日：" class="headerlink" title="12月15日："></a>12月15日：</h3><ul>
+<li>对小车进行各部分的调试，项目出现暂时性的障碍，电机驱动板无法驱动电机运转</li>
+<li>因为对电机直接通电，可以运转，所以我们判断应该是其他板块出现了问题</li>
+<li>由于电机驱动板的驱动电压为5v，而小车上的6节1.5v干电池的电压理论上为9v，远远大于5v，因此我们开始并没有将电压作为首要考虑因素，但在对单片机的代码进行核对和检验，蓝牙模块反复测试，更换新的电机驱动板后，均未解决电机无法运转的问题；当晚，我们将小车上的6节1.5v干电池更换成2节3.7v锂电池，电机运转成功，小车可实现蓝牙控制（电源电压过低的原因应该是：在项目进行的过程中，因为多次调试，产生了大量的消耗，使得其电压低于5v）</li>
+</ul>
+<h3 id="12月21日："><a href="#12月21日：" class="headerlink" title="12月21日："></a>12月21日：</h3><ul>
+<li>网上买的电池到了(太开心了(╥╯^╰╥)）</li>
+<li>开始编写pwm调速程序，用了52特有的t2定时器进行pwm调速（keil4的52头文件里好像没有T2MOD的地址，去头文件里面添加 <code>sfr T2MOD  = 0xC9;</code> 这一条语句就可以了)</li>
+</ul>
+<h2 id="实现结果："><a href="#实现结果：" class="headerlink" title="实现结果："></a>实现结果：</h2><p> 通过手机蓝牙SPP对小车发出前进，后退，暂停，左转，右转，加速，减速等指令，并实现了其相应的功能</p>
+<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><ul>
+<li>通过这次项目，我们初步了解了有关串口通信、电机驱动和定时器设置的一些内容，对单片机的理解稍微深入了一点。</li>
+<li>在项目进行的过程中，有遇到很多问题，我们通过控制变量法进行排查，最终完成了该项目。但是从中，我们发现：以后做项目的时候可以先对一些硬件进行调试，确认无误后，进行下一步，不然做到一半，发现哪里出了问题再排查问题，会非常的麻烦。</li>
+<li>本次项目只是做出了一个非常简单的蓝牙小车，我们还打算在此基础上加入红外避障或寻迹功能，以模拟远程遥控驾驶，但因时间有限，仅完成了蓝牙驱动一部分，之后，我们会继续完善我们的小车，让它成为一个多功能小车。</li>
+</ul>
+<hr>
+<ul>
+<li><strong>另附代码：</strong></li>
+</ul>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;reg52.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> uchar unsigned char</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> uint  unsigned int</span></span><br><span class="line"></span><br><span class="line">sbit ena=P1^<span class="number">0</span>;</span><br><span class="line">sbit in1=P1^<span class="number">1</span>;</span><br><span class="line">sbit in2=P1^<span class="number">2</span>;</span><br><span class="line">sbit in3=P1^<span class="number">3</span>;</span><br><span class="line">sbit in4=P1^<span class="number">4</span>;</span><br><span class="line">sbit enb=P1^<span class="number">5</span>;</span><br><span class="line"></span><br><span class="line">uchar mode;</span><br><span class="line">uint flag=<span class="number">0</span>,pwm=<span class="number">70</span>,pwmadd=<span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//串口通信的计时器</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    TMOD=<span class="number">0x20</span>;</span><br><span class="line">	TH1=<span class="number">0xfd</span>;</span><br><span class="line">	TL1=<span class="number">0xfd</span>;		 <span class="comment">//波特率9600</span></span><br><span class="line">	TR1=<span class="number">1</span>;</span><br><span class="line">	REN=<span class="number">1</span>;</span><br><span class="line">	SM0=<span class="number">0</span>;</span><br><span class="line">	SM1=<span class="number">1</span>;</span><br><span class="line">	EA=<span class="number">1</span>;</span><br><span class="line">	ES=<span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ser</span><span class="params">()</span> interrupt 4</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	RI=<span class="number">0</span>;</span><br><span class="line">	mode=SBUF;</span><br><span class="line">	flag=<span class="number">1</span>; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//延迟函数</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">delay</span><span class="params">(uint x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	uint a,b;</span><br><span class="line">	<span class="keyword">for</span>(a=<span class="number">0</span>;a&lt;x;a++)</span><br><span class="line">		<span class="keyword">for</span>(b=<span class="number">0</span>;b&lt;<span class="number">148</span>;b++);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//pwm的定时器t2	</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">motor_pwm</span> <span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(pwm&gt;=pwmadd)</span><br><span class="line">	&#123;ena=<span class="number">1</span>;enb=<span class="number">1</span>;&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;ena=<span class="number">0</span>;enb=<span class="number">0</span>;&#125;</span><br><span class="line">	<span class="keyword">if</span>(pwmadd&gt;=<span class="number">100</span>)</span><br><span class="line">	pwmadd=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	pwmadd++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">time_init</span> <span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	T2CON = <span class="number">0x00</span>;	     <span class="comment">//定时器T2--PWM 头文件没有T2MOD地址</span></span><br><span class="line">	T2MOD = <span class="number">0x00</span>;</span><br><span class="line">	RCAP2H = <span class="number">0xff</span>; 		</span><br><span class="line">	RCAP2L = <span class="number">0x47</span>;</span><br><span class="line">	TH2 = <span class="number">0xff</span>;</span><br><span class="line">	TL2 = <span class="number">0x47</span>;			<span class="comment">//定时0.1ms</span></span><br><span class="line">	ET2 = <span class="number">1</span>;  			<span class="comment">//定时器2中断开</span></span><br><span class="line">	TR2 = <span class="number">1</span>; 		 <span class="comment">//PWM定时器开</span></span><br><span class="line">&#125;</span><br><span class="line"> <span class="function"><span class="keyword">void</span> <span class="title">pwm_time2</span> <span class="params">()</span> interrupt 5</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"> TR2 = <span class="number">0</span>;</span><br><span class="line"> TF2 = <span class="number">0</span>;</span><br><span class="line"> ET2 = <span class="number">0</span>; <span class="comment">//定时器0中断禁止</span></span><br><span class="line"></span><br><span class="line"> motor_pwm();<span class="comment">//PWM占空比输出</span></span><br><span class="line"></span><br><span class="line"> ET2 = <span class="number">1</span>; <span class="comment">//定时中断0开启</span></span><br><span class="line"> TR2 = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*前进*/</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">forward</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	in1=<span class="number">1</span>;</span><br><span class="line">	in2=<span class="number">0</span>;</span><br><span class="line">	in3=<span class="number">1</span>;</span><br><span class="line">	in4=<span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*后退*/</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">back</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	in1=<span class="number">0</span>;</span><br><span class="line">	in2=<span class="number">1</span>;</span><br><span class="line">	in3=<span class="number">0</span>;</span><br><span class="line">	in4=<span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line">                                                                                                                                                                                             </span><br><span class="line"><span class="comment">/*左转*/</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">left</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	in1=<span class="number">1</span>;</span><br><span class="line">	in2=<span class="number">1</span>;</span><br><span class="line">	in3=<span class="number">1</span>;</span><br><span class="line">	in4=<span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*右转*/</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">right</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	in1=<span class="number">1</span>;</span><br><span class="line">	in2=<span class="number">0</span>;</span><br><span class="line">	in3=<span class="number">1</span>;</span><br><span class="line">	in4=<span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*停止*/</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">stop</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	in1=<span class="number">0</span>;</span><br><span class="line">	in2=<span class="number">0</span>;</span><br><span class="line">	in3=<span class="number">0</span>;</span><br><span class="line">	in4=<span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span> <span class="params">(<span class="keyword">void</span>)</span>               </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	init();</span><br><span class="line">	time_init ();</span><br><span class="line">	<span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(flag)</span><br><span class="line">		&#123;</span><br><span class="line">		ES=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">if</span> (mode==<span class="string">&#x27;2&#x27;</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			forward();</span><br><span class="line">			delay(<span class="number">20</span>);</span><br><span class="line">		&#125;     </span><br><span class="line">		<span class="keyword">if</span> (mode==<span class="string">&#x27;8&#x27;</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			back();</span><br><span class="line">			delay(<span class="number">20</span>);</span><br><span class="line">		&#125;       </span><br><span class="line">		<span class="keyword">if</span> (mode==<span class="string">&#x27;4&#x27;</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			left();</span><br><span class="line">			delay(<span class="number">20</span>);</span><br><span class="line">		&#125;        </span><br><span class="line">		<span class="keyword">if</span> (mode==<span class="string">&#x27;6&#x27;</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			right();</span><br><span class="line">			delay(<span class="number">20</span>);</span><br><span class="line">		&#125;        </span><br><span class="line">		<span class="keyword">if</span> (mode==<span class="string">&#x27;5&#x27;</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			stop();</span><br><span class="line">			delay(<span class="number">20</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (mode==<span class="string">&#x27;1&#x27;</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			pwm+=<span class="number">10</span>;</span><br><span class="line">			<span class="keyword">if</span>(pwm&gt;<span class="number">100</span>)</span><br><span class="line">			pwm=<span class="number">100</span>;</span><br><span class="line">		&#125; </span><br><span class="line">		<span class="keyword">if</span> (mode==<span class="string">&#x27;3&#x27;</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			pwm-=<span class="number">10</span>;</span><br><span class="line">			<span class="keyword">if</span>(pwm&lt;<span class="number">40</span>)</span><br><span class="line">			pwm=<span class="number">40</span>;</span><br><span class="line">		&#125;        </span><br><span class="line">		ES=<span class="number">1</span>;</span><br><span class="line">		flag=<span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>单片机</category>
+      </categories>
+      <tags>
+        <tag>51单片机</tag>
       </tags>
   </entry>
   <entry>
@@ -444,136 +606,6 @@
       <tags>
         <tag>linux</tag>
         <tag>GitHub</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>电赛感想</title>
-    <url>/2019/08/16/%E7%94%B5%E8%B5%9B%E6%84%9F%E6%83%B3/</url>
-    <content><![CDATA[<h2 id="为何参赛"><a href="#为何参赛" class="headerlink" title="为何参赛"></a>为何参赛</h2><p>本来，我是没有考虑过这个比赛的，一是预备知识量大，二是准备时间长，三是队友难寻（作为大一萌新的我毫无战斗力）。实数侥幸，承蒙学长看得起我，说带一个小萌新参加19年的电赛，我就很开心地答应了，后参加了学校的一选二选成功出道。尽管中间经历了很多事情，但是最终也在十一号早上将自己队伍的作品送到了北邮，进行评测。</p>
-<h2 id="参赛准备历程"><a href="#参赛准备历程" class="headerlink" title="参赛准备历程"></a>参赛准备历程</h2><h3 id="比赛前的准备"><a href="#比赛前的准备" class="headerlink" title="比赛前的准备"></a>比赛前的准备</h3><p>说到参赛准备，真的是一场跨时间很长的战斗。我是在大一上学期，入门了单片机（32的标准库和51），但是这样完全不够格去电赛，在下学期，为了整个队伍的电控方面的一致性，我改去学了32的hal库，大概学完I2C后，队伍出了点问题，就解散了，多亏指导老师的调整，我加入了一个双人队伍，成为里面的电控主力，同时又从hal库转到了标准库，在原有的基础上，学了屏幕、adc、pid方面的知识。另外有关摄像头这方面，我们队伍采用了openmv的方案，先用python写openmv的程序，在将它与stm32通讯，这样就完成了大部分摄像头的功能。</p>
-<h3 id="比赛前夕的预备"><a href="#比赛前夕的预备" class="headerlink" title="比赛前夕的预备"></a>比赛前夕的预备</h3><p>比赛前几天，我们队伍就搭好了电控的框架，一是按键控制，二是屏幕显示，三是单片机和openmv的通讯。还有一些预备的模块，例如ADC，mpu6050，定时器的中断和pwm的输出。</p>
-<h2 id="比赛中"><a href="#比赛中" class="headerlink" title="比赛中"></a>比赛中</h2><h3 id="“犹豫就会败北”"><a href="#“犹豫就会败北”" class="headerlink" title="“犹豫就会败北”"></a>“犹豫就会败北”</h3><p>当时七点半多赛题就出来了，我一看题目，嗯~，B题题目“巡线机器人”像是控制类题目，点进去一看，什么！“设计一基于四旋翼飞行器的巡线机器人……”，(O_o)??飞控题再见。那再去H题“模拟电磁曲射炮”看看，“自行设计并制作一模拟电磁曲射炮”，震惊，电赛组委会竟然出了这么一道题，1.8J警告好吗。自个做电磁炮，有点告辞了哈，然后我们就开始看看其他题目，A题“本题所有控制器必须使用 TI 公司处理器”，告辞；CDEFG题没训练过，告辞；IJK题高职高专，告辞。能做的题目，也只能是1.8J警告的电磁炮，所以，大概在九点的时候，我们确定了题目，并开始了讨论。<br>既然选择了这道题，电磁炮是关键吧，那先去万能的某宝看看，连万能的某宝的某店家都告诉我，电磁炮全网没货！！！<em>（聊天记录见下图）</em><br> <img src="/image/taobaodiancipao.jpg" width = "108" height = "490" alt="聊天记录" align=center /><br>没办法，那就自己上手做了。事实上，我们做电磁炮就做了大概两天半的时间，直到第三天的晚上，我才真正地开始调试程序。</p>
-<h3 id="功亏一篑"><a href="#功亏一篑" class="headerlink" title="功亏一篑"></a>功亏一篑</h3><p>在最后提交的时候，发现我们都是usb调试，根本没考虑作为独立作品的时候的供电，结果到现场的时候，半个小时都在接电源，openmv的芯片还发烫，还好有备用的。</p>
-<h2 id="比赛后"><a href="#比赛后" class="headerlink" title="比赛后"></a>比赛后</h2><p>追悔莫及，没有把握好调试的半个小时。</p>
-<p>如果我大三还有时间的话，可能会冲一把，给我的本科竞赛生涯画上句号。</p>
-]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>来路</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>《深度学习》学习笔记(1)</title>
-    <url>/2021/07/18/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(1)/</url>
-    <content><![CDATA[<h2 id="第1部分-应用数学与机器学习基础"><a href="#第1部分-应用数学与机器学习基础" class="headerlink" title="第1部分 应用数学与机器学习基础"></a>第1部分 应用数学与机器学习基础</h2><h3 id="第2章-线性代数"><a href="#第2章-线性代数" class="headerlink" title="第2章 线性代数"></a>第2章 线性代数</h3><p><em>一些概念工科线性代数教材中有提及，不作详细解释</em></p>
-<p><strong>个别概念：</strong></p>
-<ul>
-<li><p>标量、向量、矩阵，单位矩阵、逆矩阵</p>
-</li>
-<li><p>张量(tensor)：一个数组中的元素分布在若干维坐标的规则网格中。记作<strong>A</strong>                    <em>多维数组？高纬度矩阵？</em></p>
-</li>
-<li><p>广播(broadcasting)：不同维度张量相加</p>
-</li>
-<li><p>线性组合、线性相关、奇异矩阵</p>
-</li>
-<li><p>范数：衡量向量大小。</p>
-<ul>
-<li>L1范数：0/非0差异，经常作为表示非零元素数目的替代函数；</li>
-<li>最大范数：向量中具有最大幅值的元素的绝对值；</li>
-<li>Frobenius范数：衡量矩阵大小。                                                                                   <em>式子和欧氏几何距离差不多</em></li>
-<li>点积可以用范数表示 xy点积=L2范数之积*xy夹角的余弦（L2可以通过向量点积计算）</li>
-</ul>
-</li>
-<li><p>对角矩阵、对称矩阵、单位向量、单位范数、正交矩阵</p>
-</li>
-<li><p>特征分解</p>
-</li>
-<li><p>奇异值分解</p>
-</li>
-<li><p>Moore-Penros伪逆</p>
-</li>
-<li><p>迹运算</p>
-</li>
-<li><p>行列式</p>
-</li>
-</ul>
-<p><strong>实例：主成分分析</strong></p>
-<h2 id="第3章概率与信息论"><a href="#第3章概率与信息论" class="headerlink" title="第3章概率与信息论"></a>第3章概率与信息论</h2><p><em>复习完概率论后再来看</em></p>
-]]></content>
-      <categories>
-        <category>读书笔记</category>
-      </categories>
-      <tags>
-        <tag>DL</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>蓝牙小车遥控项目日志</title>
-    <url>/2018/12/22/%E8%93%9D%E7%89%99%E5%B0%8F%E8%BD%A6%E9%81%A5%E6%8E%A7%E9%A1%B9%E7%9B%AE%E6%97%A5%E5%BF%97/</url>
-    <content><![CDATA[<h2 id="项目目标：蓝牙遥控小车"><a href="#项目目标：蓝牙遥控小车" class="headerlink" title="项目目标：蓝牙遥控小车"></a><strong>项目目标：蓝牙遥控小车</strong></h2><h2 id="项目过程："><a href="#项目过程：" class="headerlink" title="项目过程："></a>项目过程：</h2><h3 id="11月5日："><a href="#11月5日：" class="headerlink" title="11月5日："></a>11月5日：</h3><ul>
-<li>讨论了蓝牙和红外遥控小车，考虑到蓝牙遥控可直接用手机app进行操作，确定项目目标为通过蓝牙对小车进行遥控操作</li>
-</ul>
-<h3 id="11月7日："><a href="#11月7日：" class="headerlink" title="11月7日："></a>11月7日：</h3><ul>
-<li>探讨了小车的主要组成部分：单片机，电机驱动板模块，电机，蓝牙模块</li>
-<li>对各部分之间的联系以及小车的运作原理进行了学习和讨论：<ul>
-<li>通过手机蓝牙SPP对蓝牙模块发出信号指令</li>
-<li>蓝牙模块接收到指令后从通信口传递给单片机进行信息判断</li>
-<li>单片机通过控制电机驱动板输出端的电压的高低来实现对电机的控制，从而使小车实现相应的操作指令</li>
-</ul>
-</li>
-</ul>
-<h3 id="11月27日："><a href="#11月27日：" class="headerlink" title="11月27日："></a>11月27日：</h3><ul>
-<li>对项目所需要的材料进行了更为细致的商榷，一些细节的补充也使项目更加的成熟<ul>
-<li>是否使用麦克纳姆轮</li>
-<li>电机的选择：直流电机还是步进电机</li>
-<li>小车底盘板是否由我们自己绘图切割</li>
-<li>单片机的选择：stm 32或51单片机或arduino</li>
-<li>驱动模块的确定</li>
-<li>蓝牙模块的确定</li>
-</ul>
-</li>
-<li>对该部分最后的讨论结果为：<ul>
-<li>采用普通的两轮+万向轮的形式</li>
-<li>选用了tt直流减速电机</li>
-<li>小车底盘板网购</li>
-<li>从难度的角度出发，确定选择采用51单片机（芯片stc89c52)</li>
-<li>选择了l298n红版驱动</li>
-<li>选用了hc-05蓝牙模块</li>
-</ul>
-</li>
-</ul>
-<h3 id="12月1日："><a href="#12月1日：" class="headerlink" title="12月1日："></a>12月1日：</h3><ul>
-<li>所有材料均购入，对小车的主体部分进行了组装</li>
-<li>研究单片机代码，开始编写项目程序</li>
-</ul>
-<h3 id="12月15日："><a href="#12月15日：" class="headerlink" title="12月15日："></a>12月15日：</h3><ul>
-<li>对小车进行各部分的调试，项目出现暂时性的障碍，电机驱动板无法驱动电机运转</li>
-<li>因为对电机直接通电，可以运转，所以我们判断应该是其他板块出现了问题</li>
-<li>由于电机驱动板的驱动电压为5v，而小车上的6节1.5v干电池的电压理论上为9v，远远大于5v，因此我们开始并没有将电压作为首要考虑因素，但在对单片机的代码进行核对和检验，蓝牙模块反复测试，更换新的电机驱动板后，均未解决电机无法运转的问题；当晚，我们将小车上的6节1.5v干电池更换成2节3.7v锂电池，电机运转成功，小车可实现蓝牙控制（电源电压过低的原因应该是：在项目进行的过程中，因为多次调试，产生了大量的消耗，使得其电压低于5v）</li>
-</ul>
-<h3 id="12月21日："><a href="#12月21日：" class="headerlink" title="12月21日："></a>12月21日：</h3><ul>
-<li>网上买的电池到了(太开心了(╥╯^╰╥)）</li>
-<li>开始编写pwm调速程序，用了52特有的t2定时器进行pwm调速（keil4的52头文件里好像没有T2MOD的地址，去头文件里面添加 <code>sfr T2MOD  = 0xC9;</code> 这一条语句就可以了)</li>
-</ul>
-<h2 id="实现结果："><a href="#实现结果：" class="headerlink" title="实现结果："></a>实现结果：</h2><p> 通过手机蓝牙SPP对小车发出前进，后退，暂停，左转，右转，加速，减速等指令，并实现了其相应的功能</p>
-<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><ul>
-<li>通过这次项目，我们初步了解了有关串口通信、电机驱动和定时器设置的一些内容，对单片机的理解稍微深入了一点。</li>
-<li>在项目进行的过程中，有遇到很多问题，我们通过控制变量法进行排查，最终完成了该项目。但是从中，我们发现：以后做项目的时候可以先对一些硬件进行调试，确认无误后，进行下一步，不然做到一半，发现哪里出了问题再排查问题，会非常的麻烦。</li>
-<li>本次项目只是做出了一个非常简单的蓝牙小车，我们还打算在此基础上加入红外避障或寻迹功能，以模拟远程遥控驾驶，但因时间有限，仅完成了蓝牙驱动一部分，之后，我们会继续完善我们的小车，让它成为一个多功能小车。</li>
-</ul>
-<hr>
-<ul>
-<li><strong>另附代码：</strong></li>
-</ul>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;reg52.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> uchar unsigned char</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> uint  unsigned int</span></span><br><span class="line"></span><br><span class="line">sbit ena=P1^<span class="number">0</span>;</span><br><span class="line">sbit in1=P1^<span class="number">1</span>;</span><br><span class="line">sbit in2=P1^<span class="number">2</span>;</span><br><span class="line">sbit in3=P1^<span class="number">3</span>;</span><br><span class="line">sbit in4=P1^<span class="number">4</span>;</span><br><span class="line">sbit enb=P1^<span class="number">5</span>;</span><br><span class="line"></span><br><span class="line">uchar mode;</span><br><span class="line">uint flag=<span class="number">0</span>,pwm=<span class="number">70</span>,pwmadd=<span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//串口通信的计时器</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    TMOD=<span class="number">0x20</span>;</span><br><span class="line">	TH1=<span class="number">0xfd</span>;</span><br><span class="line">	TL1=<span class="number">0xfd</span>;		 <span class="comment">//波特率9600</span></span><br><span class="line">	TR1=<span class="number">1</span>;</span><br><span class="line">	REN=<span class="number">1</span>;</span><br><span class="line">	SM0=<span class="number">0</span>;</span><br><span class="line">	SM1=<span class="number">1</span>;</span><br><span class="line">	EA=<span class="number">1</span>;</span><br><span class="line">	ES=<span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ser</span><span class="params">()</span> interrupt 4</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	RI=<span class="number">0</span>;</span><br><span class="line">	mode=SBUF;</span><br><span class="line">	flag=<span class="number">1</span>; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//延迟函数</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">delay</span><span class="params">(uint x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	uint a,b;</span><br><span class="line">	<span class="keyword">for</span>(a=<span class="number">0</span>;a&lt;x;a++)</span><br><span class="line">		<span class="keyword">for</span>(b=<span class="number">0</span>;b&lt;<span class="number">148</span>;b++);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//pwm的定时器t2	</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">motor_pwm</span> <span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(pwm&gt;=pwmadd)</span><br><span class="line">	&#123;ena=<span class="number">1</span>;enb=<span class="number">1</span>;&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;ena=<span class="number">0</span>;enb=<span class="number">0</span>;&#125;</span><br><span class="line">	<span class="keyword">if</span>(pwmadd&gt;=<span class="number">100</span>)</span><br><span class="line">	pwmadd=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	pwmadd++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">time_init</span> <span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	T2CON = <span class="number">0x00</span>;	     <span class="comment">//定时器T2--PWM 头文件没有T2MOD地址</span></span><br><span class="line">	T2MOD = <span class="number">0x00</span>;</span><br><span class="line">	RCAP2H = <span class="number">0xff</span>; 		</span><br><span class="line">	RCAP2L = <span class="number">0x47</span>;</span><br><span class="line">	TH2 = <span class="number">0xff</span>;</span><br><span class="line">	TL2 = <span class="number">0x47</span>;			<span class="comment">//定时0.1ms</span></span><br><span class="line">	ET2 = <span class="number">1</span>;  			<span class="comment">//定时器2中断开</span></span><br><span class="line">	TR2 = <span class="number">1</span>; 		 <span class="comment">//PWM定时器开</span></span><br><span class="line">&#125;</span><br><span class="line"> <span class="function"><span class="keyword">void</span> <span class="title">pwm_time2</span> <span class="params">()</span> interrupt 5</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"> TR2 = <span class="number">0</span>;</span><br><span class="line"> TF2 = <span class="number">0</span>;</span><br><span class="line"> ET2 = <span class="number">0</span>; <span class="comment">//定时器0中断禁止</span></span><br><span class="line"></span><br><span class="line"> motor_pwm();<span class="comment">//PWM占空比输出</span></span><br><span class="line"></span><br><span class="line"> ET2 = <span class="number">1</span>; <span class="comment">//定时中断0开启</span></span><br><span class="line"> TR2 = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*前进*/</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">forward</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	in1=<span class="number">1</span>;</span><br><span class="line">	in2=<span class="number">0</span>;</span><br><span class="line">	in3=<span class="number">1</span>;</span><br><span class="line">	in4=<span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*后退*/</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">back</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	in1=<span class="number">0</span>;</span><br><span class="line">	in2=<span class="number">1</span>;</span><br><span class="line">	in3=<span class="number">0</span>;</span><br><span class="line">	in4=<span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line">                                                                                                                                                                                             </span><br><span class="line"><span class="comment">/*左转*/</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">left</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	in1=<span class="number">1</span>;</span><br><span class="line">	in2=<span class="number">1</span>;</span><br><span class="line">	in3=<span class="number">1</span>;</span><br><span class="line">	in4=<span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*右转*/</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">right</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	in1=<span class="number">1</span>;</span><br><span class="line">	in2=<span class="number">0</span>;</span><br><span class="line">	in3=<span class="number">1</span>;</span><br><span class="line">	in4=<span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*停止*/</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">stop</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	in1=<span class="number">0</span>;</span><br><span class="line">	in2=<span class="number">0</span>;</span><br><span class="line">	in3=<span class="number">0</span>;</span><br><span class="line">	in4=<span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span> <span class="params">(<span class="keyword">void</span>)</span>               </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	init();</span><br><span class="line">	time_init ();</span><br><span class="line">	<span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(flag)</span><br><span class="line">		&#123;</span><br><span class="line">		ES=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">if</span> (mode==<span class="string">&#x27;2&#x27;</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			forward();</span><br><span class="line">			delay(<span class="number">20</span>);</span><br><span class="line">		&#125;     </span><br><span class="line">		<span class="keyword">if</span> (mode==<span class="string">&#x27;8&#x27;</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			back();</span><br><span class="line">			delay(<span class="number">20</span>);</span><br><span class="line">		&#125;       </span><br><span class="line">		<span class="keyword">if</span> (mode==<span class="string">&#x27;4&#x27;</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			left();</span><br><span class="line">			delay(<span class="number">20</span>);</span><br><span class="line">		&#125;        </span><br><span class="line">		<span class="keyword">if</span> (mode==<span class="string">&#x27;6&#x27;</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			right();</span><br><span class="line">			delay(<span class="number">20</span>);</span><br><span class="line">		&#125;        </span><br><span class="line">		<span class="keyword">if</span> (mode==<span class="string">&#x27;5&#x27;</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			stop();</span><br><span class="line">			delay(<span class="number">20</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (mode==<span class="string">&#x27;1&#x27;</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			pwm+=<span class="number">10</span>;</span><br><span class="line">			<span class="keyword">if</span>(pwm&gt;<span class="number">100</span>)</span><br><span class="line">			pwm=<span class="number">100</span>;</span><br><span class="line">		&#125; </span><br><span class="line">		<span class="keyword">if</span> (mode==<span class="string">&#x27;3&#x27;</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			pwm-=<span class="number">10</span>;</span><br><span class="line">			<span class="keyword">if</span>(pwm&lt;<span class="number">40</span>)</span><br><span class="line">			pwm=<span class="number">40</span>;</span><br><span class="line">		&#125;        </span><br><span class="line">		ES=<span class="number">1</span>;</span><br><span class="line">		flag=<span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>单片机</category>
-      </categories>
-      <tags>
-        <tag>51单片机</tag>
       </tags>
   </entry>
 </search>
