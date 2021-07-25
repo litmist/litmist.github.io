@@ -14,6 +14,13 @@
 
 
 
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
 
 
 
@@ -79,15 +86,15 @@
 
 
 
-<meta name="description" content="第1部分 应用数学与机器学习基础第2章 线性代数一些概念工科线性代数教材中有提及，不作详细解释 个别概念 标量、向量、矩阵，单位矩阵、逆矩阵  张量(tensor)：一个数组中的元素分布在若干维坐标的规则网格中。记作$A$                    （多维数组？高纬度矩阵？)  广播(broadcasting)：不同维度张量相加     (python的广播机制)">
+<meta name="description" content="第一部分 应用数学与机器学习基础第2章 线性代数一些概念工科线性代数教材中有提及，不作详细解释 个别概念 标量、向量、矩阵，单位矩阵、逆矩阵  张量(tensor)：一个数组中的元素分布在若干维坐标的规则网格中。记作$A$                    （多维数组？高纬度矩阵？)  广播(broadcasting)：不同维度张量相加     (python的广播机制)">
 <meta property="og:type" content="article">
 <meta property="og:title" content="《深度学习》学习笔记(1)">
 <meta property="og:url" content="https://litmist.github.io/2021/07/18/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(1)/index.html">
 <meta property="og:site_name" content="看过的月亮">
-<meta property="og:description" content="第1部分 应用数学与机器学习基础第2章 线性代数一些概念工科线性代数教材中有提及，不作详细解释 个别概念 标量、向量、矩阵，单位矩阵、逆矩阵  张量(tensor)：一个数组中的元素分布在若干维坐标的规则网格中。记作$A$                    （多维数组？高纬度矩阵？)  广播(broadcasting)：不同维度张量相加     (python的广播机制)">
+<meta property="og:description" content="第一部分 应用数学与机器学习基础第2章 线性代数一些概念工科线性代数教材中有提及，不作详细解释 个别概念 标量、向量、矩阵，单位矩阵、逆矩阵  张量(tensor)：一个数组中的元素分布在若干维坐标的规则网格中。记作$A$                    （多维数组？高纬度矩阵？)  广播(broadcasting)：不同维度张量相加     (python的广播机制)">
 <meta property="og:locale">
 <meta property="article:published_time" content="2021-07-18T11:53:14.000Z">
-<meta property="article:modified_time" content="2021-07-25T18:07:42.042Z">
+<meta property="article:modified_time" content="2021-07-25T19:01:25.316Z">
 <meta property="article:author" content="Chen">
 <meta property="article:tag" content="DL">
 <meta name="twitter:card" content="summary">
@@ -100,7 +107,7 @@
     root: '',
     scheme: 'Gemini',
     version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -302,7 +309,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="image" content="/images/bg2.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -417,8 +424,8 @@
       
 
       
-        <h2 id="第1部分-应用数学与机器学习基础"><a href="#第1部分-应用数学与机器学习基础" class="headerlink" title="第1部分 应用数学与机器学习基础"></a>第1部分 应用数学与机器学习基础</h2><h3 id="第2章-线性代数"><a href="#第2章-线性代数" class="headerlink" title="第2章 线性代数"></a>第2章 线性代数</h3><p><em>一些概念工科线性代数教材中有提及，不作详细解释</em></p>
-<h4 id="个别概念"><a href="#个别概念" class="headerlink" title="个别概念"></a><strong>个别概念</strong></h4><ul>
+        <h2 id="第一部分-应用数学与机器学习基础"><a href="#第一部分-应用数学与机器学习基础" class="headerlink" title="第一部分 应用数学与机器学习基础"></a><strong>第一部分 应用数学与机器学习基础</strong></h2><h2 id="第2章-线性代数"><a href="#第2章-线性代数" class="headerlink" title="第2章 线性代数"></a>第2章 线性代数</h2><p><em>一些概念工科线性代数教材中有提及，不作详细解释</em></p>
+<h3 id="个别概念"><a href="#个别概念" class="headerlink" title="个别概念"></a><strong>个别概念</strong></h3><ul>
 <li><p>标量、向量、矩阵，单位矩阵、逆矩阵</p>
 </li>
 <li><p>张量(tensor)：一个数组中的元素分布在若干维坐标的规则网格中。记作<strong>$A$</strong>                    <em>（多维数组？高纬度矩阵？)</em></p>
@@ -476,7 +483,7 @@ A=UDV^T</script><p>其中A为m ∗ n的矩阵(未必为方阵)，U为m ∗ m的�
 <li><p>行列式</p>
 </li>
 </ul>
-<h4 id="实例：主成分分析"><a href="#实例：主成分分析" class="headerlink" title="实例：主成分分析"></a><strong>实例：主成分分析</strong></h4><p>主成分分析（PCA）是一种统计过程，它使用正交变换将一组可能相关变量(实体，每个实体具有不同的数值)的观察值转换为一组称为主成分的线性不相关变量的值。</p>
+<h3 id="实例：主成分分析"><a href="#实例：主成分分析" class="headerlink" title="实例：主成分分析"></a><strong>实例：主成分分析</strong></h3><p>主成分分析（PCA）是一种统计过程，它使用正交变换将一组可能相关变量(实体，每个实体具有不同的数值)的观察值转换为一组称为主成分的线性不相关变量的值。</p>
 <p><em>理解：主要基于多变量内部具有一定的相关性，我们想要减少运算量，于是用较少的变量代替原来的变量，并尽可能地保留信息</em></p>
 <p>实际上主成分分析有好几种推导，下面介绍一下本书采用的方法（最小平方误差）。</p>
 <p>假设在$R^n$空间里有m个点，对其进行编码。则每一个$x^{(i)}\in R^n$,会有对应的$c^{(i)}\in R^l$,如果l比n小，那就减少了运算量。<em>从n个特征降维到l个特征。</em>找到编码函数$f(x)=c$和解码函数$x\approx g(f(X))$。</p>
@@ -497,7 +504,7 @@ c*=argmin_c||x-g(c)||_2^2
 r(x)=g(f(x))=g(c)=DD^Tx</script><p>我们的优化目标则成为找到D，因此让误差矩阵最小，即Frobenius范数最小,在前提$D^TD=I_l$(正交性质)</p>
 <script type="math/tex; mode=display">
 D^*=argmin_D\sqrt{\sum_{i,j}(x_j^{(i)}-r(x^{(i)})_j)^2}</script><script type="math/tex; mode=display">
-d^*=argmin_d \sum_i||X-Xdd^T||_F^2    ~~~~~~~~~~~~~~~~~~s.d.d^Td=1
+d^*=argmin_d \sum_i||X-Xdd^T||_F^2    ~~~~~~~~~~~~~~~~~~s.t.d^Td=1
 \\=argmin_d ~Tr((X-Xdd^T)^T(X-Xdd^T))
 \\进行化简后
 \\=argmin_d ~-2Tr(X^TXdd^T)+Tr(X^TXdd^Tdd^T)
@@ -507,7 +514,7 @@ d^*=argmin_d \sum_i||X-Xdd^T||_F^2    ~~~~~~~~~~~~~~~~~~s.d.d^Td=1
 \\最优的d为X^TX的最大特征值对应的特征向量</script><p>结论：矩阵D由前l个最大的特征值对应的特征向量组成。</p>
 <p>注：PCA推导有更详细的博客<a target="_blank" rel="noopener" href="https://www.cnblogs.com/pinard/p/6239403.html">在此</a>，还有基于最大方差的推导，等学完概率论后再来看看。</p>
 <hr>
-<h3 id="第3章-概率与信息论"><a href="#第3章-概率与信息论" class="headerlink" title="第3章 概率与信息论"></a>第3章 概率与信息论</h3><p><em>复习完概率论后再来看</em></p>
+<h2 id="第3章-概率与信息论"><a href="#第3章-概率与信息论" class="headerlink" title="第3章 概率与信息论"></a>第3章 概率与信息论</h2><p>下周复习完概率论再来看</p>
 
       
     </div>
@@ -613,7 +620,7 @@ d^*=argmin_d \sum_i||X-Xdd^T||_F^2    ~~~~~~~~~~~~~~~~~~s.d.d^Td=1
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
               <img class="site-author-image" itemprop="image"
-                src="/images/avatar.jpg"
+                src="/images/bg2.jpg"
                 alt="" />
             
               <p class="site-author-name" itemprop="name"></p>
@@ -702,7 +709,7 @@ d^*=argmin_d \sum_i||X-Xdd^T||_F^2    ~~~~~~~~~~~~~~~~~~s.d.d^Td=1
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC1%E9%83%A8%E5%88%86-%E5%BA%94%E7%94%A8%E6%95%B0%E5%AD%A6%E4%B8%8E%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text">第1部分 应用数学与机器学习基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC2%E7%AB%A0-%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0"><span class="nav-number">1.1.</span> <span class="nav-text">第2章 线性代数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%AA%E5%88%AB%E6%A6%82%E5%BF%B5"><span class="nav-number">1.1.1.</span> <span class="nav-text">个别概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B%EF%BC%9A%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%90"><span class="nav-number">1.1.2.</span> <span class="nav-text">实例：主成分分析</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC3%E7%AB%A0-%E6%A6%82%E7%8E%87%E4%B8%8E%E4%BF%A1%E6%81%AF%E8%AE%BA"><span class="nav-number">1.2.</span> <span class="nav-text">第3章 概率与信息论</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86-%E5%BA%94%E7%94%A8%E6%95%B0%E5%AD%A6%E4%B8%8E%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text">第一部分 应用数学与机器学习基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC2%E7%AB%A0-%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0"><span class="nav-number">2.</span> <span class="nav-text">第2章 线性代数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%AA%E5%88%AB%E6%A6%82%E5%BF%B5"><span class="nav-number">2.1.</span> <span class="nav-text">个别概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B%EF%BC%9A%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%90"><span class="nav-number">2.2.</span> <span class="nav-text">实例：主成分分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC3%E7%AB%A0-%E6%A6%82%E7%8E%87%E4%B8%8E%E4%BF%A1%E6%81%AF%E8%AE%BA"><span class="nav-number">3.</span> <span class="nav-text">第3章 概率与信息论</span></a></li></ol></div>
             
 
           </div>
@@ -710,6 +717,13 @@ d^*=argmin_d \sum_i||X-Xdd^T||_F^2    ~~~~~~~~~~~~~~~~~~s.d.d^Td=1
       <!--/noindex-->
       
 
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
       
 
     </div>
@@ -766,11 +780,6 @@ d^*=argmin_d \sum_i||X-Xdd^T||_F^2    ~~~~~~~~~~~~~~~~~~s.d.d^Td=1
       </div>
     </footer>
 
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
     
 
     
@@ -1242,6 +1251,26 @@ d^*=argmin_d \sum_i||X-Xdd^T||_F^2    ~~~~~~~~~~~~~~~~~~s.d.d^Td=1
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 

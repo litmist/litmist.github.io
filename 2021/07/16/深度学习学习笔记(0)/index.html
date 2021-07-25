@@ -14,6 +14,13 @@
 
 
 
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
 
 
 
@@ -87,7 +94,7 @@
 <meta property="og:description" content="前言​    快两年没有更新博客了，原因是生活的重心逐渐向学习转移，笔记也以纸张为主。今年暑假呆在学校里，一边准备考研，一边学习新东西，需要笔记来记录一下学习情况。 ​    而且前几日，老师推荐了几本书，正好我之前就有这本《深度学习》，以前只阅读片段，现在打算从头学起，本系列博客便是这本书的学习笔记记录。 备注 本书由Ian Goodfellow ， Yoshua Bengio ，Aaron C">
 <meta property="og:locale">
 <meta property="article:published_time" content="2021-07-16T07:53:14.000Z">
-<meta property="article:modified_time" content="2021-07-18T12:33:10.502Z">
+<meta property="article:modified_time" content="2021-07-25T18:52:25.273Z">
 <meta property="article:author" content="Chen">
 <meta property="article:tag" content="DL">
 <meta name="twitter:card" content="summary">
@@ -100,7 +107,7 @@
     root: '',
     scheme: 'Gemini',
     version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -302,7 +309,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="image" content="/images/bg2.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -419,7 +426,7 @@
       
         <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>​    快两年没有更新博客了，原因是生活的重心逐渐向学习转移，笔记也以纸张为主。今年暑假呆在学校里，一边准备考研，一边学习新东西，需要笔记来记录一下学习情况。</p>
 <p>​    而且前几日，老师推荐了几本书，正好我之前就有这本《深度学习》，以前只阅读片段，现在打算从头学起，本系列博客便是这本书的学习笔记记录。</p>
-<h3 id="备注"><a href="#备注" class="headerlink" title="备注"></a>备注</h3><ol>
+<h2 id="备注"><a href="#备注" class="headerlink" title="备注"></a>备注</h2><ol>
 <li>本书由Ian Goodfellow ， Yoshua Bengio ，Aaron Courville三位大牛合著。</li>
 <li>本书的英文版可以在网站（<a target="_blank" rel="noopener" href="http://www.deeplearningbook.org/）上免费阅读；中文版也是开源的，网站为（https://github.com/exacity/deeplearningbook-chinese）。">http://www.deeplearningbook.org/）上免费阅读；中文版也是开源的，网站为（https://github.com/exacity/deeplearningbook-chinese）。</a></li>
 </ol>
@@ -532,7 +539,7 @@
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
               <img class="site-author-image" itemprop="image"
-                src="/images/avatar.jpg"
+                src="/images/bg2.jpg"
                 alt="" />
             
               <p class="site-author-name" itemprop="name"></p>
@@ -621,7 +628,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%87%E6%B3%A8"><span class="nav-number">1.1.</span> <span class="nav-text">备注</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%87%E6%B3%A8"><span class="nav-number">2.</span> <span class="nav-text">备注</span></a></li></ol></div>
             
 
           </div>
@@ -629,6 +636,13 @@
       <!--/noindex-->
       
 
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
       
 
     </div>
@@ -685,11 +699,6 @@
       </div>
     </footer>
 
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
     
 
     
